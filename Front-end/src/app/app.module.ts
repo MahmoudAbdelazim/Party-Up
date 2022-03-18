@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-reserved.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { PersonalityTestComponent } from './personality-test/personality-test.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
