@@ -14,7 +14,7 @@ import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-res
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {HttpClientModule} from '@angular/common/http'
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,11 +27,14 @@ import { ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     AllRightsReservedComponent,
     LogoutComponent,
-    PersonalityTestComponent
+    PersonalityTestComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,ReactiveFormsModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
