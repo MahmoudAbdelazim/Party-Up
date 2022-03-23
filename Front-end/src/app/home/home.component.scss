@@ -2,9 +2,14 @@
   font-family: 'Cinzel', serif;
   font-family: 'Cinzel Decorative', cursive;
   font-family: 'Roboto', sans-serif;
-  position: relative;
-  top: 100px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
  }
+
+
 // .content{
 //     font-family: 'Cinzel', serif;
 // }
