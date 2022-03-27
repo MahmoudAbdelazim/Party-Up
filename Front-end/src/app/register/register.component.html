@@ -1,9 +1,9 @@
 
 
 <form [formGroup]="registerForm" (ngSubmit)="submitRegisterForm(registerForm)" class="w-50 container">
-  
+
     <div class="form-group">
-        <label class="" for="firstName">First Name*</label>
+        <label class="register-fonts-specifications" for="firstName">First Name*</label>
         <input formControlName='firstName' type="text" class="form-control" id="firstName" placeholder="ex. Mustafa">
         <div class="alert my-1 alert-danger" *ngIf="registerForm.get('firstName')?.errors != null && registerForm.get('firstName')?.touched">
           <p *ngIf="registerForm.get('firstName')?.errors?.['pattern']">First Name has to be only letters</p>
@@ -14,21 +14,21 @@
       </div>
 
       <div class="form-group">
-        
-        <label class="" for="LastName">Last Name*</label>
+
+        <label class="register-fonts-specifications" for="LastName">Last Name*</label>
         <input formControlName='lastName' type="text" class="form-control" id="LastName" placeholder="ex. Taha">
-        
+
           <div class="alert my-1 alert-danger" *ngIf="registerForm.get('lastName')?.errors != null && registerForm.get('lastName')?.touched">
             <p *ngIf="registerForm.get('firstName')?.errors?.['pattern']">Last Name has to be only letters</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name's min length has to be more than 3</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name max length has to be less than 20</p>
           </div>
-       
+
       </div>
 
     <div class="form-group">
-      <label class="" for="EmailAddress">Email address*</label>
+      <label class="register-fonts-specifications" for="EmailAddress">Email address*</label>
       <input  formControlName="email" type="email" class="form-control" id="EmailAddress" aria-describedby="emailHelp" placeholder="ex. mustafa@gmail.com">
       <div *ngIf="registerForm.get('email')?.errors != null && registerForm.get('email')?.touched" class="alert my-1 alert-danger">
         <p *ngIf="registerForm.get('email')?.errors?.['required']">Email is required</p>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="form-group">
-      <label class="" for="Password">Password*</label>
+      <label class="register-fonts-specifications" for="Password">Password*</label>
       <input formControlName="password" type="password" class="form-control" id="Password" placeholder="Password">
       <div *ngIf="registerForm.get('password')?.errors != null && registerForm.get('password')?.touched" class="alert my-1 alert-danger">
         <p *ngIf="registerForm.get('password')?.errors?.['required']">Password is required</p>
@@ -46,7 +46,7 @@
     </div>
 
     <div class="form-group">
-      <label class="" for="DiscordTag">Discord Tag*</label>
+      <label class="register-fonts-specifications" for="DiscordTag">Discord Tag*</label>
       <i class=" px-1 fa-brands fa-discord"></i>
       <input formControlName="discordTag" type="text" class="form-control" id="DiscordTag" placeholder="ex. Mustafa#4320">
       <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
@@ -56,7 +56,7 @@
     </div>
 
       <div class="form-group">
-        <label class="" for="DateOfBirth">Date Of Birth* </label>
+        <label class="register-fonts-specifications" for="DateOfBirth">Date Of Birth* </label>
         <input formControlName="dateOfBirth" type="date" class="form-control" id="dateOfBirth" placeholder="ex. Egypt">
         <div *ngIf="registerForm.get('dateOfBirth')?.errors != null && registerForm.get('dateOfBirth')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="registerForm.get('dateOfBirth')?.errors?.['required']">Date of birth is required</p>
@@ -64,7 +64,7 @@
       </div>
 
       <div class="form-group">
-        <label class="" for="Country">Country/Region* </label>
+        <label class="register-fonts-specifications" for="Country">Country/Region* </label>
         <i class="px-1 fa-solid fa-location-dot"></i>
         <input formControlName="country" type="text" class="form-control" id="Country" placeholder="ex. Egypt">
         <div *ngIf="registerForm.get('country')?.errors != null && registerForm.get('country')?.touched" class="alert my-1 alert-danger">
@@ -319,6 +319,6 @@
             <option value="Zimbabwe">Zimbabwe</option>
          </select> -->
     </div>
-    
-    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary my-2">Submit</button>
+
+    <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary my-2 register-fonts-specifications">Submit</button>
   </form>

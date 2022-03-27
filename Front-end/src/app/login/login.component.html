@@ -3,25 +3,25 @@
   <div class="">
     <div class="">
       <div class="form-group">
-        <label class="" for="EmailAddress">Email address*</label>
+        <label class="login-fonts-specifications" for="EmailAddress">Email address*</label>
         <input  formControlName="email" type="email" class="form-control" id="EmailAddress" aria-describedby="emailHelp" placeholder="ex. mustafa@gmail.com">
         <div *ngIf="loginForm.get('email')?.errors != null && loginForm.get('email')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</p>
           <p *ngIf="loginForm.get('email')?.errors?.['email']">Email is invalid!</p>
         </div>
       </div>
-  
+
       <div class="form-group">
-        <label class="" for="Password">Password*</label>
+        <label class="login-fonts-specifications" for="Password">Password*</label>
         <input formControlName="password" type="password" class="form-control" id="Password" placeholder="Password">
         <div *ngIf="loginForm.get('password')?.errors != null && loginForm.get('password')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="loginForm.get('password')?.errors?.['required']">Password is required</p>
         </div>
       </div>
     </div>
-    
+
   </div>
-    
- 
-    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary my-2">Login</button>
+
+
+    <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary my-2 login-fonts-specifications">Login</button>
 </form>

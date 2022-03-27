@@ -1,11 +1,16 @@
 .content{
+  position: relative;
+  top: 22vh;
+}
+.home-fonts-specifications{
   font-family: 'Cinzel', serif;
   font-family: 'Cinzel Decorative', cursive;
   font-family: 'Roboto', sans-serif;
-  display: flex;
-  margin: auto;
-  padding: 5em;
- }
+  color: white;
+  font-weight: bold;
+}
+
+
 // .content{
 //     font-family: 'Cinzel', serif;
 // }
