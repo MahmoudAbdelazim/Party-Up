@@ -1,6 +1,8 @@
 .container{
   position: relative;
   top: 15vh;
+  margin-bottom: 17vh;
+
 }
 .register-fonts-specifications{
   font-family: 'Cinzel', serif;
@@ -8,4 +10,10 @@
   font-family: 'Roboto', sans-serif;
   color: white;
   font-weight: bold;
+}
+.discordTagColour{
+  color: #573391;
+}
+.regionColour{
+  color: red;
 }

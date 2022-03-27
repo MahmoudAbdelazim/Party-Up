@@ -47,7 +47,7 @@
 
     <div class="form-group">
       <label class="register-fonts-specifications" for="DiscordTag">Discord Tag*</label>
-      <i class=" px-1 fa-brands fa-discord"></i>
+      <i class=" px-1 fa-brands fa-discord discordTagColour"></i>
       <input formControlName="discordTag" type="text" class="form-control" id="DiscordTag" placeholder="ex. Mustafa#4320">
       <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
         <p *ngIf="registerForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
@@ -65,7 +65,7 @@
 
       <div class="form-group">
         <label class="register-fonts-specifications" for="Country">Country/Region* </label>
-        <i class="px-1 fa-solid fa-location-dot"></i>
+        <i class="px-1 fa-solid fa-location-dot regionColour" ></i>
         <input formControlName="country" type="text" class="form-control" id="Country" placeholder="ex. Egypt">
         <div *ngIf="registerForm.get('country')?.errors != null && registerForm.get('country')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="registerForm.get('country')?.errors?.['required']">Country is required</p>
