@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {Router} from "@angular/router";
+import {PlayersDataService} from "../players-data.service";
 
 @Component({
   selector: 'app-login',
@@ -8,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router : Router , private logIn: PlayersDataService) { }
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -16,7 +18,15 @@ export class LoginComponent implements OnInit {
   })
 
   loginFormMethod(loginForm:FormGroup){
-    console.log(loginForm.value);
+    console.log(this.loginForm.value);
+    let flag : boolean[] = this.logIn.checkingCredentials(loginForm);
+    if (flag[0] && flag[1]) {
+      this.router.navigate(['/findpeers']);
+    }else if (flag[0] && !flag[1]) {
+      flag[0] = false;
+      this.logIn.pickingSpecificPlayerForTest(loginForm.value);
+
+    }
 
   }
 

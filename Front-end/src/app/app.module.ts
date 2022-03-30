@@ -15,6 +15,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
+import {PlayersDataService} from "./players-data.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import {HttpClientModule} from '@angular/common/http'
     AllRightsReservedComponent,
     LogoutComponent,
     PersonalityTestComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,7 @@ import {HttpClientModule} from '@angular/common/http'
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [PlayersDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
