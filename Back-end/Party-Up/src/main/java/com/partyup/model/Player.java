@@ -2,8 +2,13 @@ package com.partyup.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "player", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"username"}),
+        @UniqueConstraint(columnNames = {"email"})
+})
 public class Player {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +27,7 @@ public class Player {
 
     private String phoneNumber;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private State state;
 
     @OneToMany
@@ -30,6 +35,9 @@ public class Player {
 
     @OneToMany
     private List<Handle> handles;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Set<Role> roles;
 
     public Long getId() {
         return id;
@@ -109,5 +117,29 @@ public class Player {
 
     public void setUserHandles(List<Handle> handles) {
         this.handles = handles;
+    }
+
+    public List<Handle> getHandles() {
+        return handles;
+    }
+
+    public void setHandles(List<Handle> handles) {
+        this.handles = handles;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void addRole(Role role) {
+        roles.add(role);
+    }
+
+    public boolean removeRole(Role role) {
+        return roles.remove(role);
+    }
+
+    public void setRoles(Set<Role> role) {
+        this.roles = role;
     }
 }
