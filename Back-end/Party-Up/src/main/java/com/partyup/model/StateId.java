@@ -9,6 +9,9 @@ public class StateId implements Serializable {
 
     private Country country;
 
+    public StateId() {
+    }
+
     public StateId(String name, Country country) {
         this.name = name;
         this.country = country;
