@@ -9,7 +9,7 @@ public class State {
     private String name;
 
     @Id
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Country country;
 
     public String getName() {
@@ -18,5 +18,13 @@ public class State {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }
