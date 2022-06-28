@@ -5,6 +5,7 @@ import { LoginRequestPayload } from './login/login.request.payload';
 import { LoginResponse } from './login/login.response.payload';
 import {RegisterRequestPayload} from "./register/register-request.payload";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -12,8 +13,8 @@ export class AuthService {
 
   constructor(private _httpClient:HttpClient) { }
 
-  register(registerPayload : RegisterRequestPayload) : Observable<any>{
-    return this._httpClient.post('http://localhost:8080/api/auth/signup', registerPayload, {responseType : 'text'});
+  register(){
+    this._httpClient.post('', []);
   }
 
   login(loginRequestPayload: LoginRequestPayload){
