@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {PlayersDataService} from "../players-data.service";
 
 @Component({
   selector: 'app-register',
@@ -10,7 +9,7 @@ import {PlayersDataService} from "../players-data.service";
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private router:Router , private playerDetailsObject: PlayersDataService) { }
+  constructor(private router:Router) { }
 
   registerForm = new FormGroup({
     firstName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z]{3,20}$'), Validators.maxLength(20)]), //inside the constructor is like a place holder
@@ -28,12 +27,6 @@ export class RegisterComponent implements OnInit {
 
 
   submitRegisterForm(registerForm:FormGroup){
-    let flag = this.playerDetailsObject.checkingExistingAccount(registerForm)
-    if (flag) {
-      this.playerDetailsObject.setPlayersDetails(registerForm.value);
-      console.log(this.playerDetailsObject.getPlayersDetails());
       this.router.navigate(['/personalityTest']);
-    }
-
   }
 }
