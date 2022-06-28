@@ -15,7 +15,6 @@ import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http'
-import {PlayersDataService} from "./players-data.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +36,7 @@ import {PlayersDataService} from "./players-data.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [PlayersDataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
