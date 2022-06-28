@@ -14,7 +14,11 @@ import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-res
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import {NgxWebstorageModule} from "ngx-webstorage";
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +38,9 @@ import {HttpClientModule} from '@angular/common/http'
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxWebstorageModule.forRoot()
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
