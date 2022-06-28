@@ -28,12 +28,6 @@ export class RegisterComponent implements OnInit {
 
 
   submitRegisterForm(registerForm:FormGroup){
-    let flag = this.playerDetailsObject.checkingExistingAccount(registerForm)
-    if (flag) {
-      this.playerDetailsObject.setPlayersDetails(registerForm.value);
-      console.log(this.playerDetailsObject.getPlayersDetails());
       this.router.navigate(['/personalityTest']);
-    }
-
   }
 }

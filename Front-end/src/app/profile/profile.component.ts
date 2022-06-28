@@ -15,10 +15,6 @@ export class ProfileComponent implements OnInit {
     password: new FormControl(null, [Validators.required ]) //Minimum eight characters, at least one letter and one number
   })
 
-  loginForm(registerForm:FormGroup){
-    console.log(registerForm.value);
-
-  }
 
   ngOnInit(): void {
   }
