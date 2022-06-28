@@ -15,7 +15,7 @@ public class Player {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String username; //momken teb2a DiscordTag
+    private String username;
 
     private String email;
 
@@ -25,9 +25,7 @@ public class Player {
 
     private String lastName;
 
-    private String phoneNumber; //momken teb2a dateOfBirth
-
-    // momken tezawedo ->>> object : Country
+    private String phoneNumber;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     private State state;
