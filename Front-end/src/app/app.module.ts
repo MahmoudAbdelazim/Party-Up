@@ -14,8 +14,10 @@ import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-res
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import {NgxWebstorageModule} from "ngx-webstorage";
 import {PlayersDataService} from "./players-data.service";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +37,9 @@ import {PlayersDataService} from "./players-data.service";
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxWebstorageModule.forRoot()
+    
   ],
   providers: [PlayersDataService],
   bootstrap: [AppComponent]
