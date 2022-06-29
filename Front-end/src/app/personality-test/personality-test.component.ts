@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Router} from "@angular/router";
-
 
 @Component({
   selector: 'app-personality-test',
@@ -40,13 +38,10 @@ export class PersonalityTestComponent implements OnInit {
     q27: new FormControl(null , [Validators.required])
 })
 
-  constructor(private router:Router) { }
+  constructor() { }
 
   ngOnInit(){
   }
-  submitPersonalityForm(playerPersonalityTest: FormGroup){
-    // this.playerTestObject.setPlayersTest(playerPersonalityTest.value);
-    // console.log(this.playerTestObject.getPlayersDetails());
-    // this.router.navigate(['/login']);
-  }
+
+
 }

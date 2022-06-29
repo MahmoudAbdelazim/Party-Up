@@ -111,8 +111,5 @@
       }
     }
   },
-  "defaultProject": "GP",
-  "cli": {
-    "analytics": "4929fb9e-36c8-475e-9d55-2b5271730576"
-  }
+  "defaultProject": "GP"
 }

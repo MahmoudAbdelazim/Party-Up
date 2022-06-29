@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { AuthService } from '../auth.service';
-import { LoginRequestPayload } from './login.request.payload';
 
 @Component({
   selector: 'app-login',
@@ -11,14 +8,7 @@ import { LoginRequestPayload } from './login.request.payload';
 })
 export class LoginComponent implements OnInit {
 
-  loginRequestPayload: LoginRequestPayload;
-
-  constructor(private authService: AuthService) {
-    this.loginRequestPayload = {
-      email : "",
-      password : ""
-    };
-   }
+  constructor() { }
 
   loginForm = new FormGroup({
     email: new FormControl(null, [Validators.email, Validators.required]),
@@ -29,11 +19,4 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
-    this.loginRequestPayload.email = this.loginForm.get('email')?.value;
-    this.loginRequestPayload.password = this.loginForm.get('password')?.value;
-
-    this.authService.login(this.loginRequestPayload).subscribe();
-    
-  }
 }
