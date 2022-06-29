@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
         lastName: "",
         email: "",
         password: "",
-        discordTag: "",
+        username: "",
         dataOfBirth: "",
         country: ""
       };
@@ -45,13 +45,15 @@ export class RegisterComponent implements OnInit {
       this.registerPayload.lastName = this.registerForm.get('lastName')?.value;
       this.registerPayload.email = this.registerForm.get('email')?.value;
       this.registerPayload.password = this.registerForm.get('password')?.value;
-      this.registerPayload.discordTag = this.registerForm.get('discordTag')?.value;
+      this.registerPayload.username = this.registerForm.get('discordTag')?.value;
       this.registerPayload.dataOfBirth = this.registerForm.get('dateOfBirth')?.value;
       this.registerPayload.country = this.registerForm.get('country')?.value;
 
       this.authService.register(this.registerPayload).subscribe(data =>{
         console.log("sign up successfully")
+        console.log(data.value)
+        this.router.navigate(['/personalityTest']);
       });
-      this.router.navigate(['/personalityTest']);
+
   }
 }

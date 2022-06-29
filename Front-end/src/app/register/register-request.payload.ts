@@ -3,7 +3,7 @@ export interface RegisterRequestPayload{
   lastName: string;
   email: string;
   password: string;
-  discordTag: string;
+  username: string;
   dataOfBirth: string;
   country: string;
 }

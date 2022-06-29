@@ -11,9 +11,4 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  navBarDisplay(){
-    // if (this.logIn.navBarFlag[0] && this.logIn.navBarFlag[1])
-    //   return true;
-    // return false;
-  }
 }
