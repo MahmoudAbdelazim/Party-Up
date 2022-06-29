@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { PlayersDataService } from '../players-data.service'
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -7,14 +6,14 @@ import { PlayersDataService } from '../players-data.service'
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private logIn: PlayersDataService) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
 
   navBarDisplay(){
-    if (this.logIn.navBarFlag[0] && this.logIn.navBarFlag[1])
-      return true;
-    return false;
+    // if (this.logIn.navBarFlag[0] && this.logIn.navBarFlag[1])
+    //   return true;
+    // return false;
   }
 }

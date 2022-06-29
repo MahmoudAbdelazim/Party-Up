@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
-import {PlayersDataService} from "../players-data.service";
+
 
 @Component({
   selector: 'app-personality-test',
@@ -40,13 +40,13 @@ export class PersonalityTestComponent implements OnInit {
     q27: new FormControl(null , [Validators.required])
 })
 
-  constructor(private router:Router , private playerTestObject: PlayersDataService) { }
+  constructor(private router:Router) { }
 
   ngOnInit(){
   }
   submitPersonalityForm(playerPersonalityTest: FormGroup){
-    this.playerTestObject.setPlayersTest(playerPersonalityTest.value);
-    console.log(this.playerTestObject.getPlayersDetails());
-    this.router.navigate(['/login']);
+    // this.playerTestObject.setPlayersTest(playerPersonalityTest.value);
+    // console.log(this.playerTestObject.getPlayersDetails());
+    // this.router.navigate(['/login']);
   }
 }

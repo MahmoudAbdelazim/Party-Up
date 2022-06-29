@@ -16,7 +16,7 @@ import { PersonalityTestComponent } from './personality-test/personality-test.co
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {NgxWebstorageModule} from "ngx-webstorage";
-import {PlayersDataService} from "./players-data.service";
+
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import {PlayersDataService} from "./players-data.service";
     NgxWebstorageModule.forRoot()
     
   ],
-  providers: [PlayersDataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
