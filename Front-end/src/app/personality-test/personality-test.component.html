@@ -1,396 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Personality Test</title>
+</head>
+<body>
+
 <div class="my-2 text-center container">
-    <h1>Personality Test</h1>
-    <h2>Please answer all questions below sincerely</h2>
+  <h1>Personality Test</h1>
+  <h2>Please answer all questions below sincerely</h2>
+  <h3>give yourself a rate from 1 ~ 5 for each question</h3>
 
 
+  <!--
+  <form [formGroup]="playerPersonalityTest">
+    <div class="row">
+    <div class="col-md-4">
+      <div class=" my-3">
+        <p>Q1: I am energetic during the game.</p>
+         <input formControlName='q1' type="radio"  name="q1" value="1">
+         <label for="">1</label>
+         <input formControlName='q1' type="radio"  name="q1" value="2">
+         <label for="">2</label>
+         <input formControlName='q1' type="radio"  name="q1" value="3">
+         <label  for="">3</label>
+         <input formControlName='q1' class="m-left" type="radio"  name="q1" value="4">
+         <label for="">4</label>
+         <input formControlName='q1' type="radio"  name="q1" value="5">
+         <label for="">5</label>
+      </div>
 
-<form [formGroup]="playerPersonalityTest">
-  <div class="row">
-  <div class="col-md-4">
-    <div class=" my-3">
-      <p>Q1: I am energetic during the game.</p>
-       <input formControlName='q1' type="radio"  name="q1" value="1">
-       <label for="">1</label>
-       <input formControlName='q1' type="radio"  name="q1" value="2">
-       <label for="">2</label>
-       <input formControlName='q1' type="radio"  name="q1" value="3">
-       <label  for="">3</label>
-       <input formControlName='q1' class="m-left" type="radio"  name="q1" value="4">
-       <label for="">4</label>
-       <input formControlName='q1' type="radio"  name="q1" value="5">
-       <label for="">5</label>
-    </div>
-
-    <div class=" my-3">
-  <p>Q2: I don't talk a lot while gaming.</p>
-    <input formControlName='q2' type="radio"  name="q2" value="1">
-    <label for="">1</label>
-    <input formControlName='q2' type="radio"  name="q2" value="2">
-    <label for="">2</label>
-    <input formControlName='q2' type="radio"  name="q2" value="3">
-    <label for="">3</label>
-    <input formControlName='q2' class="m-left" type="radio"  name="q2" value="4">
-    <label for="">4</label>
-    <input formControlName='q2' type="radio"  name="q2" value="5">
-    <label for="">5</label>
-    </div>
-
-  <div class=" my-3">
-  <p>Q3: I feel comfortable playing with others.</p>
-    <input formControlName='q3' type="radio"  name="q3" value="1">
-    <label for="">1</label>
-    <input formControlName='q3' type="radio"  name="q3" value="2">
-    <label for="">2</label>
-    <input formControlName='q3' type="radio"  name="q3" value="3">
-    <label for="">3</label>
-    <input formControlName='q3' class="m-left" type="radio"  name="q3" value="4">
-    <label for="">4</label>
-    <input formControlName='q3' type="radio"  name="q3" value="5">
-    <label for="">5</label>
-  </div>
-
-  <div class=" my-3">
-  <p>Q4: I start conversations.</p>
-    <input formControlName='q4' type="radio"  name="q4" value="1">
-    <label for="">1</label>
-    <input formControlName='q4' type="radio"  name="q4" value="2">
-    <label for="">2</label>
-    <input formControlName='q4' type="radio"  name="q4" value="3">
-    <label for="">3</label>
-   <input formControlName='q4' class="m-left" type="radio"  name="q4" value="4">
-    <label for="">4</label>
-    <input formControlName='q4' type="radio"  name="q4" value="5">
-    <label for="">5</label>
-  </div>
-
-  <div class=" my-3">
-    <p>Q5: I like to talk to new people in games.</p>
-      <input formControlName='q5' type="radio"  name="q5" value="1">
+      <div class=" my-3">
+    <p>Q2: I don't talk a lot while gaming.</p>
+      <input formControlName='q2' type="radio"  name="q2" value="1">
       <label for="">1</label>
-      <input formControlName='q5' type="radio"  name="q5" value="2">
+      <input formControlName='q2' type="radio"  name="q2" value="2">
       <label for="">2</label>
-      <input formControlName='q5' type="radio"  name="q5" value="3">
+      <input formControlName='q2' type="radio"  name="q2" value="3">
       <label for="">3</label>
-     <input formControlName='q5' class="m-left" type="radio"  name="q5" value="4">
+      <input formControlName='q2' class="m-left" type="radio"  name="q2" value="4">
       <label for="">4</label>
-      <input formControlName='q5' type="radio"  name="q5" value="5">
+      <input formControlName='q2' type="radio"  name="q2" value="5">
+      <label for="">5</label>
+      </div>
+
+    <div class=" my-3">
+    <p>Q3: I feel comfortable playing with others.</p>
+      <input formControlName='q3' type="radio"  name="q3" value="1">
+      <label for="">1</label>
+      <input formControlName='q3' type="radio"  name="q3" value="2">
+      <label for="">2</label>
+      <input formControlName='q3' type="radio"  name="q3" value="3">
+      <label for="">3</label>
+      <input formControlName='q3' class="m-left" type="radio"  name="q3" value="4">
+      <label for="">4</label>
+      <input formControlName='q3' type="radio"  name="q3" value="5">
       <label for="">5</label>
     </div>
 
     <div class=" my-3">
-      <p>Q6: I like to talk to new people in games.</p>
-        <input formControlName='q6' type="radio"  name="q6" value="1">
-        <label for="">1</label>
-        <input formControlName='q6' type="radio"  name="q6" value="2">
-        <label for="">2</label>
-        <input formControlName='q6' type="radio"  name="q6" value="3">
-        <label for="">3</label>
-       <input formControlName='q6' class="m-left" type="radio"  name="q6" value="4">
-        <label for="">4</label>
-        <input formControlName='q6' type="radio"  name="q6" value="5">
-        <label for="">5</label>
-      </div>
-
-      <div class=" my-3">
-        <p>Q7: I like to talk to new people in games.</p>
-          <input formControlName='q7' type="radio"  name="q7" value="1">
-          <label for="">1</label>
-          <input formControlName='q7' type="radio"  name="q7" value="2">
-          <label for="">2</label>
-          <input formControlName='q7' type="radio"  name="q7" value="3">
-          <label for="">3</label>
-         <input formControlName='q7' class="m-left" type="radio"  name="q7" value="4">
-          <label for="">4</label>
-          <input formControlName='q7' type="radio"  name="q7" value="5">
-          <label for="">5</label>
-        </div>
-        <div class=" my-3">
-          <p>Q8: I get stressed out easily.</p>
-           <input formControlName='q8' type="radio"  name="q8" value="1">
-           <label for="">1</label>
-           <input formControlName='q8' type="radio"  name="q8" value="2">
-           <label for="">2</label>
-           <input formControlName='q8' type="radio"  name="q8" value="3">
-           <label  for="">3</label>
-           <input formControlName='q8' class="m-left" type="radio"  name="q8" value="4">
-           <label for="">4</label>
-           <input formControlName='q8' type="radio"  name="q8" value="5">
-           <label for="">5</label>
-        </div>
-
-        <div class=" my-3">
-      <p>Q9: I am relaxed most of the time.</p>
-        <input formControlName='q9' type="radio"  name="q9" value="1">
-        <label for="">1</label>
-        <input formControlName='q9' type="radio"  name="q9" value="2">
-        <label for="">2</label>
-        <input formControlName='q9' type="radio"  name="q9" value="3">
-        <label for="">3</label>
-        <input formControlName='q9' class="m-left" type="radio"  name="q9" value="4">
-        <label for="">4</label>
-        <input formControlName='q9' type="radio"  name="q9" value="5">
-        <label for="">5</label>
-        </div>
-  </div>
-
-
-  <div class="col-md-4">
-
-  <div class=" my-3">
-  <p>Q10: I get upset easily.</p>
-    <input formControlName='q10' type="radio"  name="q10" value="1">
-    <label for="">1</label>
-    <input formControlName='q10' type="radio"  name="q10" value="2">
-    <label for="">2</label>
-    <input formControlName='q10' type="radio"  name="q10" value="3">
-    <label for="">3</label>
-    <input formControlName='q10' class="m-left" type="radio"  name="q10" value="4">
-    <label for="">4</label>
-    <input formControlName='q10' type="radio"  name="q10" value="5">
-    <label for="">5</label>
-  </div>
-
-  <div class=" my-3">
-  <p>Q11: I change my mood a lot.</p>
-    <input formControlName='q11' type="radio"  name="q11" value="1">
-    <label for="">1</label>
-    <input formControlName='q11' type="radio"  name="q11" value="2">
-    <label for="">2</label>
-    <input formControlName='q11' type="radio"  name="q11" value="3">
-    <label for="">3</label>
-   <input formControlName='q11' class="m-left" type="radio"  name="q11" value="4">
-    <label for="">4</label>
-    <input formControlName='q11' type="radio"  name="q11" value="5">
-    <label for="">5</label>
-  </div>
-
-  <div class=" my-3">
-    <p>Q12: I prefer playing on my own.</p>
-      <input formControlName='q12' type="radio"  name="q12" value="1">
+    <p>Q4: I start conversations.</p>
+      <input formControlName='q4' type="radio"  name="q4" value="1">
       <label for="">1</label>
-      <input formControlName='q12' type="radio"  name="q12" value="2">
+      <input formControlName='q4' type="radio"  name="q4" value="2">
       <label for="">2</label>
-      <input formControlName='q12' type="radio"  name="q12" value="3">
+      <input formControlName='q4' type="radio"  name="q4" value="3">
       <label for="">3</label>
-     <input formControlName='q12' class="m-left" type="radio"  name="q12" value="4">
+     <input formControlName='q4' class="m-left" type="radio"  name="q4" value="4">
       <label for="">4</label>
-      <input formControlName='q12' type="radio"  name="q12" value="5">
+      <input formControlName='q4' type="radio"  name="q4" value="5">
       <label for="">5</label>
     </div>
 
     <div class=" my-3">
-      <p>Q13: I am interested in knowing new people.</p>
-        <input formControlName='q13' type="radio"  name="q13" value="1">
+      <p>Q5: I like to talk to new people in games.</p>
+        <input formControlName='q5' type="radio"  name="q5" value="1">
         <label for="">1</label>
-        <input formControlName='q13' type="radio"  name="q13" value="2">
+        <input formControlName='q5' type="radio"  name="q5" value="2">
         <label for="">2</label>
-        <input formControlName='q13' type="radio"  name="q13" value="3">
+        <input formControlName='q5' type="radio"  name="q5" value="3">
         <label for="">3</label>
-       <input formControlName='q13' class="m-left" type="radio"  name="q13" value="4">
+       <input formControlName='q5' class="m-left" type="radio"  name="q5" value="4">
         <label for="">4</label>
-        <input formControlName='q13' type="radio"  name="q13" value="5">
+        <input formControlName='q5' type="radio"  name="q5" value="5">
         <label for="">5</label>
       </div>
 
       <div class=" my-3">
-        <p>Q14: I get nervous when I lose.</p>
-          <input formControlName='q14' type="radio"  name="q14" value="1">
+        <p>Q6: I like to talk to new people in games.</p>
+          <input formControlName='q6' type="radio"  name="q6" value="1">
           <label for="">1</label>
-          <input formControlName='q14' type="radio"  name="q14" value="2">
+          <input formControlName='q6' type="radio"  name="q6" value="2">
           <label for="">2</label>
-          <input formControlName='q14' type="radio"  name="q14" value="3">
+          <input formControlName='q6' type="radio"  name="q6" value="3">
           <label for="">3</label>
-         <input formControlName='q14' class="m-left" type="radio"  name="q14" value="4">
+         <input formControlName='q6' class="m-left" type="radio"  name="q6" value="4">
           <label for="">4</label>
-          <input formControlName='q14' type="radio"  name="q14" value="5">
+          <input formControlName='q6' type="radio"  name="q6" value="5">
           <label for="">5</label>
+        </div>
+
+        <div class=" my-3">
+          <p>Q7: I like to talk to new people in games.</p>
+            <input formControlName='q7' type="radio"  name="q7" value="1">
+            <label for="">1</label>
+            <input formControlName='q7' type="radio"  name="q7" value="2">
+            <label for="">2</label>
+            <input formControlName='q7' type="radio"  name="q7" value="3">
+            <label for="">3</label>
+           <input formControlName='q7' class="m-left" type="radio"  name="q7" value="4">
+            <label for="">4</label>
+            <input formControlName='q7' type="radio"  name="q7" value="5">
+            <label for="">5</label>
+          </div>
+          <div class=" my-3">
+            <p>Q8: I get stressed out easily.</p>
+             <input formControlName='q8' type="radio"  name="q8" value="1">
+             <label for="">1</label>
+             <input formControlName='q8' type="radio"  name="q8" value="2">
+             <label for="">2</label>
+             <input formControlName='q8' type="radio"  name="q8" value="3">
+             <label  for="">3</label>
+             <input formControlName='q8' class="m-left" type="radio"  name="q8" value="4">
+             <label for="">4</label>
+             <input formControlName='q8' type="radio"  name="q8" value="5">
+             <label for="">5</label>
+          </div>
+
+          <div class=" my-3">
+        <p>Q9: I am relaxed most of the time.</p>
+          <input formControlName='q9' type="radio"  name="q9" value="1">
+          <label for="">1</label>
+          <input formControlName='q9' type="radio"  name="q9" value="2">
+          <label for="">2</label>
+          <input formControlName='q9' type="radio"  name="q9" value="3">
+          <label for="">3</label>
+          <input formControlName='q9' class="m-left" type="radio"  name="q9" value="4">
+          <label for="">4</label>
+          <input formControlName='q9' type="radio"  name="q9" value="5">
+          <label for="">5</label>
+          </div>
+    </div>
+
+
+    <div class="col-md-4">
+
+    <div class=" my-3">
+    <p>Q10: I get upset easily.</p>
+      <input formControlName='q10' type="radio"  name="q10" value="1">
+      <label for="">1</label>
+      <input formControlName='q10' type="radio"  name="q10" value="2">
+      <label for="">2</label>
+      <input formControlName='q10' type="radio"  name="q10" value="3">
+      <label for="">3</label>
+      <input formControlName='q10' class="m-left" type="radio"  name="q10" value="4">
+      <label for="">4</label>
+      <input formControlName='q10' type="radio"  name="q10" value="5">
+      <label for="">5</label>
+    </div>
+
+    <div class=" my-3">
+    <p>Q11: I change my mood a lot.</p>
+      <input formControlName='q11' type="radio"  name="q11" value="1">
+      <label for="">1</label>
+      <input formControlName='q11' type="radio"  name="q11" value="2">
+      <label for="">2</label>
+      <input formControlName='q11' type="radio"  name="q11" value="3">
+      <label for="">3</label>
+     <input formControlName='q11' class="m-left" type="radio"  name="q11" value="4">
+      <label for="">4</label>
+      <input formControlName='q11' type="radio"  name="q11" value="5">
+      <label for="">5</label>
+    </div>
+
+    <div class=" my-3">
+      <p>Q12: I prefer playing on my own.</p>
+        <input formControlName='q12' type="radio"  name="q12" value="1">
+        <label for="">1</label>
+        <input formControlName='q12' type="radio"  name="q12" value="2">
+        <label for="">2</label>
+        <input formControlName='q12' type="radio"  name="q12" value="3">
+        <label for="">3</label>
+       <input formControlName='q12' class="m-left" type="radio"  name="q12" value="4">
+        <label for="">4</label>
+        <input formControlName='q12' type="radio"  name="q12" value="5">
+        <label for="">5</label>
       </div>
 
       <div class=" my-3">
-        <p>Q15: I sympathize with others' feelings.</p>
-          <input formControlName='q15' type="radio"  name="q15" value="1">
+        <p>Q13: I am interested in knowing new people.</p>
+          <input formControlName='q13' type="radio"  name="q13" value="1">
           <label for="">1</label>
-          <input formControlName='q15' type="radio"  name="q15" value="2">
+          <input formControlName='q13' type="radio"  name="q13" value="2">
           <label for="">2</label>
-          <input formControlName='q15' type="radio"  name="q15" value="3">
+          <input formControlName='q13' type="radio"  name="q13" value="3">
           <label for="">3</label>
-         <input formControlName='q15' class="m-left" type="radio"  name="q15" value="4">
+         <input formControlName='q13' class="m-left" type="radio"  name="q13" value="4">
           <label for="">4</label>
-          <input formControlName='q15' type="radio"  name="q15" value="5">
+          <input formControlName='q13' type="radio"  name="q13" value="5">
           <label for="">5</label>
-      </div>
+        </div>
+
+        <div class=" my-3">
+          <p>Q14: I get nervous when I lose.</p>
+            <input formControlName='q14' type="radio"  name="q14" value="1">
+            <label for="">1</label>
+            <input formControlName='q14' type="radio"  name="q14" value="2">
+            <label for="">2</label>
+            <input formControlName='q14' type="radio"  name="q14" value="3">
+            <label for="">3</label>
+           <input formControlName='q14' class="m-left" type="radio"  name="q14" value="4">
+            <label for="">4</label>
+            <input formControlName='q14' type="radio"  name="q14" value="5">
+            <label for="">5</label>
+        </div>
+
+        <div class=" my-3">
+          <p>Q15: I sympathize with others' feelings.</p>
+            <input formControlName='q15' type="radio"  name="q15" value="1">
+            <label for="">1</label>
+            <input formControlName='q15' type="radio"  name="q15" value="2">
+            <label for="">2</label>
+            <input formControlName='q15' type="radio"  name="q15" value="3">
+            <label for="">3</label>
+           <input formControlName='q15' class="m-left" type="radio"  name="q15" value="4">
+            <label for="">4</label>
+            <input formControlName='q15' type="radio"  name="q15" value="5">
+            <label for="">5</label>
+        </div>
+        <div class=" my-3">
+          <p>Q16: I prefer making friends over winning.</p>
+            <input formControlName='q16' type="radio"  name="q16" value="1">
+            <label for="">1</label>
+            <input formControlName='q16' type="radio"  name="q16" value="2">
+            <label for="">2</label>
+            <input formControlName='q16' type="radio"  name="q16" value="3">
+            <label for="">3</label>
+           <input formControlName='q16' class="m-left" type="radio"  name="q16" value="4">
+            <label for="">4</label>
+            <input formControlName='q16' type="radio"  name="q16" value="5">
+            <label for="">5</label>
+        </div>
+        <div class=" my-3">
+          <p>Q17: I help newbies.</p>
+            <input formControlName='q17' type="radio"  name="q17" value="1">
+            <label for="">1</label>
+            <input formControlName='q17' type="radio"  name="q17" value="2">
+            <label for="">2</label>
+            <input formControlName='q17' type="radio"  name="q17" value="3">
+            <label for="">3</label>
+           <input formControlName='q17' class="m-left" type="radio"  name="q17" value="4">
+            <label for="">4</label>
+            <input formControlName='q17' type="radio"  name="q17" value="5">
+            <label for="">5</label>
+        </div>
+        <div class=" my-3">
+          <p>Q18: I am always prepared.</p>
+            <input formControlName='q18' type="radio"  name="q18" value="1">
+            <label for="">1</label>
+            <input formControlName='q18' type="radio"  name="q18" value="2">
+            <label for="">2</label>
+            <input formControlName='q18' type="radio"  name="q18" value="3">
+            <label for="">3</label>
+           <input formControlName='q18' class="m-left" type="radio"  name="q18" value="4">
+            <label for="">4</label>
+            <input formControlName='q18' type="radio"  name="q18" value="5">
+            <label for="">5</label>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+
       <div class=" my-3">
-        <p>Q16: I prefer making friends over winning.</p>
-          <input formControlName='q16' type="radio"  name="q16" value="1">
-          <label for="">1</label>
-          <input formControlName='q16' type="radio"  name="q16" value="2">
-          <label for="">2</label>
-          <input formControlName='q16' type="radio"  name="q16" value="3">
-          <label for="">3</label>
-         <input formControlName='q16' class="m-left" type="radio"  name="q16" value="4">
-          <label for="">4</label>
-          <input formControlName='q16' type="radio"  name="q16" value="5">
-          <label for="">5</label>
-      </div>
-      <div class=" my-3">
-        <p>Q17: I help newbies.</p>
-          <input formControlName='q17' type="radio"  name="q17" value="1">
-          <label for="">1</label>
-          <input formControlName='q17' type="radio"  name="q17" value="2">
-          <label for="">2</label>
-          <input formControlName='q17' type="radio"  name="q17" value="3">
-          <label for="">3</label>
-         <input formControlName='q17' class="m-left" type="radio"  name="q17" value="4">
-          <label for="">4</label>
-          <input formControlName='q17' type="radio"  name="q17" value="5">
-          <label for="">5</label>
-      </div>
-      <div class=" my-3">
-        <p>Q18: I am always prepared.</p>
-          <input formControlName='q18' type="radio"  name="q18" value="1">
-          <label for="">1</label>
-          <input formControlName='q18' type="radio"  name="q18" value="2">
-          <label for="">2</label>
-          <input formControlName='q18' type="radio"  name="q18" value="3">
-          <label for="">3</label>
-         <input formControlName='q18' class="m-left" type="radio"  name="q18" value="4">
-          <label for="">4</label>
-          <input formControlName='q18' type="radio"  name="q18" value="5">
-          <label for="">5</label>
+      <p>Q19: I pay attention to details.</p>
+        <input formControlName='q19' type="radio"  name="q19" value="1">
+        <label for="">1</label>
+        <input formControlName='q19' type="radio"  name="q19" value="2">
+        <label for="">2</label>
+        <input formControlName='q19' type="radio"  name="q19" value="3">
+        <label for="">3</label>
+        <input formControlName='q19' class="m-left" type="radio"  name="q19" value="4">
+        <label for="">4</label>
+        <input formControlName='q19' type="radio"  name="q19" value="5">
+        <label for="">5</label>
       </div>
 
+      <div class=" my-3">
+      <p>Q20: I don't stick to a gaming style.</p>
+        <input formControlName='q20' type="radio"  name="q20" value="1">
+        <label for="">1</label>
+        <input formControlName='q20' type="radio"  name="q20" value="2">
+        <label for="">2</label>
+        <input formControlName='q20' type="radio"  name="q20" value="3">
+        <label for="">3</label>
+       <input formControlName='q20' class="m-left" type="radio"  name="q20" value="4">
+        <label for="">4</label>
+        <input formControlName='q20' type="radio"  name="q20" value="5">
+        <label for="">5</label>
+      </div>
+
+      <div class=" my-3">
+        <p>Q21: I like order.</p>
+          <input formControlName='q21' type="radio"  name="q21" value="1">
+          <label for="">1</label>
+          <input formControlName='q21' type="radio"  name="q21" value="2">
+          <label for="">2</label>
+          <input formControlName='q21' type="radio"  name="q21" value="3">
+          <label for="">3</label>
+         <input formControlName='q21' class="m-left" type="radio"  name="q21" value="4">
+          <label for="">4</label>
+          <input formControlName='q21' type="radio"  name="q21" value="5">
+          <label for="">5</label>
+        </div>
+
+        <div class=" my-3">
+          <p>Q22: I exit the game when I feel I am losing.</p>
+            <input formControlName='q22' type="radio"  name="q22" value="1">
+            <label for="">1</label>
+            <input formControlName='q22' type="radio"  name="q22" value="2">
+            <label for="">2</label>
+            <input formControlName='q22' type="radio"  name="q22" value="3">
+            <label for="">3</label>
+           <input formControlName='q22' class="m-left" type="radio"  name="q22" value="4">
+            <label for="">4</label>
+            <input formControlName='q22' type="radio"  name="q22" value="5">
+            <label for="">5</label>
+          </div>
+
+          <div class=" my-3">
+            <p>Q23: I follow a plan in game.</p>
+              <input formControlName='q23' type="radio"  name="q23" value="1">
+              <label for="">1</label>
+              <input formControlName='q23' type="radio"  name="q23" value="2">
+              <label for="">2</label>
+              <input formControlName='q23' type="radio"  name="q23" value="3">
+              <label for="">3</label>
+             <input formControlName='q23' class="m-left" type="radio"  name="q23" value="4">
+              <label for="">4</label>
+              <input formControlName='q23' type="radio"  name="q23" value="5">
+              <label for="">5</label>
+          </div>
+
+          <div class=" my-3">
+            <p>Q24: I have difficulty understanding others' plans.</p>
+              <input formControlName='q24' type="radio"  name="q24" value="1">
+              <label for="">1</label>
+              <input formControlName='q24' type="radio"  name="q24" value="2">
+              <label for="">2</label>
+              <input formControlName='q24' type="radio"  name="q24" value="3">
+              <label for="">3</label>
+             <input formControlName='q24' class="m-left" type="radio"  name="q24" value="4">
+              <label for="">4</label>
+              <input formControlName='q24' type="radio"  name="q24" value="5">
+              <label for="">5</label>
+          </div>
+          <div class=" my-3">
+            <p>Q25: I have a vivid imagination.</p>
+              <input formControlName='q25' type="radio"  name="q25" value="1">
+              <label for="">1</label>
+              <input formControlName='q25' type="radio"  name="q25" value="2">
+              <label for="">2</label>
+              <input formControlName='q25' type="radio"  name="q25" value="3">
+              <label for="">3</label>
+             <input formControlName='q25' class="m-left" type="radio"  name="q25" value="4">
+              <label for="">4</label>
+              <input formControlName='q25' type="radio"  name="q25" value="5">
+              <label for="">5</label>
+          </div>
+          <div class=" my-3">
+            <p>Q26: I have excellent ideas.</p>
+              <input formControlName='q26' type="radio"  name="q26" value="1">
+              <label for="">1</label>
+              <input formControlName='q26' type="radio"  name="q26" value="2">
+              <label for="">2</label>
+              <input formControlName='q26' type="radio"  name="q26" value="3">
+              <label for="">3</label>
+             <input formControlName='q26' class="m-left" type="radio"  name="q26" value="4">
+              <label for="">4</label>
+              <input formControlName='q26' type="radio"  name="q26" value="5">
+              <label for="">5</label>
+          </div>
+          <div class=" my-3">
+            <p>Q27: I am quick to understand things.</p>
+              <input formControlName='q27' type="radio"  name="q27" value="1">
+              <label for="">1</label>
+              <input formControlName='q27' type="radio"  name="q27" value="2">
+              <label for="">2</label>
+              <input formControlName='q27' type="radio"  name="q27" value="3">
+              <label for="">3</label>
+             <input formControlName='q27' class="m-left" type="radio"  name="q27" value="4">
+              <label for="">4</label>
+              <input formControlName='q27' type="radio"  name="q27" value="5">
+              <label for="">5</label>
+          </div>
+
+      </div>
+  </div>
+  <button [disabled]="playerPersonalityTest.invalid" type="submit" class="btn btn-primary my-2 register-fonts-specifications">Submit</button>
+  </form>
+  -->
+  <div class="container tb-10">
+    <form (ngSubmit)="submit()" [formGroup]="multistep">
+      <div *ngIf="step == 1" formGroupName="Page1">
+        <div>
+          <label>Q1: I am energetic during the game.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q1" value="1" class="mx-2"  formControlName='q1'>
+          <label>2:</label>
+          <input type="radio" name="q1" value="2" class="mx-2"  formControlName='q1'>
+          <label>3:</label>
+          <input type="radio" name="q1" value="3" class="mx-2"  formControlName='q1'>
+          <label>4:</label>
+          <input type="radio" name="q1" value="4" class="mx-2"  formControlName='q1'>
+          <label>5:</label>
+          <input type="radio" name="q1" value="5" class="mx-2"  formControlName='q1'>
+        </div>
+        <div>
+          <label>Q2: I don't talk a lot while gaming.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q2" value="1" class="mx-2"  formControlName='q2'>
+          <label>2:</label>
+          <input type="radio" name="q2" value="2" class="mx-2"  formControlName='q2'>
+          <label>3:</label>
+          <input type="radio" name="q2" value="3" class="mx-2"  formControlName='q2'>
+          <label>4:</label>
+          <input type="radio" name="q2" value="4" class="mx-2"  formControlName='q2'>
+          <label>5:</label>
+          <input type="radio" name="q2" value="5" class="mx-2"  formControlName='q2'>
+        </div>
+        <div>
+          <label>Q3: I feel comfortable playing with others.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q3" value="1" class="mx-2" formControlName='q3'>
+          <label>2:</label>
+          <input type="radio" name="q3" value="2" class="mx-2"  formControlName='q3'>
+          <label>3:</label>
+          <input type="radio" name="q3" value="3" class="mx-2"  formControlName='q3'>
+          <label>4:</label>
+          <input type="radio" name="q3" value="4" class="mx-2"  formControlName='q3'>
+          <label>5:</label>
+          <input type="radio" name="q3" value="5" class="mx-2"  formControlName='q3'>
+        </div>
+        <div>
+          <label>Q4: I start conversations.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q4" value="1" class="mx-2"  formControlName='q4'>
+          <label>2:</label>
+          <input type="radio" name="q4" value="2" class="mx-2"  formControlName='q4'>
+          <label>3:</label>
+          <input type="radio" name="q4" value="3" class="mx-2"  formControlName='q4'>
+          <label>4:</label>
+          <input type="radio" name="q4" value="4" class="mx-2"  formControlName='q4'>
+          <label>5:</label>
+          <input type="radio" name="q4" value="5" class="mx-2"  formControlName='q4'>
+        </div>
+        <div>
+          <label>Q5: I like to talk to new people in games.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q5" value="1" class="mx-2"  formControlName='q5'>
+          <label>2:</label>
+          <input type="radio" name="q5" value="2" class="mx-2"  formControlName='q5'>
+          <label>3:</label>
+          <input type="radio" name="q5" value="3" class="mx-2"  formControlName='q5'>
+          <label>4:</label>
+          <input type="radio" name="q5" value="4" class="mx-2"  formControlName='q5'>
+          <label>5:</label>
+          <input type="radio" name="q5" value="5" class="mx-2"  formControlName='q5'>
+        </div>
+        <div>
+          <label>Q6: I like to talk to new people in games.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q6" value="1" class="mx-2"  formControlName='q6'>
+          <label>2:</label>
+          <input type="radio" name="q6" value="2" class="mx-2"  formControlName='q6'>
+          <label>3:</label>
+          <input type="radio" name="q6" value="3" class="mx-2"  formControlName='q6'>
+          <label>4:</label>
+          <input type="radio" name="q6" value="4" class="mx-2"  formControlName='q6'>
+          <label>5:</label>
+          <input type="radio" name="q6" value="5" class="mx-2"  formControlName='q6'>
+        </div>
+        <div>
+          <label>Q7: I like to talk to new people in games.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q7" value="1" class="mx-2"  formControlName='q7'>
+          <label>2:</label>
+          <input type="radio" name="q7" value="2" class="mx-2"  formControlName='q7'>
+          <label>3:</label>
+          <input type="radio" name="q7" value="3" class="mx-2"  formControlName='q7'>
+          <label>4:</label>
+          <input type="radio" name="q7" value="4" class="mx-2"  formControlName='q7'>
+          <label>5:</label>
+          <input type="radio" name="q7" value="5" class="mx-2"  formControlName='q7'>
+        </div>
+        <div>
+          <label>Q8: I get stressed out easily.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q8" value="1" class="mx-2"  formControlName='q8'>
+          <label>2:</label>
+          <input type="radio" name="q8" value="2" class="mx-2"  formControlName='q8'>
+          <label>3:</label>
+          <input type="radio" name="q8" value="3" class="mx-2"  formControlName='q8'>
+          <label>4:</label>
+          <input type="radio" name="q8" value="4" class="mx-2"  formControlName='q8'>
+          <label>5:</label>
+          <input type="radio" name="q8" value="5" class="mx-2"  formControlName='q8'>
+        </div>
+        <div>
+          <label>Q9: I am relaxed most of the time.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q9" value="1" class="mx-2"  formControlName='q9'>
+          <label>2:</label>
+          <input type="radio" name="q9" value="2" class="mx-2"  formControlName='q9'>
+          <label>3:</label>
+          <input type="radio" name="q9" value="3" class="mx-2"  formControlName='q9'>
+          <label>4:</label>
+          <input type="radio" name="q9" value="4" class="mx-2"  formControlName='q9'>
+          <label>5:</label>
+          <input type="radio" name="q9" value="5" class="mx-2"  formControlName='q9'>
+          <br>
+          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+        </div>
+      </div>
+      <div *ngIf="step == 2" formGroupName="Page2">
+        <div>
+          <label>Q10: I get upset easily.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q10" value="1" class="mx-2"  formControlName='q10'>
+          <label>2:</label>
+          <input type="radio" name="q10" value="2" class="mx-2"  formControlName='q10'>
+          <label>3:</label>
+          <input type="radio" name="q10" value="3" class="mx-2"  formControlName='q10'>
+          <label>4:</label>
+          <input type="radio" name="q10" value="4" class="mx-2"  formControlName='q10'>
+          <label>5:</label>
+          <input type="radio" name="q10" value="5" class="mx-2"  formControlName='q10'>
+        </div>
+        <div>
+          <label>Q11: I change my mood a lot.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q11" value="1" class="mx-2"  formControlName='q11'>
+          <label>2:</label>
+          <input type="radio" name="q11" value="2" class="mx-2"  formControlName='q11'>
+          <label>3:</label>
+          <input type="radio" name="q11" value="3" class="mx-2"  formControlName='q11'>
+          <label>4:</label>
+          <input type="radio" name="q11" value="4" class="mx-2"  formControlName='q11'>
+          <label>5:</label>
+          <input type="radio" name="q11" value="5" class="mx-2"  formControlName='q11'>
+        </div>
+        <div>
+          <label>Q12: I prefer playing on my own.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q12" value="1" class="mx-2" formControlName='q12'>
+          <label>2:</label>
+          <input type="radio" name="q12" value="2" class="mx-2"  formControlName='q12'>
+          <label>3:</label>
+          <input type="radio" name="q12" value="3" class="mx-2"  formControlName='q12'>
+          <label>4:</label>
+          <input type="radio" name="q12" value="4" class="mx-2"  formControlName='q12'>
+          <label>5:</label>
+          <input type="radio" name="q12" value="5" class="mx-2"  formControlName='q12'>
+        </div>
+        <div>
+          <label>Q13: I am interested in knowing new people.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q13" value="1" class="mx-2"  formControlName='q13'>
+          <label>2:</label>
+          <input type="radio" name="q13" value="2" class="mx-2"  formControlName='q13'>
+          <label>3:</label>
+          <input type="radio" name="q13" value="3" class="mx-2"  formControlName='q13'>
+          <label>4:</label>
+          <input type="radio" name="q13" value="4" class="mx-2"  formControlName='q13'>
+          <label>5:</label>
+          <input type="radio" name="q13" value="5" class="mx-2"  formControlName='q13'>
+        </div>
+        <div>
+          <label>Q14: I get nervous when I lose.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q14" value="1" class="mx-2"  formControlName='q14'>
+          <label>2:</label>
+          <input type="radio" name="q14" value="2" class="mx-2"  formControlName='q14'>
+          <label>3:</label>
+          <input type="radio" name="q14" value="3" class="mx-2"  formControlName='q14'>
+          <label>4:</label>
+          <input type="radio" name="q14" value="4" class="mx-2"  formControlName='q14'>
+          <label>5:</label>
+          <input type="radio" name="q14" value="5" class="mx-2"  formControlName='q14'>
+        </div>
+        <div>
+          <label>Q15: I sympathize with others' feelings.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q15" value="1" class="mx-2"  formControlName='q15'>
+          <label>2:</label>
+          <input type="radio" name="q15" value="2" class="mx-2"  formControlName='q15'>
+          <label>3:</label>
+          <input type="radio" name="q15" value="3" class="mx-2"  formControlName='q15'>
+          <label>4:</label>
+          <input type="radio" name="q15" value="4" class="mx-2"  formControlName='q15'>
+          <label>5:</label>
+          <input type="radio" name="q15" value="5" class="mx-2"  formControlName='q15'>
+        </div>
+        <div>
+          <label>Q16: I prefer making friends over winning.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q16" value="1" class="mx-2"  formControlName='q16'>
+          <label>2:</label>
+          <input type="radio" name="q16" value="2" class="mx-2"  formControlName='q16'>
+          <label>3:</label>
+          <input type="radio" name="q16" value="3" class="mx-2"  formControlName='q16'>
+          <label>4:</label>
+          <input type="radio" name="q16" value="4" class="mx-2"  formControlName='q16'>
+          <label>5:</label>
+          <input type="radio" name="q16" value="5" class="mx-2"  formControlName='q16'>
+        </div>
+        <div>
+          <label>Q17: I help newbies.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q17" value="1" class="mx-2"  formControlName='q17'>
+          <label>2:</label>
+          <input type="radio" name="q17" value="2" class="mx-2"  formControlName='q17'>
+          <label>3:</label>
+          <input type="radio" name="q17" value="3" class="mx-2"  formControlName='q17'>
+          <label>4:</label>
+          <input type="radio" name="q17" value="4" class="mx-2"  formControlName='q17'>
+          <label>5:</label>
+          <input type="radio" name="q17" value="5" class="mx-2"  formControlName='q17'>
+        </div>
+        <div>
+          <label>Q18: I am always prepared.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q18" value="1" class="mx-2"  formControlName='q18'>
+          <label>2:</label>
+          <input type="radio" name="q18" value="2" class="mx-2"  formControlName='q18'>
+          <label>3:</label>
+          <input type="radio" name="q18" value="3" class="mx-2"  formControlName='q18'>
+          <label>4:</label>
+          <input type="radio" name="q18" value="4" class="mx-2"  formControlName='q18'>
+          <label>5:</label>
+          <input type="radio" name="q18" value="5" class="mx-2"  formControlName='q18'>
+          <br>
+          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+        </div>
+      </div>
+      <div *ngIf="step == 3" formGroupName="Page3">
+        <div>
+          <label>Q19: I pay attention to details.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q19" value="1" class="mx-2"  formControlName='q19'>
+          <label>2:</label>
+          <input type="radio" name="q19" value="2" class="mx-2"  formControlName='q19'>
+          <label>3:</label>
+          <input type="radio" name="q19" value="3" class="mx-2"  formControlName='q19'>
+          <label>4:</label>
+          <input type="radio" name="q19" value="4" class="mx-2"  formControlName='q19'>
+          <label>5:</label>
+          <input type="radio" name="q19" value="5" class="mx-2"  formControlName='q19'>
+        </div>
+        <div>
+          <label>Q20: I don't stick to a gaming style.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q20" value="1" class="mx-2"  formControlName='q20'>
+          <label>2:</label>
+          <input type="radio" name="q20" value="2" class="mx-2"  formControlName='q20'>
+          <label>3:</label>
+          <input type="radio" name="q20" value="3" class="mx-2"  formControlName='q20'>
+          <label>4:</label>
+          <input type="radio" name="q20" value="4" class="mx-2"  formControlName='q20'>
+          <label>5:</label>
+          <input type="radio" name="q20" value="5" class="mx-2"  formControlName='q20'>
+        </div>
+        <div>
+          <label>Q21: I like order.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q21" value="1" class="mx-2" formControlName='q21'>
+          <label>2:</label>
+          <input type="radio" name="q21" value="2" class="mx-2"  formControlName='q21'>
+          <label>3:</label>
+          <input type="radio" name="q21" value="3" class="mx-2"  formControlName='q21'>
+          <label>4:</label>
+          <input type="radio" name="q21" value="4" class="mx-2"  formControlName='q21'>
+          <label>5:</label>
+          <input type="radio" name="q21" value="5" class="mx-2"  formControlName='q21'>
+        </div>
+        <div>
+          <label>Q22: I exit the game when I feel I am losing.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q22" value="1" class="mx-2"  formControlName='q22'>
+          <label>2:</label>
+          <input type="radio" name="q22" value="2" class="mx-2"  formControlName='q22'>
+          <label>3:</label>
+          <input type="radio" name="q22" value="3" class="mx-2"  formControlName='q22'>
+          <label>4:</label>
+          <input type="radio" name="q22" value="4" class="mx-2"  formControlName='q22'>
+          <label>5:</label>
+          <input type="radio" name="q22" value="5" class="mx-2"  formControlName='q22'>
+        </div>
+        <div>
+          <label>Q23: I follow a plan in game.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q23" value="1" class="mx-2"  formControlName='q23'>
+          <label>2:</label>
+          <input type="radio" name="q23" value="2" class="mx-2"  formControlName='q23'>
+          <label>3:</label>
+          <input type="radio" name="q23" value="3" class="mx-2"  formControlName='q23'>
+          <label>4:</label>
+          <input type="radio" name="q23" value="4" class="mx-2"  formControlName='q23'>
+          <label>5:</label>
+          <input type="radio" name="q23" value="5" class="mx-2"  formControlName='q23'>
+        </div>
+        <div>
+          <label>Q24: I have difficulty understanding others' plans.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q24" value="1" class="mx-2"  formControlName='q24'>
+          <label>2:</label>
+          <input type="radio" name="q24" value="2" class="mx-2"  formControlName='q24'>
+          <label>3:</label>
+          <input type="radio" name="q24" value="3" class="mx-2"  formControlName='q24'>
+          <label>4:</label>
+          <input type="radio" name="q24" value="4" class="mx-2"  formControlName='q24'>
+          <label>5:</label>
+          <input type="radio" name="q24" value="5" class="mx-2"  formControlName='q24'>
+        </div>
+        <div>
+          <label>Q25: I have a vivid imagination.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q25" value="1" class="mx-2"  formControlName='q25'>
+          <label>2:</label>
+          <input type="radio" name="q25" value="2" class="mx-2"  formControlName='q25'>
+          <label>3:</label>
+          <input type="radio" name="q25" value="3" class="mx-2"  formControlName='q25'>
+          <label>4:</label>
+          <input type="radio" name="q25" value="4" class="mx-2"  formControlName='q25'>
+          <label>5:</label>
+          <input type="radio" name="q25" value="5" class="mx-2"  formControlName='q25'>
+        </div>
+        <div>
+          <label>Q26: I have excellent ideas.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q26" value="1" class="mx-2"  formControlName='q26'>
+          <label>2:</label>
+          <input type="radio" name="q26" value="2" class="mx-2"  formControlName='q26'>
+          <label>3:</label>
+          <input type="radio" name="q26" value="3" class="mx-2"  formControlName='q26'>
+          <label>4:</label>
+          <input type="radio" name="q26" value="4" class="mx-2"  formControlName='q26'>
+          <label>5:</label>
+          <input type="radio" name="q26" value="5" class="mx-2"  formControlName='q26'>
+        </div>
+        <div>
+          <label>Q27: I am quick to understand things.</label>
+          <br>
+          <label>1:</label>
+          <input type="radio" name="q27" value="1" class="mx-2"  formControlName='q27'>
+          <label>2:</label>
+          <input type="radio" name="q27" value="2" class="mx-2"  formControlName='q27'>
+          <label>3:</label>
+          <input type="radio" name="q27" value="3" class="mx-2"  formControlName='q27'>
+          <label>4:</label>
+          <input type="radio" name="q27" value="4" class="mx-2"  formControlName='q27'>
+          <label>5:</label>
+          <input type="radio" name="q27" value="5" class="mx-2"  formControlName='q27'>
+          <br>
+          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+        </div>
+
+      </div>
+      <a class="btn btn-primary mx-2" *ngIf="step != 1" (click)="previous()">Previous</a>
+      <button type="submit" class="btn btn-primary mx-2" *ngIf="step != 3">Next</button>
+      <button type="submit" class="btn btn-primary mx-2" *ngIf="step == 3">Submit</button>
+      <br>
+      <!--
+      <pre>{{multistep.value | json}}</pre>
+      -->
+    </form>
   </div>
 
-  <div class="col-md-4">
-
-    <div class=" my-3">
-    <p>Q19: I pay attention to details.</p>
-      <input formControlName='q19' type="radio"  name="q19" value="1">
-      <label for="">1</label>
-      <input formControlName='q19' type="radio"  name="q19" value="2">
-      <label for="">2</label>
-      <input formControlName='q19' type="radio"  name="q19" value="3">
-      <label for="">3</label>
-      <input formControlName='q19' class="m-left" type="radio"  name="q19" value="4">
-      <label for="">4</label>
-      <input formControlName='q19' type="radio"  name="q19" value="5">
-      <label for="">5</label>
-    </div>
-
-    <div class=" my-3">
-    <p>Q20: I don't stick to a gaming style.</p>
-      <input formControlName='q20' type="radio"  name="q20" value="1">
-      <label for="">1</label>
-      <input formControlName='q20' type="radio"  name="q20" value="2">
-      <label for="">2</label>
-      <input formControlName='q20' type="radio"  name="q20" value="3">
-      <label for="">3</label>
-     <input formControlName='q20' class="m-left" type="radio"  name="q20" value="4">
-      <label for="">4</label>
-      <input formControlName='q20' type="radio"  name="q20" value="5">
-      <label for="">5</label>
-    </div>
-
-    <div class=" my-3">
-      <p>Q21: I like order.</p>
-        <input formControlName='q21' type="radio"  name="q21" value="1">
-        <label for="">1</label>
-        <input formControlName='q21' type="radio"  name="q21" value="2">
-        <label for="">2</label>
-        <input formControlName='q21' type="radio"  name="q21" value="3">
-        <label for="">3</label>
-       <input formControlName='q21' class="m-left" type="radio"  name="q21" value="4">
-        <label for="">4</label>
-        <input formControlName='q21' type="radio"  name="q21" value="5">
-        <label for="">5</label>
-      </div>
-
-      <div class=" my-3">
-        <p>Q22: I exit the game when I feel I am losing.</p>
-          <input formControlName='q22' type="radio"  name="q22" value="1">
-          <label for="">1</label>
-          <input formControlName='q22' type="radio"  name="q22" value="2">
-          <label for="">2</label>
-          <input formControlName='q22' type="radio"  name="q22" value="3">
-          <label for="">3</label>
-         <input formControlName='q22' class="m-left" type="radio"  name="q22" value="4">
-          <label for="">4</label>
-          <input formControlName='q22' type="radio"  name="q22" value="5">
-          <label for="">5</label>
-        </div>
-
-        <div class=" my-3">
-          <p>Q23: I follow a plan in game.</p>
-            <input formControlName='q23' type="radio"  name="q23" value="1">
-            <label for="">1</label>
-            <input formControlName='q23' type="radio"  name="q23" value="2">
-            <label for="">2</label>
-            <input formControlName='q23' type="radio"  name="q23" value="3">
-            <label for="">3</label>
-           <input formControlName='q23' class="m-left" type="radio"  name="q23" value="4">
-            <label for="">4</label>
-            <input formControlName='q23' type="radio"  name="q23" value="5">
-            <label for="">5</label>
-        </div>
-
-        <div class=" my-3">
-          <p>Q24: I have difficulty understanding others' plans.</p>
-            <input formControlName='q24' type="radio"  name="q24" value="1">
-            <label for="">1</label>
-            <input formControlName='q24' type="radio"  name="q24" value="2">
-            <label for="">2</label>
-            <input formControlName='q24' type="radio"  name="q24" value="3">
-            <label for="">3</label>
-           <input formControlName='q24' class="m-left" type="radio"  name="q24" value="4">
-            <label for="">4</label>
-            <input formControlName='q24' type="radio"  name="q24" value="5">
-            <label for="">5</label>
-        </div>
-        <div class=" my-3">
-          <p>Q25: I have a vivid imagination.</p>
-            <input formControlName='q25' type="radio"  name="q25" value="1">
-            <label for="">1</label>
-            <input formControlName='q25' type="radio"  name="q25" value="2">
-            <label for="">2</label>
-            <input formControlName='q25' type="radio"  name="q25" value="3">
-            <label for="">3</label>
-           <input formControlName='q25' class="m-left" type="radio"  name="q25" value="4">
-            <label for="">4</label>
-            <input formControlName='q25' type="radio"  name="q25" value="5">
-            <label for="">5</label>
-        </div>
-        <div class=" my-3">
-          <p>Q26: I have excellent ideas.</p>
-            <input formControlName='q26' type="radio"  name="q26" value="1">
-            <label for="">1</label>
-            <input formControlName='q26' type="radio"  name="q26" value="2">
-            <label for="">2</label>
-            <input formControlName='q26' type="radio"  name="q26" value="3">
-            <label for="">3</label>
-           <input formControlName='q26' class="m-left" type="radio"  name="q26" value="4">
-            <label for="">4</label>
-            <input formControlName='q26' type="radio"  name="q26" value="5">
-            <label for="">5</label>
-        </div>
-        <div class=" my-3">
-          <p>Q27: I am quick to understand things.</p>
-            <input formControlName='q27' type="radio"  name="q27" value="1">
-            <label for="">1</label>
-            <input formControlName='q27' type="radio"  name="q27" value="2">
-            <label for="">2</label>
-            <input formControlName='q27' type="radio"  name="q27" value="3">
-            <label for="">3</label>
-           <input formControlName='q27' class="m-left" type="radio"  name="q27" value="4">
-            <label for="">4</label>
-            <input formControlName='q27' type="radio"  name="q27" value="5">
-            <label for="">5</label>
-        </div>
-
-    </div>
 </div>
-<button [disabled]="playerPersonalityTest.invalid" type="submit" class="btn btn-primary my-2 register-fonts-specifications">Submit</button>
-</form>
+
+
+</body>
+</html>
 
 
 
-</div>
+
