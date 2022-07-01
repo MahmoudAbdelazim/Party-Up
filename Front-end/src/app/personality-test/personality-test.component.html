@@ -11,7 +11,7 @@
 <div class="my-2 text-center container">
   <h1>Personality Test</h1>
   <h2>Please answer all questions below sincerely</h2>
-  <h3>give yourself a rate from 1 ~ 5 for each question</h3>
+  <h3>Give yourself a rating from 1 ~ 5 for each question</h3>
 
 
   <!--
@@ -419,7 +419,7 @@
           <label>5:</label>
           <input type="radio" name="q1" value="5" class="mx-2"  formControlName='q1'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q2: I don't talk a lot while gaming.</label>
           <br>
           <label>1:</label>
@@ -433,7 +433,7 @@
           <label>5:</label>
           <input type="radio" name="q2" value="5" class="mx-2"  formControlName='q2'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q3: I feel comfortable playing with others.</label>
           <br>
           <label>1:</label>
@@ -447,7 +447,7 @@
           <label>5:</label>
           <input type="radio" name="q3" value="5" class="mx-2"  formControlName='q3'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q4: I start conversations.</label>
           <br>
           <label>1:</label>
@@ -461,7 +461,7 @@
           <label>5:</label>
           <input type="radio" name="q4" value="5" class="mx-2"  formControlName='q4'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q5: I like to talk to new people in games.</label>
           <br>
           <label>1:</label>
@@ -475,7 +475,7 @@
           <label>5:</label>
           <input type="radio" name="q5" value="5" class="mx-2"  formControlName='q5'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q6: I like to talk to new people in games.</label>
           <br>
           <label>1:</label>
@@ -489,7 +489,7 @@
           <label>5:</label>
           <input type="radio" name="q6" value="5" class="mx-2"  formControlName='q6'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q7: I like to talk to new people in games.</label>
           <br>
           <label>1:</label>
@@ -503,7 +503,7 @@
           <label>5:</label>
           <input type="radio" name="q7" value="5" class="mx-2"  formControlName='q7'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q8: I get stressed out easily.</label>
           <br>
           <label>1:</label>
@@ -517,7 +517,7 @@
           <label>5:</label>
           <input type="radio" name="q8" value="5" class="mx-2"  formControlName='q8'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q9: I am relaxed most of the time.</label>
           <br>
           <label>1:</label>
@@ -531,11 +531,11 @@
           <label>5:</label>
           <input type="radio" name="q9" value="5" class="mx-2"  formControlName='q9'>
           <br>
-          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+          <span class="text-danger my-2" *ngIf="submitted && multistep.invalid && forTheSpan">Please, answer all the questions in order to proceed!</span>
         </div>
       </div>
       <div *ngIf="step == 2" formGroupName="Page2">
-        <div>
+        <div class="my-2">
           <label>Q10: I get upset easily.</label>
           <br>
           <label>1:</label>
@@ -549,7 +549,7 @@
           <label>5:</label>
           <input type="radio" name="q10" value="5" class="mx-2"  formControlName='q10'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q11: I change my mood a lot.</label>
           <br>
           <label>1:</label>
@@ -563,7 +563,7 @@
           <label>5:</label>
           <input type="radio" name="q11" value="5" class="mx-2"  formControlName='q11'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q12: I prefer playing on my own.</label>
           <br>
           <label>1:</label>
@@ -577,7 +577,7 @@
           <label>5:</label>
           <input type="radio" name="q12" value="5" class="mx-2"  formControlName='q12'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q13: I am interested in knowing new people.</label>
           <br>
           <label>1:</label>
@@ -591,7 +591,7 @@
           <label>5:</label>
           <input type="radio" name="q13" value="5" class="mx-2"  formControlName='q13'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q14: I get nervous when I lose.</label>
           <br>
           <label>1:</label>
@@ -605,7 +605,7 @@
           <label>5:</label>
           <input type="radio" name="q14" value="5" class="mx-2"  formControlName='q14'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q15: I sympathize with others' feelings.</label>
           <br>
           <label>1:</label>
@@ -619,7 +619,7 @@
           <label>5:</label>
           <input type="radio" name="q15" value="5" class="mx-2"  formControlName='q15'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q16: I prefer making friends over winning.</label>
           <br>
           <label>1:</label>
@@ -633,7 +633,7 @@
           <label>5:</label>
           <input type="radio" name="q16" value="5" class="mx-2"  formControlName='q16'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q17: I help newbies.</label>
           <br>
           <label>1:</label>
@@ -647,7 +647,7 @@
           <label>5:</label>
           <input type="radio" name="q17" value="5" class="mx-2"  formControlName='q17'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q18: I am always prepared.</label>
           <br>
           <label>1:</label>
@@ -661,11 +661,11 @@
           <label>5:</label>
           <input type="radio" name="q18" value="5" class="mx-2"  formControlName='q18'>
           <br>
-          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">Please, answer all the questions in order to proceed!</span>
         </div>
       </div>
       <div *ngIf="step == 3" formGroupName="Page3">
-        <div>
+        <div class="my-2">
           <label>Q19: I pay attention to details.</label>
           <br>
           <label>1:</label>
@@ -679,7 +679,7 @@
           <label>5:</label>
           <input type="radio" name="q19" value="5" class="mx-2"  formControlName='q19'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q20: I don't stick to a gaming style.</label>
           <br>
           <label>1:</label>
@@ -693,7 +693,7 @@
           <label>5:</label>
           <input type="radio" name="q20" value="5" class="mx-2"  formControlName='q20'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q21: I like order.</label>
           <br>
           <label>1:</label>
@@ -707,7 +707,7 @@
           <label>5:</label>
           <input type="radio" name="q21" value="5" class="mx-2"  formControlName='q21'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q22: I exit the game when I feel I am losing.</label>
           <br>
           <label>1:</label>
@@ -721,7 +721,7 @@
           <label>5:</label>
           <input type="radio" name="q22" value="5" class="mx-2"  formControlName='q22'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q23: I follow a plan in game.</label>
           <br>
           <label>1:</label>
@@ -735,7 +735,7 @@
           <label>5:</label>
           <input type="radio" name="q23" value="5" class="mx-2"  formControlName='q23'>
         </div>
-        <div>
+        <div class="my-2" >
           <label>Q24: I have difficulty understanding others' plans.</label>
           <br>
           <label>1:</label>
@@ -749,7 +749,7 @@
           <label>5:</label>
           <input type="radio" name="q24" value="5" class="mx-2"  formControlName='q24'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q25: I have a vivid imagination.</label>
           <br>
           <label>1:</label>
@@ -763,7 +763,7 @@
           <label>5:</label>
           <input type="radio" name="q25" value="5" class="mx-2"  formControlName='q25'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q26: I have excellent ideas.</label>
           <br>
           <label>1:</label>
@@ -777,7 +777,7 @@
           <label>5:</label>
           <input type="radio" name="q26" value="5" class="mx-2"  formControlName='q26'>
         </div>
-        <div>
+        <div class="my-2">
           <label>Q27: I am quick to understand things.</label>
           <br>
           <label>1:</label>
@@ -791,13 +791,13 @@
           <label>5:</label>
           <input type="radio" name="q27" value="5" class="mx-2"  formControlName='q27'>
           <br>
-          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">PLEASE ANSWER ALL THE QUESTIONS</span>
+          <span class="text-danger" *ngIf="submitted && multistep.invalid && forTheSpan">Please, answer all the questions in order to proceed!</span>
         </div>
 
       </div>
-      <a class="btn btn-primary mx-2" *ngIf="step != 1" (click)="previous()">Previous</a>
-      <button type="submit" class="btn btn-primary mx-2" *ngIf="step != 3">Next</button>
-      <button type="submit" class="btn btn-primary mx-2" *ngIf="step == 3">Submit</button>
+      <a class="btn mx-2 btn-outline-danger" *ngIf="step != 1" (click)="previous()">Previous</a>
+      <button type="submit" class="btn  mx-2 my-2 btn-success" *ngIf="step != 3">Next</button>
+      <button type="submit" class="btn btn-success x-2 my-2" *ngIf="step == 3">Submit</button>
       <br>
       <!--
       <pre>{{multistep.value | json}}</pre>
