@@ -14,7 +14,9 @@ import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-res
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
+import { FeedComponent } from './feed/feed.component'
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,13 +30,15 @@ import {HttpClientModule} from '@angular/common/http'
     AllRightsReservedComponent,
     LogoutComponent,
     PersonalityTestComponent,
+    FeedComponent,
 
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
