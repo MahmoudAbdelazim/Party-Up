@@ -1,6 +1,7 @@
 package com.partyup.model.posting;
 
 import com.partyup.model.Player;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,15 +11,15 @@ import java.util.Objects;
 @Entity
 public class Post {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@NotNull
 	private Player player;
 
 	private String text;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Content> contents;
 
 	public Player getPlayer() {
@@ -45,7 +46,7 @@ public class Post {
 		this.contents = contents;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

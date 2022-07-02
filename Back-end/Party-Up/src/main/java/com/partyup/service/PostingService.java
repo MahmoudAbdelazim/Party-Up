@@ -46,7 +46,7 @@ public class PostingService {
 			Post post = optionalPost.get();
 			return postingMapper.map(post, PostDto.class);
 		} else {
-			throw new PostNotFoundException(id);
+			throw new PostNotFoundException(Long.toString(id));
 		}
 	}
 
@@ -83,13 +83,15 @@ class configPostingService {
 
 	Converter<List<MultipartFile>, List<Content>> getToPostConverter() {
 		return src -> {
-			var files = src.getSource();
-			List<Content> contents = new ArrayList<>();
 			try {
-				for (MultipartFile file : files) {
-					byte[] compressedFile = ImageCompressionUtility.compressImage(file.getBytes());
-					var content = new Content(file.getOriginalFilename(), file.getContentType(), compressedFile);
-					contents.add(content);
+				var files = src.getSource();
+				List<Content> contents = new ArrayList<>();
+				if (files != null) {
+					for (MultipartFile file : files) {
+						byte[] compressedFile = ImageCompressionUtility.compressImage(file.getBytes());
+						var content = new Content(file.getOriginalFilename(), file.getContentType(), compressedFile);
+						contents.add(content);
+					}
 				}
 				return contents;
 			} catch (IOException e) {
@@ -103,10 +105,12 @@ class configPostingService {
 		return src -> {
 			var contents = src.getSource();
 			List<MultipartFile> files = new ArrayList<>();
-			for (Content file : contents) {
-				byte[] decompressedFile = ImageCompressionUtility.decompressImage(file.getFile());
-				MultipartFile mpFile = new MockMultipartFile(file.getName(), file.getName(), file.getType(), decompressedFile);
-				files.add(mpFile);
+			if (contents != null) {
+				for (Content file : contents) {
+					byte[] decompressedFile = ImageCompressionUtility.decompressImage(file.getFile());
+					MultipartFile mpFile = new MockMultipartFile(file.getName(), file.getName(), file.getType(), decompressedFile);
+					files.add(mpFile);
+				}
 			}
 			return files;
 		};

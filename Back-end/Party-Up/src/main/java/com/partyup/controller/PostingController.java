@@ -6,6 +6,7 @@ import com.partyup.payload.UploadResponse;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.service.PostingService;
 import com.partyup.service.exception.PostNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/post")
+@Slf4j
 public class PostingController {
 
 	@Autowired
@@ -29,7 +31,7 @@ public class PostingController {
 	private PlayerRepository playerRepo;
 
 	@PostMapping("/upload")
-	public ResponseEntity<UploadResponse> postPost(@RequestBody PostDto post) {
+	public ResponseEntity<UploadResponse> postPost(@ModelAttribute PostDto post) {
 		String username = getUserName();
 		Optional<Player> player = playerRepo.findByUsernameOrEmail(username, username);
 		if (player.isEmpty()) {
@@ -41,9 +43,14 @@ public class PostingController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<PostDto> getPostOf(@PathVariable("id") Long id) throws PostNotFoundException {
-		PostDto post = postingService.getPostOfId(id);
-		return ResponseEntity.ok().body(post);
+	public ResponseEntity<PostDto> getPostOf(@PathVariable("id") String id) throws PostNotFoundException {
+		try {
+			Long postId = Long.valueOf(id);
+			PostDto post = postingService.getPostOfId(postId);
+			return ResponseEntity.ok().body(post);
+		} catch (NumberFormatException e) {
+			throw new PostNotFoundException(id, "Post id should be of type long");
+		}
 	}
 
 	@GetMapping("/profile")
@@ -65,8 +72,8 @@ public class PostingController {
 	}
 
 	@ExceptionHandler(PostNotFoundException.class)
-	public ResponseEntity<PostNotFoundException> sendFileNotFound(PostNotFoundException e) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e);
+	public ResponseEntity<String> sendFileNotFound(PostNotFoundException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 	}
 
 	@ExceptionHandler(UsernameNotFoundException.class)
