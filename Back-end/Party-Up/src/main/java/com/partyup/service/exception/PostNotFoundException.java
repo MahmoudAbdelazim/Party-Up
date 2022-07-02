@@ -1,14 +1,21 @@
 package com.partyup.service.exception;
 
 public class PostNotFoundException extends Exception {
-	Long id;
+	String id;
+	String message;
 
-	public PostNotFoundException(Long id) {
+	public PostNotFoundException(String id) {
 		this.id = id;
+		message = "Post not found";
+	}
+
+	public PostNotFoundException(String id, String customMessage) {
+		this.id = id;
+		this.message = customMessage;
 	}
 
 	@Override
 	public String getMessage() {
-		return "Post of id: " + id + " not found";
+		return message + " id:" + id;
 	}
 }
