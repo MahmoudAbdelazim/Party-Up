@@ -16,6 +16,7 @@ import { PersonalityTestComponent } from './personality-test/personality-test.co
 import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component'
+import {InfiniteScrollModule} from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +37,8 @@ import { FeedComponent } from './feed/feed.component'
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]
