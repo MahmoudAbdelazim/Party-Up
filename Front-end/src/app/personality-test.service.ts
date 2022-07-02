@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PersonalityTestRequestPayload} from "./personality-test/personality-test-request.payload";
-import {RegisterRequestPayload} from "./register/register-request.payload";
 import {Observable} from "rxjs";
 
 @Injectable({
@@ -13,6 +12,6 @@ export class PersonalityTestService {
   }
 
   sendPersonalityTestAnswers(ptPayloadAnswers : PersonalityTestRequestPayload[]) : Observable<any>{
-    return this._httpClient.post('http://localhost:8080/api/personalityTest', ptPayloadAnswers);
+    return this._httpClient.post('http://localhost:8080/api/personalityTest', ptPayloadAnswers , {responseType : 'text'});
   }
 }

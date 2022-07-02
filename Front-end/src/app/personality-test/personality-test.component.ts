@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
 import {PersonalityTestRequestPayload} from "./personality-test-request.payload";
 import {PersonalityTestService} from "../personality-test.service";
-import {forEach} from "lodash";
 
 
 @Component({
@@ -104,14 +103,14 @@ export class PersonalityTestComponent implements OnInit {
     return this.multistep.controls['Page3']['controls'];
   }
 
-      submit() {
-        this.submitted = true;
-        if(this.multistep.controls['Page1'].invalid && this.step == 1) {
-          this.forTheSpan = true;
-          return;
-        }
-        if(this.multistep.controls['Page2'].invalid && this.step == 2) {
-          this.forTheSpan = true;
+  submit() {
+    this.submitted = true;
+    if(this.multistep.controls['Page1'].invalid && this.step == 1) {
+      this.forTheSpan = true;
+      return;
+    }
+    if(this.multistep.controls['Page2'].invalid && this.step == 2) {
+      this.forTheSpan = true;
       return;
     }
     if(this.multistep.controls['Page3'].invalid && this.step == 3) {
@@ -122,7 +121,7 @@ export class PersonalityTestComponent implements OnInit {
     this.step = this.step + 1;
     if(this.step == 4) {
       this.submitPersonalityTestAnswers();
-      this.route.navigate(['/login'])
+      this.route.navigate(['/findpeers'])
     }
   }
 
@@ -133,7 +132,6 @@ export class PersonalityTestComponent implements OnInit {
 
 
   submitPersonalityTestAnswers(){
-    console.log(this.Page1)
 
     this.ptAnswersPayload.push({id : 1 , answer : this.Page1.q1.value});
     this.ptAnswersPayload.push({id : 2 , answer : this.Page1.q2.value});
@@ -164,11 +162,11 @@ export class PersonalityTestComponent implements OnInit {
     this.ptAnswersPayload.push({id : 27 , answer : this.Page3.q27.value});
 
 
+    console.log(this.ptAnswersPayload)
+
     this.ptAnswersService.sendPersonalityTestAnswers(this.ptAnswersPayload).subscribe(data =>{
       console.log("Answers submitted successfully")
-      console.log(data)
-      console.log(this.ptAnswersPayload)
-      this.router.navigate(['/login']);
+      this.router.navigate(['/findpeers']);
     });
 
   }
