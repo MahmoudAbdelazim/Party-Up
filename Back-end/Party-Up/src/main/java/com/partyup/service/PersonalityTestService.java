@@ -26,7 +26,13 @@ public class PersonalityTestService {
 
     public List<QuestionDto> getAllQuestions() {
         List<Question> listOfQuestions = questionsRepository.findAll();
-        return new ArrayList<QuestionDto>();
+        List<QuestionDto> dtoList = new ArrayList<>();
+        for (Question question: listOfQuestions) {
+            QuestionDto questionDto = new QuestionDto();
+            questionDto.setId(question.getId());
+            dtoList.add(questionDto);
+        }
+        return dtoList;
     }
 
     public void saveAnswersOfUser(List<QuestionDto> questionDtos, Player player) {
