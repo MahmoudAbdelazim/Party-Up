@@ -8,6 +8,7 @@ import { NotFound404Component } from './not-found404/not-found404.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
+import {FeedComponent} from "./feed/feed.component";
 
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
@@ -18,7 +19,9 @@ const routes: Routes = [
   {path: "findpeers", component: FindpeersComponent},
   {path: "profile", component:ProfileComponent},
   {path: "personalityTest", component:PersonalityTestComponent},
-  {path: "**", component:NotFound404Component}
+  {path: "feed", component:FeedComponent},
+  {path: "**", component:NotFound404Component},
+
 ];
 
 @NgModule({
