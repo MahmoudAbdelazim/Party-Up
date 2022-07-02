@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import { Router } from '@angular/router';
+import {PersonalityTestRequestPayload} from "./personality-test-request.payload";
+import {PersonalityTestService} from "../personality-test.service";
+import {forEach} from "lodash";
 
 
 @Component({
@@ -10,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class PersonalityTestComponent implements OnInit {
 
+  ptAnswersPayload : PersonalityTestRequestPayload[];
 /*
   playerPersonalityTest = new FormGroup({
     q1: new FormControl(null , [Validators.required]),
@@ -79,7 +83,9 @@ export class PersonalityTestComponent implements OnInit {
       q27: new FormControl(null , [Validators.required])
     })
   })
-  constructor(private route: Router) { }
+  constructor(private route: Router , private ptAnswersService : PersonalityTestService, private router:Router) {
+    this.ptAnswersPayload =[];
+  }
 
   ngOnInit(): void {
   }
@@ -90,18 +96,22 @@ export class PersonalityTestComponent implements OnInit {
   }
 
   get Page2() {
+        // @ts-ignore
+        return this.multistep.controls['Page2']['controls'];
+      }
+  get Page3() {
     // @ts-ignore
-    return this.multistep.controls['Page2']['controls'];
+    return this.multistep.controls['Page3']['controls'];
   }
 
-  submit() {
-    this.submitted = true;
-    if(this.multistep.controls['Page1'].invalid && this.step == 1) {
-      this.forTheSpan = true;
-      return;
-    }
-    if(this.multistep.controls['Page2'].invalid && this.step == 2) {
-      this.forTheSpan = true;
+      submit() {
+        this.submitted = true;
+        if(this.multistep.controls['Page1'].invalid && this.step == 1) {
+          this.forTheSpan = true;
+          return;
+        }
+        if(this.multistep.controls['Page2'].invalid && this.step == 2) {
+          this.forTheSpan = true;
       return;
     }
     if(this.multistep.controls['Page3'].invalid && this.step == 3) {
@@ -111,6 +121,7 @@ export class PersonalityTestComponent implements OnInit {
     this.forTheSpan = false;
     this.step = this.step + 1;
     if(this.step == 4) {
+      this.submitPersonalityTestAnswers();
       this.route.navigate(['/login'])
     }
   }
@@ -120,6 +131,47 @@ export class PersonalityTestComponent implements OnInit {
     this.step = this.step - 1;
   }
 
+
+  submitPersonalityTestAnswers(){
+    console.log(this.Page1)
+
+    this.ptAnswersPayload.push({id : 1 , answer : this.Page1.q1.value});
+    this.ptAnswersPayload.push({id : 2 , answer : this.Page1.q2.value});
+    this.ptAnswersPayload.push({id : 3 , answer : this.Page1.q3.value});
+    this.ptAnswersPayload.push({id : 4 , answer : this.Page1.q4.value});
+    this.ptAnswersPayload.push({id : 5 , answer : this.Page1.q5.value});
+    this.ptAnswersPayload.push({id : 6 , answer : this.Page1.q6.value});
+    this.ptAnswersPayload.push({id : 7 , answer : this.Page1.q7.value});
+    this.ptAnswersPayload.push({id : 8 , answer : this.Page1.q8.value});
+    this.ptAnswersPayload.push({id : 9 , answer : this.Page1.q9.value});
+    this.ptAnswersPayload.push({id : 10 , answer : this.Page2.q10.value});
+    this.ptAnswersPayload.push({id : 11 , answer : this.Page2.q11.value});
+    this.ptAnswersPayload.push({id : 12 , answer : this.Page2.q12.value});
+    this.ptAnswersPayload.push({id : 13 , answer : this.Page2.q13.value});
+    this.ptAnswersPayload.push({id : 14 , answer : this.Page2.q14.value});
+    this.ptAnswersPayload.push({id : 15 , answer : this.Page2.q15.value});
+    this.ptAnswersPayload.push({id : 16 , answer : this.Page2.q16.value});
+    this.ptAnswersPayload.push({id : 17 , answer : this.Page2.q17.value});
+    this.ptAnswersPayload.push({id : 18 , answer : this.Page2.q18.value});
+    this.ptAnswersPayload.push({id : 19 , answer : this.Page3.q19.value});
+    this.ptAnswersPayload.push({id : 20 , answer : this.Page3.q20.value});
+    this.ptAnswersPayload.push({id : 21 , answer : this.Page3.q21.value});
+    this.ptAnswersPayload.push({id : 22 , answer : this.Page3.q22.value});
+    this.ptAnswersPayload.push({id : 23 , answer : this.Page3.q23.value});
+    this.ptAnswersPayload.push({id : 24 , answer : this.Page3.q24.value});
+    this.ptAnswersPayload.push({id : 25 , answer : this.Page3.q25.value});
+    this.ptAnswersPayload.push({id : 26 , answer : this.Page3.q26.value});
+    this.ptAnswersPayload.push({id : 27 , answer : this.Page3.q27.value});
+
+
+    this.ptAnswersService.sendPersonalityTestAnswers(this.ptAnswersPayload).subscribe(data =>{
+      console.log("Answers submitted successfully")
+      console.log(data)
+      console.log(this.ptAnswersPayload)
+      this.router.navigate(['/login']);
+    });
+
+  }
 
 
 }
