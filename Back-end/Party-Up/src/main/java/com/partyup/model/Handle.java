@@ -1,9 +1,11 @@
 package com.partyup.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Handle {
+public class Handle implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
