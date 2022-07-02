@@ -33,7 +33,7 @@ public class PersonalityTestService {
         for (int i = 0; i < questionDtos.size(); i++) {
             Rate rate = new Rate();
             QuestionDto questionDto;
-            questionDto = questionDtos.get(0);
+            questionDto = questionDtos.get(i);
             rate.setQuestionID(questionDto.getId());
             rate.setPlayerID(player.getId());
             rate.setRate(questionDto.getAnswer());
