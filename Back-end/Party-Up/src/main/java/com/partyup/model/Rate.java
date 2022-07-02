@@ -9,8 +9,9 @@ public class Rate {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
-    private Question question;
+    private Long questionID;
+
+    private Long playerID;
 
     private int rate;
 
@@ -22,12 +23,20 @@ public class Rate {
         this.id = id;
     }
 
-    public Question getQuestion() {
-        return question;
+    public Long getQuestionID() {
+        return questionID;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setQuestionID(Long questionID) {
+        this.questionID = questionID;
+    }
+
+    public Long getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(Long playerID) {
+        this.playerID = playerID;
     }
 
     public int getRate() {
