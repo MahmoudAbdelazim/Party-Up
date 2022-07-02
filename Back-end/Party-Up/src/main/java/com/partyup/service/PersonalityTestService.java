@@ -4,6 +4,7 @@ import com.partyup.model.Player;
 import com.partyup.model.Question;
 import com.partyup.model.Rate;
 import com.partyup.payload.QuestionDto;
+import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.QuestionsRepository;
 import com.partyup.repository.RateRepository;
 import org.modelmapper.ModelMapper;
@@ -18,11 +19,18 @@ import java.util.List;
 @Service
 public class PersonalityTestService {
 
-    @Autowired
     private QuestionsRepository questionsRepository;
 
-    @Autowired
     private RateRepository rateRepository;
+
+    private PlayerRepository playerRepository;
+
+    @Autowired
+    public PersonalityTestService(QuestionsRepository questionsRepository, RateRepository rateRepository, PlayerRepository playerRepository) {
+        this.questionsRepository = questionsRepository;
+        this.rateRepository = rateRepository;
+        this.playerRepository = playerRepository;
+    }
 
     public List<QuestionDto> getAllQuestions() {
         List<Question> listOfQuestions = questionsRepository.findAll();
@@ -36,6 +44,7 @@ public class PersonalityTestService {
     }
 
     public void saveAnswersOfUser(List<QuestionDto> questionDtos, Player player) {
+        List<Rate> rates = new ArrayList<>();
         for (int i = 0; i < questionDtos.size(); i++) {
             Rate rate = new Rate();
             QuestionDto questionDto;
@@ -44,7 +53,10 @@ public class PersonalityTestService {
             rate.setPlayerID(player.getId());
             rate.setRate(questionDto.getAnswer());
             rateRepository.save(rate);
+            rates.add(rate);
         }
+        player.setRates(rates);
+        playerRepository.save(player);
     }
 }
 

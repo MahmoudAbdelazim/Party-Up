@@ -34,7 +34,7 @@ public class PersonalityTestController {
     }
 
     @PostMapping
-    public ResponseEntity<String> saveAnswers(@PathVariable Long id, @RequestBody List<QuestionDto> questionDto){
+    public ResponseEntity<String> saveAnswers(@RequestBody List<QuestionDto> questionDto){
         String username = getUserName();
         Optional<Player> player = playerRepository.findByUsernameOrEmail(username, username);
         if (player.isEmpty()) {
