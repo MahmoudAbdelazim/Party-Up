@@ -40,6 +40,7 @@ public class PersonalityTestService {
             QuestionDto questionDto = new QuestionDto();
             questionDto.setId(question.getId());
             questionDto.setQuestion(question.getQuestion());
+            dtoList.add(questionDto);
         }
         return dtoList;
     }
