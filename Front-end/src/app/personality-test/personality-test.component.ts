@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import { Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {PersonalityTestRequestPayload} from "./personality-test-request.payload";
 import {PersonalityTestService} from "../personality-test.service";
 
@@ -13,6 +13,7 @@ import {PersonalityTestService} from "../personality-test.service";
 export class PersonalityTestComponent implements OnInit {
 
   ptAnswersPayload : PersonalityTestRequestPayload[];
+  userName: string
 /*
   playerPersonalityTest = new FormGroup({
     q1: new FormControl(null , [Validators.required]),
@@ -82,11 +83,13 @@ export class PersonalityTestComponent implements OnInit {
       q27: new FormControl(null , [Validators.required])
     })
   })
-  constructor(private route: Router , private ptAnswersService : PersonalityTestService, private router:Router) {
+  constructor(private route: Router , private ptAnswersService : PersonalityTestService, private router:Router , private actvRoute : ActivatedRoute) {
     this.ptAnswersPayload =[];
+    this.userName = ''
   }
 
   ngOnInit(): void {
+    this.userName = this.actvRoute.snapshot.params['username'];
   }
 
   get Page1() {
@@ -164,7 +167,9 @@ export class PersonalityTestComponent implements OnInit {
 
     console.log(this.ptAnswersPayload)
 
-    this.ptAnswersService.sendPersonalityTestAnswers(this.ptAnswersPayload).subscribe(data =>{
+
+    console.log(this.userName);
+    this.ptAnswersService.sendPersonalityTestAnswers(this.ptAnswersPayload , this.userName ).subscribe(data =>{
       console.log("Answers submitted successfully")
       this.router.navigate(['/findpeers']);
     });

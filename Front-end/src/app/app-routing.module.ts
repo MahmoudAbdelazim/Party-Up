@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: "register", component: RegisterComponent},
   {path: "findpeers", component: FindpeersComponent},
   {path: "profile", component:ProfileComponent},
-  {path: "personalityTest", component:PersonalityTestComponent},
+  {path: "personalityTest/:username", component:PersonalityTestComponent},
   {path: "feed", component:FeedComponent},
   {path: "**", component:NotFound404Component},
 
