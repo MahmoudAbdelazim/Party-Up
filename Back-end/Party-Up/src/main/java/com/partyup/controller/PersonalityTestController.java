@@ -1,9 +1,11 @@
 package com.partyup.controller;
 
 import com.partyup.model.Player;
+import com.partyup.payload.AnswerDto;
 import com.partyup.payload.QuestionDto;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.service.PersonalityTestService;
+import com.partyup.service.exception.PlayerNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/personalityTest")
+@CrossOrigin(origins = "*")
 public class PersonalityTestController {
 
     @Autowired
@@ -30,29 +33,17 @@ public class PersonalityTestController {
     @GetMapping
     public ResponseEntity<List<QuestionDto>> getQuestions(){
         List<QuestionDto> questionList = personalityTestService.getAllQuestions();
-        return ResponseEntity.status(HttpStatus.OK).body(questionList);
+        return ResponseEntity.ok().body(questionList);
     }
 
-    @PostMapping
-    public ResponseEntity<String> saveAnswers(@RequestBody List<QuestionDto> questionDto){
-        String username = getUserName();
+    @PostMapping("/{username}")
+    public ResponseEntity<String> saveAnswers(@PathVariable String username, @RequestBody List<AnswerDto> answerDto)
+            throws PlayerNotFoundException {
         Optional<Player> player = playerRepository.findByUsernameOrEmail(username, username);
         if (player.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
+            throw new PlayerNotFoundException(username);
         }
-        personalityTestService.saveAnswersOfUser(questionDto, player.get());
-        //TODO
+        personalityTestService.saveAnswersOfUser(answerDto, player.get());
         return ResponseEntity.ok().body("Test Submitted Successfully");
-    }
-
-    private String getUserName() {
-        Object userSessionData = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String username;
-        if (userSessionData instanceof UserDetails) {
-            username = ((UserDetails) userSessionData).getUsername();
-        } else {
-            username = userSessionData.toString();
-        }
-        return username;
     }
 }

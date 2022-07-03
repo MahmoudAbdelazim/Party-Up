@@ -30,7 +30,7 @@ public class Player {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private State state;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Rate> rates;
 
     @OneToMany

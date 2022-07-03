@@ -171,7 +171,7 @@ export class PersonalityTestComponent implements OnInit {
     console.log(this.userName);
     this.ptAnswersService.sendPersonalityTestAnswers(this.ptAnswersPayload , this.userName ).subscribe(data =>{
       console.log("Answers submitted successfully")
-      this.router.navigate(['/findpeers']);
+      this.router.navigate(['/login']);
     });
 
   }

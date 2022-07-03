@@ -1,10 +1,8 @@
 package com.partyup.payload;
 
 public class QuestionDto {
-
     private Long id;
-
-    private int answer;
+    private String question;
 
     public Long getId() {
         return id;
@@ -14,13 +12,11 @@ public class QuestionDto {
         this.id = id;
     }
 
-    public int getAnswer() {
-        if (answer < 1) answer = 1;
-        if (answer > 5) answer = 5;
-        return answer;
+    public String getQuestion() {
+        return question;
     }
 
-    public void setAnswer(int answer) {
-        this.answer = answer;
+    public void setQuestion(String question) {
+        this.question = question;
     }
 }

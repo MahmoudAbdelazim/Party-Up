@@ -14,16 +14,14 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -73,8 +71,12 @@ public class AuthController {
         player.setRoles(Collections.singleton(role));
 
         System.out.println(player);
-        playerRepository.save(player);
-        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
+        playerRepository.saveAndFlush(player);
 
+//        LoginDto loginDto = new LoginDto();
+//        loginDto.setUsernameOrEmail(player.getUsername());
+//        loginDto.setPassword(player.getPassword());
+//        authenticateUser(loginDto);
+        return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }
 }

@@ -3,6 +3,7 @@ package com.partyup.service;
 import com.partyup.model.Player;
 import com.partyup.model.Question;
 import com.partyup.model.Rate;
+import com.partyup.payload.AnswerDto;
 import com.partyup.payload.QuestionDto;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.QuestionsRepository;
@@ -38,21 +39,20 @@ public class PersonalityTestService {
         for (Question question: listOfQuestions) {
             QuestionDto questionDto = new QuestionDto();
             questionDto.setId(question.getId());
-            dtoList.add(questionDto);
+            questionDto.setQuestion(question.getQuestion());
         }
         return dtoList;
     }
 
-    public void saveAnswersOfUser(List<QuestionDto> questionDtos, Player player) {
+    public void saveAnswersOfUser(List<AnswerDto> answerDtos, Player player) {
         List<Rate> rates = new ArrayList<>();
-        for (int i = 0; i < questionDtos.size(); i++) {
+        for (int i = 0; i < answerDtos.size(); i++) {
             Rate rate = new Rate();
-            QuestionDto questionDto;
-            questionDto = questionDtos.get(i);
-            rate.setQuestionID(questionDto.getId());
+            AnswerDto answerDto;
+            answerDto = answerDtos.get(i);
+            rate.setQuestionID(answerDto.getId());
             rate.setPlayerID(player.getId());
-            rate.setRate(questionDto.getAnswer());
-            rateRepository.save(rate);
+            rate.setRate(answerDto.getAnswer());
             rates.add(rate);
         }
         player.setRates(rates);
