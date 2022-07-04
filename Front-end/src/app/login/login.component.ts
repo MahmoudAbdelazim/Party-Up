@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     this.authService.signIn(this.loginPayload).subscribe(data =>{
       console.log("LOGin successfully")
       console.log(data.value)
-      this.router.navigate(['/findpeers']);
+      this.router.navigate(['/profile']);
     });
 
   }
