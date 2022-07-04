@@ -9,6 +9,7 @@ import { PersonalityTestComponent } from './personality-test/personality-test.co
 import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import {FeedComponent} from "./feed/feed.component";
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: "logout", component:LogoutComponent},
   {path: "register", component: RegisterComponent},
   {path: "findpeers", component: FindpeersComponent},
+  {path: "profile/settings", component: ProfileSettingsComponent},
   {path: "profile", component:ProfileComponent},
   {path: "personalityTest/:username", component:PersonalityTestComponent},
   {path: "feed", component:FeedComponent},

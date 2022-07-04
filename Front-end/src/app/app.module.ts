@@ -17,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component'
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +32,7 @@ import {InfiniteScrollModule} from "ngx-infinite-scroll";
     LogoutComponent,
     PersonalityTestComponent,
     FeedComponent,
+    ProfileSettingsComponent,
 
   ],
   imports: [
