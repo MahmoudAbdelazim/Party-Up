@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.registerPayload).subscribe(data =>{
         console.log("sign up successfully")
         console.log(data.value)
+        sessionStorage.setItem('userSignedUp' , this.registerPayload.username);
         this.router.navigate(['/personalityTest', this.registerPayload.username]);
       });
 

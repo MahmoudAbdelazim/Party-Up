@@ -175,20 +175,5 @@ export class PersonalityTestComponent implements OnInit {
 
   }
 
- 
+
 }
-
-let myHttp = new XMLHttpRequest();
-let allQuestions;
-myHttp.open("GET", "http://localhost:8080/api/personalityTest")
-myHttp.send();
-
-myHttp.addEventListener("readystatechange", function(){
-  if(myHttp.readyState == 4 && myHttp.status == 200){
-    allQuestions = JSON.parse(myHttp.response);
-    console.log(myHttp.readyState);
-    console.log(myHttp.status);
-
-    console.log(allQuestions);
-  }
-})

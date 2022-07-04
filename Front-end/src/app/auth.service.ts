@@ -14,7 +14,24 @@ export class AuthService {
   register(registerPayload : RegisterRequestPayload) : Observable<any>{
     return this._httpClient.post('http://localhost:8080/api/auth/signup', registerPayload, {responseType : 'text'});
   }
+
+  isUserSignedUp() {
+    let user = sessionStorage.getItem('userSignedUp')
+    return user
+  }
+
   signIn(loginPayload : LoginRequestPayload) : Observable<any>{
     return this._httpClient.post('http://localhost:8080/api/auth/signin', loginPayload, {responseType : 'text'});
   }
+
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem('userName')
+    return user
+  }
+
+  logOut() {
+    sessionStorage.removeItem('userName')
+  }
+
 }

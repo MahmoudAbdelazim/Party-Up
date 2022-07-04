@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(this.loginPayload).subscribe(data =>{
       console.log("LOGin successfully")
+      sessionStorage.setItem('userName' , this.loginPayload.usernameOrEmail);
       console.log(data.value)
       this.router.navigate(['/profile']);
     });
