@@ -10,18 +10,20 @@ import { ProfileComponent } from './profile/profile.component';
 import { RegisterComponent } from './register/register.component';
 import {FeedComponent} from "./feed/feed.component";
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import {AuthService} from "./auth.service";
+import {GuardAuthenticationService} from "./guard-authentication.service";
 
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
   {path: "home", component: HomeComponent},
   {path: "login", component:LoginComponent},
-  {path: "logout", component:LogoutComponent},
+  {path: "logout", component:LogoutComponent , canActivate:[GuardAuthenticationService]},
   {path: "register", component: RegisterComponent},
-  {path: "findpeers", component: FindpeersComponent},
-  {path: "profile/settings", component: ProfileSettingsComponent},
-  {path: "profile", component:ProfileComponent},
+  {path: "findpeers", component: FindpeersComponent , canActivate:[GuardAuthenticationService]},
+  {path: "profile/settings", component: ProfileSettingsComponent , canActivate:[GuardAuthenticationService]},
+  {path: "profile", component:ProfileComponent , canActivate:[GuardAuthenticationService]},
   {path: "personalityTest/:username", component:PersonalityTestComponent},
-  {path: "feed", component:FeedComponent},
+  {path: "feed", component:FeedComponent , canActivate:[GuardAuthenticationService]},
   {path: "**", component:NotFound404Component},
 
 ];
