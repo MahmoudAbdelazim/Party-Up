@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
       firstName : '',
       lastName : '',
       phoneNumber : '',
-      handle : ''
+      handles : []
     }
   }
 

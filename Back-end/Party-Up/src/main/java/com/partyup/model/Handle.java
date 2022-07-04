@@ -11,7 +11,7 @@ public class Handle implements Serializable {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
     private String handle;

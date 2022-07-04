@@ -16,7 +16,7 @@ public class ProfileDto {
 
     String phoneNumber;
 
-    List<Handle> handles;
+    List<HandleDto> handles;
 
     public String getUsername() {
         return username;
@@ -58,11 +58,11 @@ public class ProfileDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public List<Handle> getHandles() {
+    public List<HandleDto> getHandles() {
         return handles;
     }
 
-    public void setHandles(List<Handle> handles) {
+    public void setHandles(List<HandleDto> handles) {
         this.handles = handles;
     }
 }

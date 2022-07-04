@@ -21,7 +21,6 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -39,13 +38,12 @@ public class AuthController {
     public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsernameOrEmail(), loginDto.getPassword()));
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@RequestBody SignUpDto signUpDto){
+    public ResponseEntity<String> registerUser(@RequestBody SignUpDto signUpDto){
 
         // add check for username exists in a DB
         if(playerRepository.existsByUsername(signUpDto.getUsername())){
@@ -70,13 +68,7 @@ public class AuthController {
         Role role = roleRepository.findByName("ROLE_USER").get();
         player.setRoles(Collections.singleton(role));
 
-        System.out.println(player);
         playerRepository.saveAndFlush(player);
-
-//        LoginDto loginDto = new LoginDto();
-//        loginDto.setUsernameOrEmail(player.getUsername());
-//        loginDto.setPassword(player.getPassword());
-//        authenticateUser(loginDto);
         return new ResponseEntity<>("User registered successfully", HttpStatus.OK);
     }
 }

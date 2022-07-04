@@ -19,9 +19,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-
 @RequestMapping("/api/personalityTest")
-@CrossOrigin(origins = "*")
 public class PersonalityTestController {
 
     @Autowired
