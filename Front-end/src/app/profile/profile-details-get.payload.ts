@@ -1,5 +1,5 @@
 export interface ProfileDetailsGetPayload{
-  userName : string
+  username : string
   email : string
   firstName : string
   lastName : string

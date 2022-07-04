@@ -16,7 +16,7 @@ export class ProfileComponent implements OnInit {
   constructor(private pdService : PlayerDetailsService , private router:Router) {
 
     this.PlayerDetails = {
-      userName : '',
+      username : '',
       email : '',
       firstName : '',
       lastName : '',
