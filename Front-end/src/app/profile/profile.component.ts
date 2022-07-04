@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {PlayerDetailsService} from "../player-details.service";
+import {Router} from "@angular/router";
+import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
 
 @Component({
   selector: 'app-profile',
@@ -8,15 +11,33 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  PlayerDetails : ProfileDetailsGetPayload
 
-  registerForm = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
-    password: new FormControl(null, [Validators.required ]) //Minimum eight characters, at least one letter and one number
-  })
+  constructor(private pdService : PlayerDetailsService , private router:Router) {
+
+    this.PlayerDetails = {
+      userName : '',
+      email : '',
+      firstName : '',
+      lastName : '',
+      phoneNumber : '',
+      handle : ''
+    }
+  }
+
 
 
   ngOnInit(): void {
+    this.pdService.getPlayerDetails().subscribe(data =>{
+
+      this.PlayerDetails = data;
+      console.log(this.PlayerDetails);
+    })
   }
+
+  showingPlayerDetailsInHtml(){
+
+  }
+
 
 }

@@ -83,7 +83,7 @@ export class PersonalityTestComponent implements OnInit {
       q27: new FormControl(null , [Validators.required])
     })
   })
-  constructor(private route: Router , private ptAnswersService : PersonalityTestService, private router:Router , private actvRoute : ActivatedRoute) {
+  constructor(private ptAnswersService : PersonalityTestService, private router:Router , private actvRoute : ActivatedRoute) {
     this.ptAnswersPayload =[];
     this.userName = ''
   }
@@ -124,7 +124,6 @@ export class PersonalityTestComponent implements OnInit {
     this.step = this.step + 1;
     if(this.step == 4) {
       this.submitPersonalityTestAnswers();
-      this.route.navigate(['/findpeers'])
     }
   }
 
