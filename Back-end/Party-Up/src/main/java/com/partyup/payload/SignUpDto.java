@@ -1,6 +1,6 @@
 package com.partyup.payload;
 
-import com.partyup.model.State;
+import com.partyup.model.Country;
 
 public class SignUpDto {
     private String firstName;
@@ -9,7 +9,7 @@ public class SignUpDto {
     private String email;
     private String password;
     private String phoneNumber;
-    private State state;
+    private Country country;
 
     public String getFirstName() {
         return firstName;
@@ -59,11 +59,11 @@ public class SignUpDto {
         this.phoneNumber = phoneNumber;
     }
 
-    public State getState() {
-        return state;
+    public Country getCountry() {
+        return country;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

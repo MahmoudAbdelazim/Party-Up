@@ -14,7 +14,7 @@ public class Handle implements Serializable {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Game game;
 
-    private String handle;
+    private String handleName;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class Handle implements Serializable {
         this.game = game;
     }
 
-    public String getHandle() {
-        return handle;
+    public String getHandleName() {
+        return handleName;
     }
 
-    public void setHandle(String handle) {
-        this.handle = handle;
+    public void setHandleName(String handle) {
+        this.handleName = handle;
     }
 }

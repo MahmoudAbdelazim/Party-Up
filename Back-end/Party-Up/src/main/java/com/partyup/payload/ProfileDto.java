@@ -1,7 +1,5 @@
 package com.partyup.payload;
 
-import com.partyup.model.Handle;
-
 import java.util.List;
 
 public class ProfileDto {

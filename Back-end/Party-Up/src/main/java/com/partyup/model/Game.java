@@ -12,8 +12,6 @@ public class Game implements Serializable {
 
     private String name;
 
-    private GameCategory gameCategory;
-
     public Long getId() {
         return id;
     }
@@ -28,13 +26,5 @@ public class Game implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public GameCategory getGameCategory() {
-        return gameCategory;
-    }
-
-    public void setGameCategory(GameCategory gameCategory) {
-        this.gameCategory = gameCategory;
     }
 }

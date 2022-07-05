@@ -1,15 +1,16 @@
 package com.partyup.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Question {
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    private String question;
+    private String questionString;
 
     public Long getId() {
         return id;
@@ -19,11 +20,11 @@ public class Question {
         this.id = id;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getQuestionString() {
+        return questionString;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setQuestionString(String questionString) {
+        this.questionString = questionString;
     }
 }

@@ -1,10 +1,12 @@
 package com.partyup.controller;
 
+import com.partyup.model.Country;
 import com.partyup.model.Player;
 import com.partyup.model.Role;
 import com.partyup.payload.LoginDto;
 import com.partyup.payload.LoginResponseDto;
 import com.partyup.payload.SignUpDto;
+import com.partyup.repository.CountryRepository;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.RoleRepository;
 import com.partyup.session.InMemorySessionRegistry;
@@ -13,14 +15,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collections;
-import java.util.Set;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -39,6 +41,9 @@ public class AuthController {
 
     @Autowired
     private InMemorySessionRegistry sessionRegistry;
+
+    @Autowired
+    private CountryRepository countryRepository;
 
     @PostMapping("/signin")
     public ResponseEntity<LoginResponseDto> authenticateUser(@RequestBody LoginDto loginDto) {
@@ -73,7 +78,14 @@ public class AuthController {
         player.setEmail(signUpDto.getEmail());
         player.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         player.setPhoneNumber(signUpDto.getPhoneNumber());
-        player.setState(signUpDto.getState());
+
+        Optional<Country> country = countryRepository.findById(signUpDto.getCountry().getName());
+        if (country.isEmpty()) {
+            Country c = new Country();
+            c.setName(signUpDto.getCountry().getName());
+            countryRepository.saveAndFlush(c);
+        }
+        player.setCountry(signUpDto.getCountry());
 
         Role role = roleRepository.findByName("ROLE_USER").get();
         player.setRoles(Collections.singleton(role));

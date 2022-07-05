@@ -1,7 +1,6 @@
 package com.partyup.model.posting;
 
 import com.partyup.model.Player;
-import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

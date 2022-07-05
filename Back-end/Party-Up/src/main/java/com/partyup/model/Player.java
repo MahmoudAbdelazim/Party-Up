@@ -5,6 +5,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -14,7 +16,7 @@ import java.util.Set;
         @UniqueConstraint(columnNames = {"username"}),
         @UniqueConstraint(columnNames = {"email"})
 })
-public class Player implements UserDetails {
+public class Player implements UserDetails, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -32,13 +34,13 @@ public class Player implements UserDetails {
 
     private String phoneNumber;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private State state;
+    @ManyToOne
+    private Country country;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Rate> rates;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Handle> handles;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -125,28 +127,12 @@ public class Player implements UserDetails {
         this.phoneNumber = phoneNumber;
     }
 
-    public State getState() {
-        return state;
-    }
-
-    public void setState(State state) {
-        this.state = state;
-    }
-
     public List<Rate> getRates() {
         return rates;
     }
 
     public void setRates(List<Rate> userRate) {
         this.rates = userRate;
-    }
-
-    public List<Handle> getUserHandles() {
-        return handles;
-    }
-
-    public void setUserHandles(List<Handle> handles) {
-        this.handles = handles;
     }
 
     public List<Handle> getHandles() {
@@ -171,5 +157,18 @@ public class Player implements UserDetails {
 
     public void setRoles(Set<Role> role) {
         this.roles = role;
+    }
+
+    public void addHandle(Handle handle) {
+        if (handles.isEmpty()) handles = new ArrayList<>();
+        handles.add(handle);
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 }

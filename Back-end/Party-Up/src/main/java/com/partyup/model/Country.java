@@ -1,16 +1,16 @@
 package com.partyup.model;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class Country {
+public class Country implements Serializable {
 
     @Id
     @Column(name = "name", nullable = false)
     private String name;
-
-    private String continent;
 
     public String getName() {
         return name;
@@ -18,13 +18,5 @@ public class Country {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getContinent() {
-        return continent;
-    }
-
-    public void setContinent(String content) {
-        this.continent = content;
     }
 }

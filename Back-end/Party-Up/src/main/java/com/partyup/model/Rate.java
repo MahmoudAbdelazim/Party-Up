@@ -1,9 +1,10 @@
 package com.partyup.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Rate {
+public class Rate implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)

@@ -1,7 +1,5 @@
 package com.partyup.service;
 
-import com.partyup.model.Game;
-import com.partyup.model.Handle;
 import com.partyup.model.Player;
 import com.partyup.payload.HandleDto;
 import com.partyup.payload.ProfileDto;
@@ -9,7 +7,6 @@ import com.partyup.repository.PlayerRepository;
 import com.partyup.service.exception.PlayerNotFoundException;
 import com.partyup.service.exception.UserNotAuthenticatedException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,8 +28,7 @@ public class PlayerProfileService {
     public ProfileDto getPlayerProfile() throws PlayerNotFoundException, UserNotAuthenticatedException {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth.isAuthenticated()) {
-            String username = auth.getName();
-            System.out.println(username);
+            String username = getUsername(auth);
             Optional<Player> p = playerRepository.findByUsernameOrEmail(username, username);
             if (p.isPresent()) {
                 Player player = p.get();

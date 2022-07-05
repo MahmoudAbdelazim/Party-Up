@@ -39,7 +39,7 @@ public class PersonalityTestService {
         for (Question question: listOfQuestions) {
             QuestionDto questionDto = new QuestionDto();
             questionDto.setId(question.getId());
-            questionDto.setQuestion(question.getQuestion());
+            questionDto.setQuestion(question.getQuestionString());
             dtoList.add(questionDto);
         }
         return dtoList;
