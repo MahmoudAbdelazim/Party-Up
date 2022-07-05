@@ -10,6 +10,6 @@ public class PlayerNotFoundException extends Exception{
 
     @Override
     public String getMessage() {
-        return "Player with ID: " + username + " Not Found";
+        return "Player with username: " + username + " Not Found";
     }
 }

@@ -26,12 +26,10 @@ public class CustomPlayerDetailsService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
-        Player player = playerRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
+    public Player loadUserByUsername(String usernameOrEmail) throws UsernameNotFoundException {
+        return playerRepository.findByUsernameOrEmail(usernameOrEmail, usernameOrEmail)
                 .orElseThrow(() ->
                         new UsernameNotFoundException("User not found with username or email:" + usernameOrEmail));
-        return new org.springframework.security.core.userdetails.User(player.getEmail(),
-                player.getPassword(), mapRolesToAuthorities(player.getRoles()));
     }
 
     private Collection< ? extends GrantedAuthority> mapRolesToAuthorities(Set<Role> roles){

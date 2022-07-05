@@ -3,9 +3,11 @@ package com.partyup.controller;
 import com.partyup.model.Player;
 import com.partyup.model.Role;
 import com.partyup.payload.LoginDto;
+import com.partyup.payload.LoginResponseDto;
 import com.partyup.payload.SignUpDto;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.RoleRepository;
+import com.partyup.session.InMemorySessionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,24 +37,31 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private InMemorySessionRegistry sessionRegistry;
+
     @PostMapping("/signin")
-    public ResponseEntity<String> authenticateUser(@RequestBody LoginDto loginDto){
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginDto.getUsernameOrEmail(), loginDto.getPassword()));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
+    public ResponseEntity<LoginResponseDto> authenticateUser(@RequestBody LoginDto loginDto) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginDto.getUsernameOrEmail(),
+                        loginDto.getPassword()));
+        final String sessionId = sessionRegistry.registerSession(loginDto.getUsernameOrEmail());
+        LoginResponseDto response = new LoginResponseDto();
+        response.setSessionId(sessionId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<String> registerUser(@RequestBody SignUpDto signUpDto){
+    public ResponseEntity<String> registerUser(@RequestBody SignUpDto signUpDto) {
 
         // add check for username exists in a DB
-        if(playerRepository.existsByUsername(signUpDto.getUsername())){
+        if (playerRepository.existsByUsername(signUpDto.getUsername())) {
             return new ResponseEntity<>("Username is already taken!", HttpStatus.BAD_REQUEST);
         }
 
         // add check for email exists in DB
-        if(playerRepository.existsByEmail(signUpDto.getEmail())){
+        if (playerRepository.existsByEmail(signUpDto.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
 
