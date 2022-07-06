@@ -1,4 +1,4 @@
 export interface AddGamePayload{
-  gameId : number
+  gameName : string
   handle : string
 }

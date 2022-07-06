@@ -26,7 +26,7 @@ export class AddGameComponent implements OnInit {
     }
 
     this.addGamePayload = {
-      gameId : 0,
+      gameName : '',
       handle : ''
     }
   }
@@ -40,12 +40,12 @@ export class AddGameComponent implements OnInit {
   }
 
   addGameWithHandle = new FormGroup({
-    gameId: new FormControl(), //inside the constructor is like a place holder
+    gameName: new FormControl(), //inside the constructor is like a place holder
     handle: new FormControl()
   })
 
   sendPlayersGameWithHandle(){
-    this.addGamePayload.gameId = this.addGameWithHandle.get('gameId')?.value;
+    this.addGamePayload.gameName = this.addGameWithHandle.get('gameName')!.value;
     this.addGamePayload.handle = this.addGameWithHandle.get('handle')?.value;
     console.log(this.addGamePayload);
     this.addGameService.addGameWithHandle(this.addGamePayload).subscribe(data => {
