@@ -1,18 +1,24 @@
 package com.partyup.model.posting;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
 
 @Entity
+@Table(name = "file")
 public class Content {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
 	@Column(name = "name")
 	private String name;
 	@Column(name = "type")
-	protected String type;
+	private String type;
+	@Column(name = "size")
+	private Long size;
 	@Lob
 	@Column(name = "data", nullable = false)
 	private byte[] file;
@@ -20,13 +26,15 @@ public class Content {
 	public Content() {
 		this.name = "";
 		this.type = "";
+		this.size = 0L;
 		this.file = new byte[0];
 	}
 
-	public Content(String name, String type, byte[] image) {
+	public Content(String name, String type, byte[] file) {
 		this.name = name;
 		this.type = type;
-		this.file = image;
+		this.file = file;
+		this.size = (long) file.length;
 	}
 
 	public byte[] getFile() {
@@ -37,8 +45,12 @@ public class Content {
 		this.file = file;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
+	}
+
+	public long getSize() {
+		return size;
 	}
 
 	public String getName() {
@@ -61,11 +73,11 @@ public class Content {
 	public boolean equals(Object other) {
 		if (this == other) return true;
 		if (other == null || this.getClass() != other.getClass()) return false;
-		Content otherImage = (Content) other;
-		return Objects.equals(this.id, otherImage.id)
-				&& Objects.equals(this.type, otherImage.type)
-				&& Objects.equals(this.name, otherImage.name)
-				&& Arrays.equals(this.file, otherImage.file);
+		Content otherContent = (Content) other;
+		return Objects.equals(this.id, otherContent.id)
+				&& Objects.equals(this.type, otherContent.type)
+				&& Objects.equals(this.name, otherContent.name)
+				&& Arrays.equals(this.file, otherContent.file);
 	}
 
 	@Override
