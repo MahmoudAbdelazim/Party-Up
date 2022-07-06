@@ -5,12 +5,12 @@
       <div class="card-body little-profile text-center my-5">
         <div class="pro-img"><img src="../../assets/images/human.png" alt="user"></div>
         <h2 class="m-b-0 text-white">{{playerDetails.firstName }} {{playerDetails.lastName}}</h2>
-        
+
         <h3 class="m-b-0 text-white"><span class="text-primary"> UserName:</span> {{playerDetails.username }}</h3>
-        
+
         <h3 class="m-b-0 text-white"><i class="fa-solid fa-envelope mx-2 text-info"></i>{{playerDetails.email }}</h3>
         <h3 class="m-b-0 text-primary">Player's Handles in games:</h3>
-        
+
         <h3 *ngFor="let handle of playerDetails.handles" class="m-b-0 text-warning ">{{handle.game}}: <span class="text-white">{{handle.handle }}</span></h3>
         <!-- <h3 class="m-b-0">{{playerDetails.phoneNumber }}</h3> -->
 
