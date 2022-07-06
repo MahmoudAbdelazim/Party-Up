@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PersonalityTestRequestPayload} from "./personality-test/personality-test-request.payload";
 import {Observable} from "rxjs";
+import { PersonalityTestGetPayload } from './personality-test/personality-test-get.payload';
 
 @Injectable({
   providedIn: 'root'
@@ -15,4 +16,9 @@ export class PersonalityTestService {
     let url : string = 'http://localhost:8080/api/personalityTest/' + userName;
     return this._httpClient.post( url , ptPayloadAnswers , {responseType : 'text'});
   }
+
+  getPersonalityTestQuestions() : Observable<any>{
+    return this._httpClient.get("http://localhost:8080/api/personalityTest/");
+  }
+
 }
