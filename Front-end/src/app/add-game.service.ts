@@ -11,6 +11,6 @@ export class AddGameService {
   constructor(private _httpClient:HttpClient) { }
 
   addGameWithHandle(addGamePayload : AddGamePayload): Observable<any>{
-    return this._httpClient.post('http://localhost:8080/api/addGame' , addGamePayload);
+    return this._httpClient.post('http://localhost:8080/api/addGame' , addGamePayload , {responseType : 'text'});
   }
 }

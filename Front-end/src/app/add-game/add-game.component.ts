@@ -26,8 +26,8 @@ export class AddGameComponent implements OnInit {
     }
 
     this.addGamePayload = {
-      gameName : '',
-      handle : ''
+      gameName: "",
+      handle: ""
     }
   }
 
@@ -45,11 +45,15 @@ export class AddGameComponent implements OnInit {
   })
 
   sendPlayersGameWithHandle(){
-    this.addGamePayload.gameName = this.addGameWithHandle.get('gameName')!.value;
+    this.addGamePayload.gameName = this.addGameWithHandle.get('gameName')?.value;
     this.addGamePayload.handle = this.addGameWithHandle.get('handle')?.value;
     console.log(this.addGamePayload);
     this.addGameService.addGameWithHandle(this.addGamePayload).subscribe(data => {
       console.log(data)
+      this.pdService.getPlayerDetails().subscribe(data =>{
+        this.playerDetails = data;
+        // this.addHandles();
+      })
       this.router.navigate(['/addGame']);
     });
   }
