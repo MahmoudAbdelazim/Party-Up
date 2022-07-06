@@ -5,5 +5,7 @@ export interface RegisterRequestPayload{
   password: string;
   username: string;
   dataOfBirth: string;
-  country: string;
+  country: {
+    name : string;
+  };
 }

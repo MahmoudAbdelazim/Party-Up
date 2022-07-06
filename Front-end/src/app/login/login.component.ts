@@ -13,7 +13,6 @@ import {AuthService} from "../auth.service";
 export class LoginComponent implements OnInit {
 
   loginPayload : LoginRequestPayload;
-
   constructor(private router:Router, private authService : AuthService) {
     this.loginPayload = {
       usernameOrEmail: "",
@@ -35,10 +34,10 @@ export class LoginComponent implements OnInit {
     this.loginPayload.password = this.loginForm.get('password')?.value;
 
     this.authService.signIn(this.loginPayload).subscribe(data =>{
-      console.log("LOGin successfully")
-      sessionStorage.setItem('userName' , this.loginPayload.usernameOrEmail);
-      console.log(data.value)
-      this.router.navigate(['/profile']);
+        console.log("LOGin successfully")
+        sessionStorage.setItem('token', data.sessionId);
+        console.log(data)
+        this.router.navigate(['/profile']);
     });
 
   }

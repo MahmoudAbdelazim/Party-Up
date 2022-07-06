@@ -21,17 +21,17 @@ export class AuthService {
   }
 
   signIn(loginPayload : LoginRequestPayload) : Observable<any>{
-    return this._httpClient.post('http://localhost:8080/api/auth/signin', loginPayload, {responseType : 'text'});
+    return this._httpClient.post('http://localhost:8080/api/auth/signin', loginPayload);
   }
 
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('userName')
+    let user = sessionStorage.getItem('token')
     return user
   }
 
   logOut() {
-    sessionStorage.removeItem('userName')
+    sessionStorage.removeItem('token')
   }
 
 }
