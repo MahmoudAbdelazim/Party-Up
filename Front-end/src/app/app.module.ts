@@ -19,6 +19,7 @@ import { FeedComponent } from './feed/feed.component'
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 import {RequestInterceptor} from "./request.interceptor";
+import { AddGameComponent } from './add-game/add-game.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,6 +35,7 @@ import {RequestInterceptor} from "./request.interceptor";
     PersonalityTestComponent,
     FeedComponent,
     ProfileSettingsComponent,
+    AddGameComponent,
 
   ],
   imports: [

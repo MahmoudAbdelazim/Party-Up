@@ -1,0 +1,21 @@
+<h2>{{playerDetails.firstName}} {{playerDetails.lastName}}'s list of games and Handles</h2>
+
+<table class="table table-dark">
+  <thead>
+  <tr>
+    <th scope="col">Game</th>
+    <th scope="col">Handle</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let playerHandle of playerDetails.handles">
+    <td>{{playerHandle.game}}</td>
+    <td>{{playerHandle.handle}}</td>
+  </tr>
+  </tbody>
+</table>
+<form  [formGroup]="addGameWithHandle" (ngSubmit)="sendPlayersGameWithHandle()">
+  <input formControlName="gameName" type="text" class="form-control" name="gameName" placeholder="specify game">
+  <input formControlName="handle" type="text" class="form-control" name="handle" placeholder="specify handle">
+  <button type="submit" >Confirm</button>
+</form>
