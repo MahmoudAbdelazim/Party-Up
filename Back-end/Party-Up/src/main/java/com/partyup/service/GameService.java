@@ -42,10 +42,9 @@ public class GameService {
             Optional<Player> player = playerRepository.findByUsernameOrEmail(username, username);
             if (player.isEmpty())
                 throw new PlayerNotFoundException(username);
-            gameRepository.flush();
-            Optional<Game> game = gameRepository.findById(addGameDto.getGameId());
+            Optional<Game> game = gameRepository.findByName(addGameDto.getGameName());
             if (game.isEmpty())
-                throw new GameNotFoundException("Game with ID: " + addGameDto.getGameId() + " is Not Found");
+                throw new GameNotFoundException("Game with Name: " + addGameDto.getGameName() + " is Not Found");
             Optional<Handle> existingHandle = handleRepository.findByHandleNameAndGame(addGameDto.getHandle(), game.get());
             if (existingHandle.isPresent())
                 return "Handle is already present for this game";

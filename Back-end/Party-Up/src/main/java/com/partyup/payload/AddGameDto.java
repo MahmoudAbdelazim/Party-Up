@@ -1,15 +1,15 @@
 package com.partyup.payload;
 
 public class AddGameDto {
-    private Long gameId;
+    private String gameName;
     private String handle;
 
-    public Long getGameId() {
-        return gameId;
+    public String getGameName() {
+        return gameName;
     }
 
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
+    public void setGameId(String gameName) {
+        this.gameName = gameName;
     }
 
     public String getHandle() {
