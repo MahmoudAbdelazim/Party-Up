@@ -29,14 +29,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.pdService.getPlayerDetails().subscribe(data =>{
-
-      this.PlayerDetails = data;
-      console.log(this.PlayerDetails);
+      console.log(data);
     })
-  }
-
-  showingPlayerDetailsInHtml(){
-
   }
 
 
