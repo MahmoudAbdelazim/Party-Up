@@ -11,11 +11,11 @@ import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
 })
 export class ProfileComponent implements OnInit {
 
-  PlayerDetails : ProfileDetailsGetPayload
+  playerDetails : ProfileDetailsGetPayload
 
   constructor(private pdService : PlayerDetailsService , private router:Router) {
 
-    this.PlayerDetails = {
+    this.playerDetails = {
       username : '',
       email : '',
       firstName : '',
@@ -29,9 +29,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.pdService.getPlayerDetails().subscribe(data =>{
+      this.playerDetails = data;
+      
       console.log(data);
     })
   }
+  
 
 
 }

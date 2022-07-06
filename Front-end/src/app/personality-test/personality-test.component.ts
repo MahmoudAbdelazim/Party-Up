@@ -83,7 +83,7 @@ export class PersonalityTestComponent implements OnInit {
       q27: new FormControl(null , [Validators.required])
     })
   })
-  constructor(private ptAnswersService : PersonalityTestService, private router:Router , private actvRoute : ActivatedRoute) {
+  constructor(private ptAnswersService : PersonalityTestService, private ptQuestionsService : PersonalityTestService, private router:Router , private actvRoute : ActivatedRoute) {
     this.ptAnswersPayload =[];
     this.userName = ''
   }
@@ -172,6 +172,10 @@ export class PersonalityTestComponent implements OnInit {
       console.log("Answers submitted successfully")
       this.router.navigate(['/login']);
     });
+
+    this.ptQuestionsService.getPersonalityTestQuestions().subscribe(data =>{
+      console.log(data);
+    })
 
   }
 
