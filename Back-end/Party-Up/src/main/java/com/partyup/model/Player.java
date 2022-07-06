@@ -43,6 +43,9 @@ public class Player implements UserDetails, Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Handle> handles;
 
+    @ManyToMany
+    private Set<Player> peers;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> roles;
 
@@ -170,5 +173,17 @@ public class Player implements UserDetails, Serializable {
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public Set<Player> getPeers() {
+        return peers;
+    }
+
+    public void setPeers(Set<Player> peers) {
+        this.peers = peers;
+    }
+
+    public boolean hasPeer(Player player) {
+        return peers.contains(player);
     }
 }

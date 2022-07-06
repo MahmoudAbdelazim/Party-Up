@@ -2,6 +2,7 @@ package com.partyup.service;
 
 import com.partyup.model.Player;
 import com.partyup.payload.HandleDto;
+import com.partyup.payload.OtherProfileDto;
 import com.partyup.payload.ProfileDto;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.service.exception.PlayerNotFoundException;
@@ -38,14 +39,6 @@ public class PlayerProfileService {
                 profileDto.setFirstName(player.getFirstName());
                 profileDto.setLastName(player.getLastName());
                 profileDto.setPhoneNumber(player.getPhoneNumber());
-                //
-                profileDto.setHandles(new ArrayList<>());
-                HandleDto handle = new HandleDto();
-                handle.setGameId(1L);
-                handle.setGame("League Of Legends");
-                handle.setId(1L);
-                handle.setHandle("LOLLL");
-                profileDto.getHandles().add(handle);
                 return profileDto;
             } else {
                 throw new PlayerNotFoundException(username);
@@ -53,6 +46,25 @@ public class PlayerProfileService {
         } else {
             throw new UserNotAuthenticatedException();
         }
+    }
+
+    public OtherProfileDto getOtherPlayerProfile(String username) throws PlayerNotFoundException {
+
+        Optional<Player> optionalPlayer = playerRepository.findByUsernameOrEmail(username, username);
+        if (optionalPlayer.isEmpty()) {
+            throw new PlayerNotFoundException(username);
+        }
+        Player player = optionalPlayer.get();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        OtherProfileDto profileDto = new OtherProfileDto(player);
+        if (auth.isAuthenticated()) {
+            String currentUsername = getUsername(auth);
+            Player currentPlayer = playerRepository.findByUsernameOrEmail(username, username).get();
+            if (currentPlayer.hasPeer(player)) {
+                profileDto.setHandles(player.getHandles());
+            }
+        }
+        return profileDto;
     }
 
     private String getUsername(Authentication authentication) {

@@ -1,11 +1,21 @@
 package com.partyup.payload;
 
+import com.partyup.model.Handle;
+
 public class HandleDto {
 
     private Long id;
     private String handle;
     private Long gameId;
     private String game;
+
+    public HandleDto(Handle handle) {
+        this.id = handle.getId();
+        this.handle = handle.getHandleName();
+        this.gameId = handle.getGame().getId();
+        this.game = handle.getGame().getName();
+    }
+
 
     public Long getId() {
         return id;
