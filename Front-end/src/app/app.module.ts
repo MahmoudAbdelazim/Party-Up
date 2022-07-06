@@ -14,10 +14,11 @@ import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-res
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FeedComponent } from './feed/feed.component'
 import {InfiniteScrollModule} from "ngx-infinite-scroll";
 import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
+import {RequestInterceptor} from "./request.interceptor";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,7 @@ import { ProfileSettingsComponent } from './profile-settings/profile-settings.co
     HttpClientModule,
     InfiniteScrollModule
   ],
-  providers: [],
+  providers: [{provide : HTTP_INTERCEPTORS , useClass : RequestInterceptor , multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

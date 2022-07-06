@@ -21,7 +21,9 @@ export class RegisterComponent implements OnInit {
         password: "",
         username: "",
         dataOfBirth: "",
-        country: ""
+        country: {
+          name : ""
+        }
       };
   }
 
@@ -47,7 +49,7 @@ export class RegisterComponent implements OnInit {
       this.registerPayload.password = this.registerForm.get('password')?.value;
       this.registerPayload.username = this.registerForm.get('discordTag')?.value;
       this.registerPayload.dataOfBirth = this.registerForm.get('dateOfBirth')?.value;
-      this.registerPayload.country = this.registerForm.get('country')?.value;
+      this.registerPayload.country.name = this.registerForm.get('country')?.value;
 
       this.authService.register(this.registerPayload).subscribe(data =>{
         console.log("sign up successfully")
