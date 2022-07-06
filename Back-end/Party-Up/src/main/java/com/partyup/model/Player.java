@@ -6,10 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "player", uniqueConstraints = {
@@ -46,8 +43,19 @@ public class Player implements UserDetails, Serializable {
     @ManyToMany
     private Set<Player> peers;
 
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<PeerRequest> peerRequests;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<Role> roles;
+
+    public List<PeerRequest> getPeerRequests() {
+        return peerRequests;
+    }
+
+    public void setPeerRequests(List<PeerRequest> peerRequests) {
+        this.peerRequests = peerRequests;
+    }
 
     public Long getId() {
         return id;
@@ -185,5 +193,15 @@ public class Player implements UserDetails, Serializable {
 
     public boolean hasPeer(Player player) {
         return peers.contains(player);
+    }
+
+    public void addPeerRequest(PeerRequest peerRequest) {
+        if (peerRequests.isEmpty()) peerRequests = new ArrayList<>();
+        peerRequests.add(peerRequest);
+    }
+
+    public void addPeer(Player player) {
+        if (peers.isEmpty()) peers = new HashSet<>();
+        peers.add(player);
     }
 }
