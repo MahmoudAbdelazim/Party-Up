@@ -1,14 +1,14 @@
 package com.partyup.service.exception;
 
 public class GameNotFoundException extends Exception{
-    private Long id;
+    private final String message;
 
-    public GameNotFoundException(Long id) {
-        this.id = id;
+    public GameNotFoundException(String message) {
+        this.message = message;
     }
 
     @Override
     public String getMessage() {
-        return "Game with ID: " + id + " Not Found";
+        return message;
     }
 }

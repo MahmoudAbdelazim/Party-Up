@@ -1,5 +1,6 @@
 package com.partyup.payload;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileDto {
@@ -14,7 +15,7 @@ public class ProfileDto {
 
     String phoneNumber;
 
-    List<HandleDto> handles;
+    List<HandleDto> handles = new ArrayList<>();
 
     public String getUsername() {
         return username;

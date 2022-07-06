@@ -1,7 +1,7 @@
 package com.partyup.service.exception;
 
 public class UploadFailedException extends Exception {
-	private String message;
+	private final String message;
 
 	public UploadFailedException() {
 		message = "Couldn't upload files";

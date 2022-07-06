@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Table(name = "game", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"name"})
+})
 public class Game implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

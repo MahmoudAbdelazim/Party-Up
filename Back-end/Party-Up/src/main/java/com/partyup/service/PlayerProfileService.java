@@ -1,5 +1,6 @@
 package com.partyup.service;
 
+import com.partyup.model.Handle;
 import com.partyup.model.Player;
 import com.partyup.payload.HandleDto;
 import com.partyup.payload.OtherProfileDto;
@@ -13,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -39,6 +39,9 @@ public class PlayerProfileService {
                 profileDto.setFirstName(player.getFirstName());
                 profileDto.setLastName(player.getLastName());
                 profileDto.setPhoneNumber(player.getPhoneNumber());
+                for (Handle handle: player.getHandles()) {
+                    profileDto.getHandles().add(new HandleDto(handle));
+                }
                 return profileDto;
             } else {
                 throw new PlayerNotFoundException(username);

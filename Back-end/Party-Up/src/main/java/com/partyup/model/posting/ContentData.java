@@ -2,7 +2,9 @@ package com.partyup.model.posting;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.net.URL;
 import java.util.Objects;
 

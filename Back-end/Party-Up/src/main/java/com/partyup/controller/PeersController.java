@@ -1,8 +1,8 @@
 package com.partyup.controller;
 
-import com.partyup.model.PeerRequest;
 import com.partyup.payload.ProfileToken;
 import com.partyup.service.PeersService;
+import com.partyup.service.exception.GameNotFoundException;
 import com.partyup.service.exception.PeerRequestNotFoundException;
 import com.partyup.service.exception.PlayerNotFoundException;
 import com.partyup.service.exception.UserNotAuthenticatedException;
@@ -45,6 +45,12 @@ public class PeersController {
     public ResponseEntity<String> unpeer(@PathVariable String username)
             throws UserNotAuthenticatedException, PlayerNotFoundException {
         return ResponseEntity.ok(peersService.unpeer(username));
+    }
+
+    @GetMapping("/api/findPeers/{gameName}")
+    public ResponseEntity<List<ProfileToken>> findPeers(@PathVariable String gameName)
+            throws UserNotAuthenticatedException, GameNotFoundException {
+        return ResponseEntity.ok(peersService.findPeers(gameName));
     }
 
     @ExceptionHandler(UserNotAuthenticatedException.class)
