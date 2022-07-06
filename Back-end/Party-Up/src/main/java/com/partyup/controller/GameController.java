@@ -8,6 +8,7 @@ import com.partyup.service.exception.UserNotAuthenticatedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -21,7 +22,7 @@ public class GameController {
     }
 
     @PostMapping("/api/addGame")
-    public ResponseEntity<String> addGame(AddGameDto addGameDto)
+    public ResponseEntity<String> addGame(@RequestBody AddGameDto addGameDto)
             throws UserNotAuthenticatedException, PlayerNotFoundException, GameNotFoundException {
         return ResponseEntity.ok(gameService.addGame(addGameDto));
     }

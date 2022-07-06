@@ -15,7 +15,7 @@
   </tbody>
 </table>
 <form  [formGroup]="addGameWithHandle" (ngSubmit)="sendPlayersGameWithHandle()">
-  <input formControlName="gameName" type="number" name="gameName" placeholder="specify game">
-  <input formControlName="handle" type="text" name="handle" placeholder="specify handle">
+  <input formControlName="gameName" type="text" class="form-control" name="gameName" placeholder="specify game">
+  <input formControlName="handle" type="text" class="form-control" name="handle" placeholder="specify handle">
   <button type="submit" >Confirm</button>
 </form>

@@ -49,8 +49,7 @@ export class AddGameComponent implements OnInit {
     this.addGamePayload.handle = this.addGameWithHandle.get('handle')?.value;
     console.log(this.addGamePayload);
     this.addGameService.addGameWithHandle(this.addGamePayload).subscribe(data => {
-
-      console.log(data);
+      console.log(data)
       this.router.navigate(['/addGame']);
     });
   }
