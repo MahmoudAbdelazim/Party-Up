@@ -8,7 +8,7 @@ public class AddGameDto {
         return gameName;
     }
 
-    public void setGameId(String gameName) {
+    public void setGameName(String gameName) {
         this.gameName = gameName;
     }
 
