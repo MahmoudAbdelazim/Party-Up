@@ -1,3 +1,4 @@
+/**
 package com.partyup;
 
 import com.partyup.model.Player;
@@ -92,3 +93,4 @@ class PartyUpApplicationTests {
 		}
 	}
 }
+*/

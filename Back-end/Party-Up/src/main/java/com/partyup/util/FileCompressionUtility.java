@@ -4,7 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
-public class ImageCompressionUtility {
+public class FileCompressionUtility {
 
 	public static byte[] compressImage(byte[] data) {
 

@@ -1,25 +1,31 @@
 package com.partyup.model.posting;
 
 import com.partyup.model.Player;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class Post {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	@ManyToOne(cascade = CascadeType.PERSIST)
+	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid", strategy = "uuid2")
+	private String id;
+	private String text;
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<ContentData> contents;
+
+	@ManyToOne(cascade = CascadeType.REFRESH)
 	@NotNull
 	private Player player;
 
-	private String text;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	private List<Content> contents;
+	@CreationTimestamp
+	private Date createAt;
 
 	public Player getPlayer() {
 		return player;
@@ -37,17 +43,19 @@ public class Post {
 		this.text = text;
 	}
 
-	public List<Content> getContents() {
+	public List<ContentData> getContents() {
 		return contents;
 	}
 
-	public void setContents(List<Content> contents) {
+	public void setContents(List<ContentData> contents) {
 		this.contents = contents;
 	}
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
+
+	public Date getCreationDate() { return createAt; }
 
 	@Override
 	public boolean equals(Object o) {

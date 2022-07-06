@@ -1,8 +1,8 @@
 package com.partyup.service.exception;
 
 public class PostNotFoundException extends Exception {
-	String id;
-	String message;
+	private String id;
+	private String message;
 
 	public PostNotFoundException(String id) {
 		this.id = id;
