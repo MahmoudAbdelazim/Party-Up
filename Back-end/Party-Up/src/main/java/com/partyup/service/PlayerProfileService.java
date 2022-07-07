@@ -1,6 +1,7 @@
 package com.partyup.service;
 
 import com.partyup.model.Handle;
+import com.partyup.model.PeerRequest;
 import com.partyup.model.Player;
 import com.partyup.payload.HandleDto;
 import com.partyup.payload.OtherProfileDto;
@@ -39,7 +40,7 @@ public class PlayerProfileService {
                 profileDto.setFirstName(player.getFirstName());
                 profileDto.setLastName(player.getLastName());
                 profileDto.setPhoneNumber(player.getPhoneNumber());
-                for (Handle handle: player.getHandles()) {
+                for (Handle handle : player.getHandles()) {
                     profileDto.getHandles().add(new HandleDto(handle));
                 }
                 return profileDto;
@@ -51,20 +52,34 @@ public class PlayerProfileService {
         }
     }
 
-    public OtherProfileDto getOtherPlayerProfile(String username) throws PlayerNotFoundException {
+    public OtherProfileDto getOtherPlayerProfile(String playerUsername) throws PlayerNotFoundException {
 
-        Optional<Player> optionalPlayer = playerRepository.findByUsernameOrEmail(username, username);
+        Optional<Player> optionalPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
         if (optionalPlayer.isEmpty()) {
-            throw new PlayerNotFoundException(username);
+            throw new PlayerNotFoundException(playerUsername);
         }
-        Player player = optionalPlayer.get();
+        Player otherPlayer = optionalPlayer.get();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        OtherProfileDto profileDto = new OtherProfileDto(player);
+        OtherProfileDto profileDto = new OtherProfileDto(otherPlayer);
         if (auth.isAuthenticated()) {
-            String currentUsername = getUsername(auth);
-            Player currentPlayer = playerRepository.findByUsernameOrEmail(username, username).get();
-            if (currentPlayer.hasPeer(player)) {
-                profileDto.setHandles(player.getHandles());
+            String username = getUsername(auth);
+            Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+            if (player.hasPeer(otherPlayer)) {
+                profileDto.setPeer(true);
+                profileDto.setHandles(otherPlayer.getHandles());
+            } else {
+                for (PeerRequest peerRequest : player.getPeerRequests()) {
+                    if (peerRequest.getUsername().equals(otherPlayer.getUsername())) {
+                        profileDto.setOtherRequested(true);
+                        break;
+                    }
+                }
+                for (PeerRequest peerRequest : otherPlayer.getPeerRequests()) {
+                    if (peerRequest.getUsername().equals(player.getUsername())) {
+                        profileDto.setRequested(true);
+                        break;
+                    }
+                }
             }
         }
         return profileDto;

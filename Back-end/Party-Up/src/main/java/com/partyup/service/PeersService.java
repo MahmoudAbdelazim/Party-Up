@@ -11,7 +11,6 @@ import com.partyup.service.exception.GameNotFoundException;
 import com.partyup.service.exception.PeerRequestNotFoundException;
 import com.partyup.service.exception.PlayerNotFoundException;
 import com.partyup.service.exception.UserNotAuthenticatedException;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;

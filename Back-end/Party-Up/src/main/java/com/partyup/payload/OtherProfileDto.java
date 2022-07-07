@@ -15,6 +15,10 @@ public class OtherProfileDto {
 
     boolean isPeer = false;
 
+    boolean requested = false;
+
+    boolean otherRequested = false;
+
     public OtherProfileDto(Player player) {
         username = player.getUsername();
         country = player.getCountry();
@@ -27,6 +31,8 @@ public class OtherProfileDto {
 
     public void setHandles(List<Handle> handles) {
         isPeer = true;
+        requested = false;
+        otherRequested = false;
         for (Handle handle : handles) {
             this.handles.add(new HandleDto(handle));
         }
@@ -42,5 +48,33 @@ public class OtherProfileDto {
 
     public boolean isPeer() {
         return isPeer;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public void setPeer(boolean peer) {
+        isPeer = peer;
+    }
+
+    public boolean isRequested() {
+        return requested;
+    }
+
+    public void setRequested(boolean requested) {
+        this.requested = requested;
+    }
+
+    public boolean isOtherRequested() {
+        return otherRequested;
+    }
+
+    public void setOtherRequested(boolean otherRequested) {
+        this.otherRequested = otherRequested;
     }
 }
