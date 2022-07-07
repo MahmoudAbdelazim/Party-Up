@@ -2,6 +2,7 @@ package com.partyup.controller;
 
 import com.partyup.payload.OtherProfileDto;
 import com.partyup.payload.ProfileDto;
+import com.partyup.payload.SignUpDto;
 import com.partyup.service.PlayerProfileService;
 import com.partyup.service.exception.PlayerNotFoundException;
 import com.partyup.service.exception.UserNotAuthenticatedException;
@@ -27,15 +28,20 @@ public class PlayerProfileController {
         return ResponseEntity.ok().body(playerProfileService.getPlayerProfile());
     }
 
-    @GetMapping("/{username}")
-    public OtherProfileDto getOtherPlayerProfile(@PathVariable String username)
-            throws PlayerNotFoundException {
-        return playerProfileService.getOtherPlayerProfile(username);
+    @PutMapping()
+    public ResponseEntity<String> editProfile(@RequestBody SignUpDto signUpDto) throws UserNotAuthenticatedException {
+        return ResponseEntity.ok().body(playerProfileService.editProfile(signUpDto));
     }
 
     @ExceptionHandler(PlayerNotFoundException.class)
     public ResponseEntity<String> sendPlayerNotFound(PlayerNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @GetMapping("/{username}")
+    public OtherProfileDto getOtherPlayerProfile(@PathVariable String username)
+            throws PlayerNotFoundException, UserNotAuthenticatedException {
+        return playerProfileService.getOtherPlayerProfile(username);
     }
 
     @ExceptionHandler(UserNotAuthenticatedException.class)

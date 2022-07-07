@@ -13,7 +13,7 @@ public class ProfileDto {
 
     String lastName;
 
-    String phoneNumber;
+    String discordTag;
 
     List<HandleDto> handles = new ArrayList<>();
 
@@ -49,19 +49,19 @@ public class ProfileDto {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public List<HandleDto> getHandles() {
         return handles;
     }
 
     public void setHandles(List<HandleDto> handles) {
         this.handles = handles;
+    }
+
+    public void setDiscordTag(String discordTag) {
+        this.discordTag = discordTag;
+    }
+
+    public String getDiscordTag() {
+        return discordTag;
     }
 }

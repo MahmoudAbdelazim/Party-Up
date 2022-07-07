@@ -60,12 +60,3 @@ public class PersonalityTestService {
         playerRepository.save(player);
     }
 }
-
-@Configuration
-class configPersonalityTestService{
-    @Bean
-    ModelMapper personalityTestMapper() {
-        //TODO
-        return null;
-    }
-}

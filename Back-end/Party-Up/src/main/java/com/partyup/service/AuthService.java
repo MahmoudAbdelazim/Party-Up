@@ -59,13 +59,16 @@ public class AuthService {
         if (playerRepository.existsByEmail(signUpDto.getEmail())) {
             return new ResponseEntity<>("Email is already taken!", HttpStatus.BAD_REQUEST);
         }
+        if (playerRepository.existsByDiscordTag(signUpDto.getDiscordTag())) {
+            return new ResponseEntity<>("Discord Tag is already taken!", HttpStatus.BAD_REQUEST);
+        }
         Player player = new Player();
         player.setFirstName(signUpDto.getFirstName());
         player.setLastName(signUpDto.getLastName());
         player.setUsername(signUpDto.getUsername());
         player.setEmail(signUpDto.getEmail());
+        player.setDiscordTag(signUpDto.getDiscordTag());
         player.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-        player.setPhoneNumber(signUpDto.getPhoneNumber());
 
         Optional<Country> country = countryRepository.findById(signUpDto.getCountry().getName());
         if (country.isEmpty()) {

@@ -12,6 +12,7 @@ public class OtherProfileDto {
     String username;
     List<HandleDto> handles;
     Country country;
+    String discordTag;
 
     boolean isPeer = false;
 
@@ -76,5 +77,13 @@ public class OtherProfileDto {
 
     public void setOtherRequested(boolean otherRequested) {
         this.otherRequested = otherRequested;
+    }
+
+    public String getDiscordTag() {
+        return discordTag;
+    }
+
+    public void setDiscordTag(String discordTag) {
+        this.discordTag = discordTag;
     }
 }

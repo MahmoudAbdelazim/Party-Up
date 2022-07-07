@@ -8,8 +8,9 @@ public class SignUpDto {
     private String username;
     private String email;
     private String password;
-    private String phoneNumber;
     private Country country;
+
+    private String discordTag;
 
     public String getFirstName() {
         return firstName;
@@ -51,19 +52,19 @@ public class SignUpDto {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public Country getCountry() {
         return country;
     }
 
     public void setCountry(Country country) {
         this.country = country;
+    }
+
+    public String getDiscordTag() {
+        return discordTag;
+    }
+
+    public void setDiscordTag(String discordTag) {
+        this.discordTag = discordTag;
     }
 }

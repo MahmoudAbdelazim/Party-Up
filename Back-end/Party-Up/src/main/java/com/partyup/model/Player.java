@@ -11,7 +11,8 @@ import java.util.*;
 @Entity
 @Table(name = "player", uniqueConstraints = {
         @UniqueConstraint(columnNames = {"username"}),
-        @UniqueConstraint(columnNames = {"email"})
+        @UniqueConstraint(columnNames = {"email"}),
+        @UniqueConstraint(columnNames = {"discord_tag"})
 })
 public class Player implements UserDetails, Serializable {
     @Id
@@ -29,7 +30,8 @@ public class Player implements UserDetails, Serializable {
 
     private String lastName;
 
-    private String phoneNumber;
+    @Column(name = "discord_tag")
+    private String discordTag;
 
     @ManyToOne
     private Country country;
@@ -130,14 +132,6 @@ public class Player implements UserDetails, Serializable {
         this.lastName = lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public List<Rate> getRates() {
         return rates;
     }
@@ -204,5 +198,13 @@ public class Player implements UserDetails, Serializable {
     public void addPeer(Player player) {
         if (peers == null || peers.isEmpty()) peers = new HashSet<>();
         peers.add(player);
+    }
+
+    public String getDiscordTag() {
+        return discordTag;
+    }
+
+    public void setDiscordTag(String discordTag) {
+        this.discordTag = discordTag;
     }
 }
