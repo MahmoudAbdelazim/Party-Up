@@ -43,7 +43,7 @@
         </li>
       </ul>
     </div>
-    <div class="icon" (click)="expandingNotifications()" *ngIf="checkIfUserLoggedIn()" id="bell"> <img src="https://i.imgur.com/AC7dgLA.png" alt="">
+    <div class="icon" (click)="expandingNotifications()" *ngIf="checkIfUserLoggedIn()" id="bell"> <i class="fa-solid fa-bell text-success" style="font-size: 1.33em;"></i>
     </div>
     <div *ngIf="bellDown" [ngClass]="{boxExpand: bellDown === true}" class="notifications" id="box">
       <h2>Notifications</h2>

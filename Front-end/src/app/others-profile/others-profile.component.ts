@@ -27,8 +27,8 @@ export class OthersProfileComponent implements OnInit {
   isOtherUserAlreadySentMe : boolean;
   accOrDecPayload : AcceptDeclinePayload
 
-  isAccOrDeclined : boolean
-
+  isAcc : boolean
+  isDeclined: boolean
 
   constructor(private pdService : PlayerDetailsService, private getOtherProfile : GetOthersProfileService,
               private sendPeerRequestService : SendPeerRequestService, private popupNotification: ToastrService,
@@ -53,7 +53,8 @@ export class OthersProfileComponent implements OnInit {
       response: ''
     };
 
-    this.isAccOrDeclined = false;
+    this.isAcc = false;
+    this.isDeclined = false;
   }
 
   ngOnInit(): void {
@@ -107,7 +108,7 @@ export class OthersProfileComponent implements OnInit {
     this.acceptOrDeclineService.accept(this.accOrDecPayload , this.userName).subscribe(data =>{
       console.log(this.accOrDecPayload);
       console.log(data);
-      this.isAccOrDeclined = true;
+      this.isAcc = true;
     })
   }
 
@@ -116,7 +117,7 @@ export class OthersProfileComponent implements OnInit {
     this.acceptOrDeclineService.reject(this.accOrDecPayload , this.userName).subscribe(data =>{
       console.log(this.accOrDecPayload);
       console.log(data);
-      this.isAccOrDeclined = true;
+      this.isDeclined = true;
     })
   }
 

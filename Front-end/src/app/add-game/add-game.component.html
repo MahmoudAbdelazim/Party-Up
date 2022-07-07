@@ -1,22 +1,40 @@
-<h2>{{playerDetails.firstName}} {{playerDetails.lastName}}'s list of games and Handles</h2>
+<div class="text-center">
+  <h2>
+    {{ playerDetails.firstName }} {{ playerDetails.lastName }}'s list of games
+    and Handles as shown in the table below
+  </h2>
+</div>
+ 
+<div class="container">
+	
+	<div class="table">
+		<div class="table-header">
+			<div class="header__item"><a id="name" class="filter__link" >Game</a></div>
+			<div class="header__item"><a id="wins" class="filter__link filter__link--number" >Handle</a></div>
+		</div>
+		<div class="table-content">	
+			<div class="table-row" *ngFor="let playerHandle of playerDetails.handles">		
+				<div class="table-data text-primary">{{ playerHandle.game }}</div>
+				<div class="table-data text-primary">{{ playerHandle.handle }}</div>
+			</div>
+		</div>	
+	</div>
+</div>
 
-<table class="table table-dark">
-  <thead>
-  <tr>
-    <th scope="col">Game</th>
-    <th scope="col">Handle</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let playerHandle of playerDetails.handles">
-    <td>{{playerHandle.game}}</td>
-    <td>{{playerHandle.handle}}</td>
-  </tr>
-  </tbody>
-</table>
-<form  [formGroup]="addGameWithHandle" (ngSubmit)="sendPlayersGameWithHandle()">
-  <input formControlName="gameName" type="text" class="form-control" name="gameName" placeholder="specify game">
-  <input formControlName="handle" type="text" class="form-control" name="handle" placeholder="specify handle">
-  <button type="submit" >Confirm</button>
-  <button type="button" [routerLink]="['/profile']"> View Profile</button>
-</form>
+
+  <div class="w-100 text-center my-5">
+    <h2>A form to add new games and handles to your account!</h2>
+    <form [formGroup]="addGameWithHandle" class="w-100 container" (ngSubmit)="sendPlayersGameWithHandle()">
+     <div class="form-group">   
+      <input formControlName="gameName" type="text" class="" name="gameName" placeholder="specify game"/>
+     </div>
+     <div class="form-group my-2">
+      <input formControlName="handle" type="text" class="" name="handle" placeholder="specify handle"/>
+     </div> 
+      <button class="btn btn-success mx-2" type="submit">Confirm</button>
+      <button type="button" class="btn btn-primary" [routerLink]="['/profile']">View Profile</button>
+    </form>
+  
+  
+  </div>
+  
