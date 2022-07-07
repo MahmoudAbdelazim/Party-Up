@@ -39,11 +39,21 @@
           <a class="nav-link" aria-current="page" routerLink="register" *ngIf="!checkIfUserLoggedIn()">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" routerLink="logout" *ngIf="checkIfUserLoggedIn()">Log out</a>
+          <a class="nav-link" aria-current="page" routerLink="logout" (click)="shrinkingNotificationWhenLogout()" *ngIf="checkIfUserLoggedIn()">Log out</a>
         </li>
       </ul>
     </div>
-
+    <div class="icon" (click)="expandingNotifications()" *ngIf="checkIfUserLoggedIn()" id="bell"> <img src="https://i.imgur.com/AC7dgLA.png" alt="">
+    </div>
+    <div *ngIf="bellDown" [ngClass]="{boxExpand: bellDown === true}" class="notifications" id="box">
+      <h2>Notifications</h2>
+      <div *ngFor="let notification of notifications" class="notifications-item" routerLink="profile/{{notification.username}}"> <img src="https://i.imgur.com/uIgDDDd.jpg" alt="img">
+        <div class="text">
+          <h4>{{notification.username}}</h4>
+          <p>wants to peer with you</p>
+        </div>
+      </div>
+    </div>
   </div>
 
 </nav>
