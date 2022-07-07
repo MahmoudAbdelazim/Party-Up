@@ -46,7 +46,7 @@ public class Player implements UserDetails, Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<PeerRequest> peerRequests;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
     public List<PeerRequest> getPeerRequests() {
@@ -159,6 +159,7 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addRole(Role role) {
+        if (roles == null || roles.isEmpty()) roles = new HashSet<>();
         roles.add(role);
     }
 

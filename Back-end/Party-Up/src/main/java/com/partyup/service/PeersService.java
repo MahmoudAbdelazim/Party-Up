@@ -4,13 +4,16 @@ import com.partyup.model.Game;
 import com.partyup.model.PeerRequest;
 import com.partyup.model.Player;
 import com.partyup.payload.ProfileToken;
+import com.partyup.payload.SuggestedPeerId;
 import com.partyup.repository.PeerRequestRepository;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.service.exception.GameNotFoundException;
 import com.partyup.service.exception.PeerRequestNotFoundException;
 import com.partyup.service.exception.PlayerNotFoundException;
 import com.partyup.service.exception.UserNotAuthenticatedException;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,12 +43,7 @@ public class PeersService {
     }
 
     public List<ProfileToken> getRequests() throws UserNotAuthenticatedException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        Player player = authenticate();
         List<ProfileToken> profileTokens = new ArrayList<>();
         for (PeerRequest peerRequest : player.getPeerRequests()) {
             profileTokens.add(new ProfileToken(peerRequest));
@@ -53,17 +52,8 @@ public class PeersService {
     }
 
     public String addPeer(String playerUsername) throws UserNotAuthenticatedException, PlayerNotFoundException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
-        Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
-
-        if (otherPlayer.isEmpty()) {
-            throw new PlayerNotFoundException(playerUsername);
-        }
+        Player player = authenticate();
+        Optional<Player> otherPlayer = getOtherPlayer(playerUsername);
         PeerRequest peerRequest = new PeerRequest();
         peerRequest.setUsername(player.getUsername());
         otherPlayer.get().addPeerRequest(peerRequest);
@@ -73,17 +63,8 @@ public class PeersService {
 
     public String respondPeerRequest(String playerUsername, String response)
             throws UserNotAuthenticatedException, PlayerNotFoundException, PeerRequestNotFoundException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
-        Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
-
-        if (otherPlayer.isEmpty()) {
-            throw new PlayerNotFoundException(playerUsername);
-        }
+        Player player = authenticate();
+        Optional<Player> otherPlayer = getOtherPlayer(playerUsername);
 
         PeerRequest peerRequest = null;
         for (PeerRequest pr : player.getPeerRequests()) {
@@ -108,17 +89,8 @@ public class PeersService {
 
     public String unpeer(String playerUsername)
             throws UserNotAuthenticatedException, PlayerNotFoundException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
-        Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
-
-        if (otherPlayer.isEmpty()) {
-            throw new PlayerNotFoundException(playerUsername);
-        }
+        Player player = authenticate();
+        Optional<Player> otherPlayer = getOtherPlayer(playerUsername);
 
         if (player.hasPeer(otherPlayer.get())) {
             player.getPeers().remove(otherPlayer.get());
@@ -132,20 +104,15 @@ public class PeersService {
 
     public List<ProfileToken> findPeers(String gameName)
             throws UserNotAuthenticatedException, GameNotFoundException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        Player player = authenticate();
         RestTemplate restTemplate = new RestTemplate();
         Game game = gameService.getGameBy(gameName);
         String findPeersUri = UriComponentsBuilder.fromHttpUrl("http://localhost:5000")
                 .path("/" + player.getId())
                 .path("/" + game.getId())
                 .encode().toUriString();
-        List<SuggestedPeerId> suggestedPeerIds =  restTemplate.getForEntity(findPeersUri, List.class).getBody();
-        return getProfileTokensOf(suggestedPeerIds);
+        ResponseEntity<SuggestedPeerId[]> suggestedPeerIds =  restTemplate.getForEntity(findPeersUri, SuggestedPeerId[].class);
+        return getProfileTokensOf(Arrays.asList(suggestedPeerIds.getBody()));
     }
 
     private List<ProfileToken> getProfileTokensOf(List<SuggestedPeerId> suggestedPeerIds) {
@@ -159,6 +126,25 @@ public class PeersService {
         return profileTokens;
     }
 
+    private Optional<Player> getOtherPlayer(String playerUsername) throws PlayerNotFoundException {
+        Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
+
+        if (otherPlayer.isEmpty()) {
+            throw new PlayerNotFoundException(playerUsername);
+        }
+        return otherPlayer;
+    }
+
+    private Player authenticate() throws UserNotAuthenticatedException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.isAuthenticated()) {
+            throw new UserNotAuthenticatedException();
+        }
+        String username = getUsername(auth);
+        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        return player;
+    }
+
     private String getUsername(Authentication authentication) {
         Object userSessionData = authentication.getPrincipal();
         String username;
@@ -168,24 +154,5 @@ public class PeersService {
             username = userSessionData.toString();
         }
         return username;
-    }
-
-    public class SuggestedPeerId {
-        private Long id;
-
-        public SuggestedPeerId(Long id) {
-            this.id = id;
-        }
-
-        public SuggestedPeerId() {
-        }
-
-        public Long getId() {
-            return id;
-        }
-
-        public void setId(Long id) {
-            this.id = id;
-        }
     }
 }

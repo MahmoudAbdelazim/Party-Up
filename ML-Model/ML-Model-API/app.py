@@ -1,24 +1,9 @@
+import json
+
 from flask import Flask
-from flask import jsonify
-import json
-import pandas as pd
-import numpy as np
-import pymysql
-import time
-from matplotlib import pyplot as plt
-from scipy.cluster.hierarchy import dendrogram
-from sklearn.datasets import load_iris
-from sklearn.cluster import AgglomerativeClustering
-from sklearn.neighbors import NearestNeighbors
-from sklearn.cluster import KMeans
-from IPython.display import display
-from sklearn import metrics
-from sklearn.metrics import pairwise_distances
-from imblearn.over_sampling import SMOTE
-import json
-from flask_mysqldb import MySQL
 
 app = Flask(__name__)
+
 
 # db = pymysql.connect(host="localhost", user="root", password="mahmoud16", database="partyup")
 #
@@ -41,20 +26,20 @@ app = Flask(__name__)
 # k_means()
 
 # def get(user_id, game_id):
-    # clusterNum = data[data['ID'] == id]['cluster'].tolist()[0]
-    # cluster = data.loc[data['cluster'] == clusterNum]
-    # distances, neighbors = knn(cluster, id)
-    # sorted_cluster = cluster.iloc[neighbors.tolist()[0]]
-    # cluster = sorted_cluster.copy()
-    # sorted_cluster['distance'] = distances.tolist()[0]
-    # ids = sorted_cluster['ID'].tolist()
-    # df = sorted_cluster.iloc[[0]]
-    # game_users = users_data.loc[users_data['Game'] == game]
-    # for i in ids:
-    #     df2 = game_users.loc[game_users['ID'] == i]
-    #     if len(df2):
-    #         df = df.append(sorted_cluster.loc[sorted_cluster['ID'] == i])
-    # return df.loc[:, ['ID', 'cluster', 'distance']]
+# clusterNum = data[data['ID'] == id]['cluster'].tolist()[0]
+# cluster = data.loc[data['cluster'] == clusterNum]
+# distances, neighbors = knn(cluster, id)
+# sorted_cluster = cluster.iloc[neighbors.tolist()[0]]
+# cluster = sorted_cluster.copy()
+# sorted_cluster['distance'] = distances.tolist()[0]
+# ids = sorted_cluster['ID'].tolist()
+# df = sorted_cluster.iloc[[0]]
+# game_users = users_data.loc[users_data['Game'] == game]
+# for i in ids:
+#     df2 = game_users.loc[game_users['ID'] == i]
+#     if len(df2):
+#         df = df.append(sorted_cluster.loc[sorted_cluster['ID'] == i])
+# return df.loc[:, ['ID', 'cluster', 'distance']]
 
 # KNN
 # def knn(cluster, id):
@@ -65,18 +50,24 @@ app = Flask(__name__)
 
 @app.route('/<int:user_id>/<int:game_id>')
 def hello_world(user_id, game_id):
-    return json.dumps([
-        {'id': 2},
-        {'id': 3},
-        {'id': 4},
-        {'id': 5},
-        {'id': 6},
-        {'id': 7},
-        {'id': 8},
-        {'id': 9},
-        {'id': 10}
-    ])
-
+    response = app.response_class(
+        response=json.dumps(
+            [
+                {'id': 2},
+                {'id': 3},
+                {'id': 4},
+                {'id': 5},
+                {'id': 6},
+                {'id': 7},
+                {'id': 8},
+                {'id': 9},
+                {'id': 10}
+            ]
+        ),
+        status=200,
+        mimetype='application/json'
+    )
+    return response
 
 if __name__ == '__main__':
     app.run()
