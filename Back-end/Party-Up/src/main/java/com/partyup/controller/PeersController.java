@@ -53,6 +53,12 @@ public class PeersController {
         return ResponseEntity.ok(peersService.findPeers(gameName));
     }
 
+    @GetMapping("/api/peers")
+    public ResponseEntity<List<ProfileToken>> myPeers()
+            throws UserNotAuthenticatedException {
+        return ResponseEntity.ok(peersService.myPeers());
+    }
+
     @ExceptionHandler(UserNotAuthenticatedException.class)
     public ResponseEntity<String> sendUserNotAuthenticated(UserNotAuthenticatedException exception) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);

@@ -125,6 +125,16 @@ public class PeersService {
         return profileTokens;
     }
 
+    public List<ProfileToken> myPeers()
+            throws UserNotAuthenticatedException {
+        Player player = authenticate();
+        List<ProfileToken> profileTokens = new ArrayList<>();
+        for (Player peer: player.getPeers()) {
+            profileTokens.add(new ProfileToken(peer.getUsername()));
+        }
+        return profileTokens;
+    }
+
     private Optional<Player> getOtherPlayer(String playerUsername) throws PlayerNotFoundException {
         Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
 
