@@ -21,6 +21,7 @@ import { ProfileSettingsComponent } from './profile-settings/profile-settings.co
 import {RequestInterceptor} from "./request.interceptor";
 import { AddGameComponent } from './add-game/add-game.component';
 import { OthersProfileComponent } from './others-profile/others-profile.component';
+import { MyPeersComponent } from './my-peers/my-peers.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +39,7 @@ import { OthersProfileComponent } from './others-profile/others-profile.componen
     ProfileSettingsComponent,
     AddGameComponent,
     OthersProfileComponent,
+    MyPeersComponent,
 
   ],
   imports: [

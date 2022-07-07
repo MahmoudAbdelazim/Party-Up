@@ -15,6 +15,7 @@ import {GuardAuthenticationService} from "./guard-authentication.service";
 import {SignupGuardPersonalityService} from "./signup-guard-personality.service";
 import {AddGameComponent} from "./add-game/add-game.component";
 import {OthersProfileComponent} from "./others-profile/others-profile.component";
+import {MyPeersComponent} from "./my-peers/my-peers.component";
 
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: "profile/settings", component: ProfileSettingsComponent , canActivate:[GuardAuthenticationService]},
   {path: "profile/:username", component: OthersProfileComponent , canActivate:[GuardAuthenticationService]},
   {path: "profile", component:ProfileComponent , canActivate:[GuardAuthenticationService]},
+  {path: "myPeers", component: MyPeersComponent , canActivate:[GuardAuthenticationService]},
   {path: "personalityTest/:username", component:PersonalityTestComponent , canActivate:[SignupGuardPersonalityService]},
   {path: "feed", component:FeedComponent , canActivate:[GuardAuthenticationService]},
   {path: "**", component:NotFound404Component},

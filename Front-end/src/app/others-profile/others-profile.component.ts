@@ -10,6 +10,7 @@ import {NotificationsPayload} from "../navbar/notifications.payload";
 import {forEach} from "lodash";
 import {AcceptingOrRejectingTheRequestService} from "../accepting-or-rejecting-the-request.service";
 import {AcceptDeclinePayload} from "./accept-decline.payload";
+import {UnpeerService} from "../unpeer.service";
 
 @Component({
   selector: 'app-others-profile',
@@ -21,19 +22,17 @@ export class OthersProfileComponent implements OnInit {
   otherPlayerDetails : GetOthersDetailsPayload
   userName: string
   url : string
-  showAddPeerButton : boolean
+
 
   notifications : NotificationsPayload[];
-  isOtherUserAlreadySentMe : boolean;
-  accOrDecPayload : AcceptDeclinePayload
+  response : string
 
-  isAcc : boolean
-  isDeclined: boolean
+
 
   constructor(private pdService : PlayerDetailsService, private getOtherProfile : GetOthersProfileService,
               private sendPeerRequestService : SendPeerRequestService, private popupNotification: ToastrService,
               private getPeerRequests : GetPeerRequestsAsNotificationService,
-              private acceptOrDeclineService : AcceptingOrRejectingTheRequestService,
+              private acceptOrDeclineService : AcceptingOrRejectingTheRequestService, private unPeerService : UnpeerService,
               private router:Router , private actvRoute : ActivatedRoute) {
 
     this.otherPlayerDetails = {
@@ -42,19 +41,15 @@ export class OthersProfileComponent implements OnInit {
       country: {
         name : ''
       },
+      requested : false,
+      otherRequested : false,
       peer : false
     };
     this.userName = '';
     this.url = '';
-    this.showAddPeerButton = true;
     this.notifications = [];
-    this.isOtherUserAlreadySentMe = false;
-    this.accOrDecPayload = {
-      response: ''
-    };
+    this.response = ''
 
-    this.isAcc = false;
-    this.isDeclined = false;
   }
 
   ngOnInit(): void {
@@ -64,7 +59,6 @@ export class OthersProfileComponent implements OnInit {
       if (data.username === this.userName){
         this.router.navigate(['/profile'])
       } else {
-        this.checkingIfOtherUserSendMeRequest();
         this.getothersDetails();
       }
     })
@@ -81,44 +75,36 @@ export class OthersProfileComponent implements OnInit {
 
   sendPeerRequest(){
       this.sendPeerRequestService.sendPeerRequest(this.userName).subscribe(data =>{
-        this.showAddPeerButton = false;
+        this.getothersDetails();
         this.popupNotification.success();
         console.log(data);
       })
   }
 
-  checkingIfOtherUserSendMeRequest(){
-    this.getPeerRequests.getPeerRequestsNotifications().subscribe(data =>{
-      this.notifications = data;
-      console.log(this.notifications)
 
-      for (let notification of this.notifications) {
-        console.log(this.isOtherUserAlreadySentMe)
-        if (this.userName === notification.username) {
-          this.isOtherUserAlreadySentMe = true;
-          console.log(this.isOtherUserAlreadySentMe);
-          break;
-        }
-      }
-    })
-  }
 
   acceptingTheRequest(){
-    this.accOrDecPayload.response = 'accept';
-    this.acceptOrDeclineService.accept(this.accOrDecPayload , this.userName).subscribe(data =>{
-      console.log(this.accOrDecPayload);
+    this.response = 'accept';
+    this.acceptOrDeclineService.accept(this.response , this.userName).subscribe(data =>{
+      console.log(this.response);
       console.log(data);
-      this.isAcc = true;
+      this.getothersDetails();
     })
   }
 
   rejectingTheRequest(){
-    this.accOrDecPayload.response = 'reject';
-    this.acceptOrDeclineService.reject(this.accOrDecPayload , this.userName).subscribe(data =>{
-      console.log(this.accOrDecPayload);
+    this.response = 'reject';
+    this.acceptOrDeclineService.reject(this.response , this.userName).subscribe(data =>{
+      console.log(this.response);
       console.log(data);
-      this.isDeclined = true;
+      this.getothersDetails();
+
     })
   }
 
+  unPeer(){
+    this.unPeerService.unPeer(this.userName).subscribe(data =>{
+      this.getothersDetails();
+    })
+  }
 }
