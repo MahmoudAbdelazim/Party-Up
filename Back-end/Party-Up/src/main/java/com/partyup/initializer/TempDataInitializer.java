@@ -1,12 +1,7 @@
 package com.partyup.initializer;
 
-import com.partyup.model.Player;
-import com.partyup.model.Question;
-import com.partyup.model.Rate;
-import com.partyup.repository.CountryRepository;
-import com.partyup.repository.PlayerRepository;
-import com.partyup.repository.QuestionsRepository;
-import com.partyup.repository.RoleRepository;
+import com.partyup.model.*;
+import com.partyup.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -34,6 +29,9 @@ public class TempDataInitializer {
     @Autowired
     private PlayerRepository playerRepository;
 
+    @Autowired
+    private GameRepository gameRepository;
+
 
     @PostConstruct
     public void initialize() {
@@ -59,6 +57,11 @@ public class TempDataInitializer {
                 rates.add(rate);
             }
             player.setRates(rates);
+            Game lol = gameRepository.findByName("League Of Legends").get();
+            Handle handle = new Handle();
+            handle.setGame(lol);
+            handle.setHandleName("LOL" + i);
+            player.addHandle(handle);
             playerRepository.saveAndFlush(player);
         }
     }

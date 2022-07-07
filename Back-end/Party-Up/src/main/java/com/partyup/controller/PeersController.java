@@ -36,7 +36,7 @@ public class PeersController {
     }
 
     @PostMapping("/api/respondPeerRequest/{username}")
-    public ResponseEntity<String> respondPeerRequest(@PathVariable String username, String response)
+    public ResponseEntity<String> respondPeerRequest(@PathVariable String username, @RequestBody String response)
             throws PeerRequestNotFoundException, UserNotAuthenticatedException, PlayerNotFoundException {
         return ResponseEntity.ok(peersService.respondPeerRequest(username, response));
     }
@@ -47,8 +47,8 @@ public class PeersController {
         return ResponseEntity.ok(peersService.unpeer(username));
     }
 
-    @GetMapping("/api/findPeers/{gameName}")
-    public ResponseEntity<List<ProfileToken>> findPeers(@PathVariable String gameName)
+    @GetMapping("/api/findPeers")
+    public ResponseEntity<List<ProfileToken>> findPeers(@RequestHeader("gameName") String gameName)
             throws UserNotAuthenticatedException, GameNotFoundException {
         return ResponseEntity.ok(peersService.findPeers(gameName));
     }
