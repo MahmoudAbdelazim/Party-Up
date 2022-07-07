@@ -6,15 +6,17 @@
         <div class="pro-img"><img src="../../assets/images/human.png" alt="user"></div>
         <h2 class="m-b-0 text-white">{{playerDetails.firstName }} {{playerDetails.lastName}}</h2>
 
-        <h3 class="m-b-0 text-white"><span class="text-primary"> UserName:</span> {{playerDetails.username }}</h3>
+        <h3 class="m-b-0 text-white"><span class="text-muted"> User Name:</span> {{playerDetails.username }}</h3>
 
         <h3 class="m-b-0 text-white"><i class="fa-solid fa-envelope mx-2 text-info"></i>{{playerDetails.email }}</h3>
-        <h3 class="m-b-0 text-primary">Player's Handles in games:</h3>
+        <h3 class="m-b-0 text-muted">Player's Handles in games:</h3>
 
         <h3 *ngFor="let handle of playerDetails.handles" class="m-b-0 text-warning ">{{handle.game}}: <span class="text-white">{{handle.handle }}</span></h3>
         <!-- <h3 class="m-b-0">{{playerDetails.phoneNumber }}</h3> -->
 
-         <a [routerLink]="['/profile/settings']" class="m-t-10 waves-effect waves-dark btn btn-primary btn-rounded" data-abc="true">Profile Settings</a>
+         
+         <a [routerLink]="['/profile/settings']" class="secondButton m-t-10 waves-effect waves-dark btn btn-primary btn-rounded" data-abc="true">Profile Settings</a>
+         
         <div class="row text-center m-t-20">
           <!-- <div class="col-lg-4 col-md-4 m-t-20">
             <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
