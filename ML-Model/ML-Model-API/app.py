@@ -1,22 +1,9 @@
 from flask import Flask
-from flask import jsonify
-import json
 import pandas as pd
-import numpy as np
 import pymysql
-import time
-from matplotlib import pyplot as plt
-from scipy.cluster.hierarchy import dendrogram
-from sklearn.datasets import load_iris
-from sklearn.cluster import AgglomerativeClustering
 from sklearn.neighbors import NearestNeighbors
 from sklearn.cluster import KMeans
-from IPython.display import display
-from sklearn import metrics
-from sklearn.metrics import pairwise_distances
-from imblearn.over_sampling import SMOTE
 import json
-from flask_mysqldb import MySQL
 import os
 
 app = Flask(__name__)
@@ -38,7 +25,6 @@ def k_means():
     # print(metrics.calinski_harabasz_score(personality_data.iloc[:, 1:28], labels)) # Variance Ratio Criterion
     personality_data['cluster'] = labels
     # print(personality_data)
-k_means()
 
 def knn(cluster, id):
     nbrs = NearestNeighbors(n_neighbors=len(cluster), algorithm='ball_tree').fit(cluster.iloc[:, 1:28])
@@ -61,6 +47,7 @@ def getDataFrame(player_id, game_id):
     return df.loc[:, ['player_id']]
 
 def get(player_id, game_id):
+    k_means()
     idsList = getDataFrame(player_id, game_id)['player_id'].tolist()
     res = []
     for id in idsList:
