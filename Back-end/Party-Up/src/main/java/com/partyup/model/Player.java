@@ -202,7 +202,7 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addPeer(Player player) {
-        if (peers.isEmpty()) peers = new HashSet<>();
+        if (peers == null || peers.isEmpty()) peers = new HashSet<>();
         peers.add(player);
     }
 }

@@ -45,7 +45,7 @@ public class TempDataInitializer {
             player.setPassword(passwordEncoder.encode("1234"));
             player.setCountry(countryRepository.findById("Egypt").get());
             player.addRole(roleRepository.findByName("ROLE_USER").get());
-            playerRepository.saveAndFlush(player);
+            playerRepository.save(player);
             player = playerRepository.findByUsernameOrEmail(player.getUsername(), player.getUsername()).get();
             List<Rate> rates = new ArrayList<>();
             for (Question question: questions) {
@@ -62,7 +62,7 @@ public class TempDataInitializer {
             handle.setGame(lol);
             handle.setHandleName("LOL" + i);
             player.addHandle(handle);
-            playerRepository.saveAndFlush(player);
+            playerRepository.save(player);
         }
     }
 }

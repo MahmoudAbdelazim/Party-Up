@@ -1,24 +1,19 @@
-from flask import Flask
-import pandas as pd
-import pymysql
-from sklearn.neighbors import NearestNeighbors
-from sklearn.cluster import KMeans
 import json
 import os
 
+import pandas as pd
+import pymysql
+from flask import Flask
+from sklearn.cluster import KMeans
+from sklearn.neighbors import NearestNeighbors
+
 app = Flask(__name__)
-
-db = pymysql.connect(host="localhost", user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'), database="partyup")
-
-# print(personality_data)
-
-
-# print(user_games_data)
 
 
 def k_means():
-    global personality_data
-    global user_games_data
+    global personality_data, user_games_data, db
+    db = pymysql.connect(host="localhost", user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'),
+                         database="partyup")
     user_games_data = pd.read_sql('SELECT * FROM player_games', db)
     personality_data = pd.read_sql('SELECT * FROM players_rates_questions', db)
     personality_data = personality_data.pivot_table('rate', 'player_id', 'questionid').reset_index()
@@ -29,15 +24,18 @@ def k_means():
     personality_data['cluster'] = labels
     return num_clusters
 
+
 def knn(cluster, player_dataframe):
     nbrs = NearestNeighbors(n_neighbors=len(cluster), algorithm='ball_tree').fit(cluster.iloc[:, 1:28])
     return nbrs.kneighbors(player_dataframe, return_distance=True)
 
+
 def isPeer(player1_id, player2_id):
-    peers_data = pd.read_sql('SELECT * FROM player_peers', db)
+    peers_data = pd.read_sql('SELECT * FROM player_peers WHERE player_id = {}'.format(player1_id), db)
     if ((peers_data['player_id'] == player1_id) & (peers_data['peers_id'] == player2_id)).any():
         return True
     return False
+
 
 def addDataFromCluster(player_id, game_id, cluster_num, ids_list, size, player_dataframe):
     cluster = personality_data.loc[personality_data['cluster'] == cluster_num]
@@ -55,6 +53,7 @@ def addDataFromCluster(player_id, game_id, cluster_num, ids_list, size, player_d
             if len(ids_list) == size:
                 return ids_list
     return ids_list
+
 
 def getDataFrame(player_id, game_id, size, num_clusters):
     cluster_num = personality_data[personality_data['player_id'] == player_id]['cluster'].tolist()[0]
@@ -77,16 +76,16 @@ def getDataFrame(player_id, game_id, size, num_clusters):
         lower_cluster -= 1
     return ids_list
 
+
 def get(player_id, game_id):
     num_clusters = k_means()
-    idsList = getDataFrame(player_id, game_id, 20, num_clusters)
+    idsList = getDataFrame(player_id, game_id, 10, num_clusters)
     res = []
     for id in idsList:
         if (player_id != id):
             res.append({'id': id})
     return res
 
-print(get(1, 1))
 
 @app.route('/<player_id>/<int:game_id>')
 def hello_world(player_id, game_id):

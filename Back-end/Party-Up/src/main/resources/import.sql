@@ -10,6 +10,8 @@ INSERT INTO game(name) VALUES ('PUBG');
 INSERT INTO game(name) VALUES ('Read Dead Redemption');
 INSERT INTO game(name) VALUES ('Battlefield');
 INSERT INTO game(name) VALUES ('GTA V');
+INSERT INTO game(name) VALUES ('Valorant');
+INSERT INTO game(name) VALUES ('Rainbow Six Siege');
 
 
 INSERT INTO question(question_string)VALUES ('I am energetic during the game.');

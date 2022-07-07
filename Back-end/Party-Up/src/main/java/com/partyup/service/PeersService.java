@@ -20,10 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PeersService {
@@ -110,7 +107,7 @@ public class PeersService {
                 .path("/" + game.getId())
                 .encode().toUriString();
         ResponseEntity<SuggestedPeerId[]> suggestedPeerIds =  restTemplate.getForEntity(findPeersUri, SuggestedPeerId[].class);
-        return getProfileTokensOf(Arrays.asList(suggestedPeerIds.getBody()));
+        return getProfileTokensOf(Arrays.asList(Objects.requireNonNull(suggestedPeerIds.getBody())));
     }
 
     private List<ProfileToken> getProfileTokensOf(List<SuggestedPeerId> suggestedPeerIds) {
