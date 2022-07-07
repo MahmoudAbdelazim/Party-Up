@@ -72,7 +72,6 @@ public class PeersService {
                 peerRequest = pr;
             }
         }
-
         if (peerRequest == null) {
             throw new PeerRequestNotFoundException();
         }
