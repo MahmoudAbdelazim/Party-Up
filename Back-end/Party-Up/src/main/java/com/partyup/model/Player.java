@@ -37,7 +37,7 @@ public class Player implements UserDetails, Serializable {
     @OneToMany(cascade = CascadeType.ALL)
     private List<Rate> rates;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Handle> handles;
 
     @ManyToMany
@@ -172,7 +172,7 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addHandle(Handle handle) {
-        if (handles.isEmpty()) handles = new ArrayList<>();
+        if (handles == null || handles.isEmpty()) handles = new ArrayList<>();
         handles.add(handle);
     }
 
