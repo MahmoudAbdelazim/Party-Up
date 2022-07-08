@@ -4,5 +4,5 @@ export interface ProfileDetailsGetPayload{
   firstName : string
   lastName : string
   phoneNumber: string
-  handles : any
+  handles : {game : string, gameId: number, handle: string, id : number}[]
 }
