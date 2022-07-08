@@ -7,14 +7,14 @@ import org.springframework.hateoas.RepresentationModel;
 import java.util.Date;
 import java.util.List;
 
-public class PostResource extends RepresentationModel<PostResource> {
+public class PostModel extends RepresentationModel<PostModel> {
 	private String text;
 	private List<ContentData> contents;
 	private Date createdAt;
 
 	private ProfileToken owner;
 
-	public PostResource(Post post, ProfileToken owner) {
+	public PostModel(Post post, ProfileToken owner) {
 		this.text = post.getText();
 		this.contents = post.getContents();
 		this.createdAt = post.getCreationDate();

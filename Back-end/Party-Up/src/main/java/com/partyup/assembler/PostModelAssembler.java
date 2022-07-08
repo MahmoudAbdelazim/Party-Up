@@ -2,24 +2,24 @@ package com.partyup.assembler;
 
 import com.partyup.controller.PostingController;
 import com.partyup.model.posting.Post;
-import com.partyup.payload.PostResource;
+import com.partyup.payload.PostModel;
 import com.partyup.payload.ProfileToken;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
 
-public class PostResourceAssembler extends RepresentationModelAssemblerSupport<Post, PostResource> {
+public class PostModelAssembler extends RepresentationModelAssemblerSupport<Post, PostModel> {
 
-	public PostResourceAssembler() {
-		super(PostingController.class, PostResource.class);
+	public PostModelAssembler() {
+		super(PostingController.class, PostModel.class);
 	}
 
 	@Override
-	protected PostResource instantiateModel(Post post) {
+	protected PostModel instantiateModel(Post post) {
 		ProfileToken owner = new ProfileToken(post.getPlayer().getUsername(), post.getPlayer().getProfilePicture());
-		return new PostResource(post, owner);
+		return new PostModel(post, owner);
 	}
 
 	@Override
-	public PostResource toModel(Post post) {
+	public PostModel toModel(Post post) {
 		return createModelWithId(post.getId(), post);
 	}
 }
