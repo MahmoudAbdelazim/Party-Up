@@ -46,20 +46,19 @@
     </div>
 
     <div class="form-group">
-      <label class="register-fonts-specifications" for="DiscordTag">Discord Tag*</label>
+      <label class="register-fonts-specifications" for="DiscordTag">username*</label>
       <i class=" px-1 fa-brands fa-discord discordTagColour"></i>
-      <input formControlName="discordTag" type="text" class="form-control" id="DiscordTag" placeholder="ex. Mustafa#4320">
-      <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
-        <p *ngIf="registerForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
-        <p *ngIf="registerForm.get('discordTag')?.errors?.['pattern']">Invalid discord tag ex. Mustafa#1234</p>
+      <input formControlName="username" type="text" class="form-control" id="username" placeholder="ex. Mustafa#4320">
+      <div *ngIf="registerForm.get('username')?.errors != null && registerForm.get('username')?.touched" class="alert my-1 alert-danger">
+        <p *ngIf="registerForm.get('username')?.errors?.['required']">user name is required</p>
       </div>
     </div>
 
       <div class="form-group">
-        <label class="register-fonts-specifications" for="DateOfBirth">Date Of Birth* </label>
-        <input formControlName="dateOfBirth" type="date" class="form-control" id="dateOfBirth" placeholder="ex. Egypt">
-        <div *ngIf="registerForm.get('dateOfBirth')?.errors != null && registerForm.get('dateOfBirth')?.touched" class="alert my-1 alert-danger">
-          <p *ngIf="registerForm.get('dateOfBirth')?.errors?.['required']">Date of birth is required</p>
+        <label class="register-fonts-specifications" for="discordTag">discordTag* </label>
+        <input formControlName="discordTag" type="text" class="form-control" id="discordTag" placeholder="ex. Egypt">
+        <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
+          <p *ngIf="registerForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
         </div>
       </div>
 
