@@ -10,13 +10,15 @@ import java.util.List;
 public class PostResource extends RepresentationModel<PostResource> {
 	private String text;
 	private List<ContentData> contents;
-
 	private Date createdAt;
 
-	public PostResource(Post post) {
+	private ProfileToken owner;
+
+	public PostResource(Post post, ProfileToken owner) {
 		this.text = post.getText();
 		this.contents = post.getContents();
 		this.createdAt = post.getCreationDate();
+		this.owner = owner;
 	}
 
 	public List<ContentData> getContents() {
@@ -30,5 +32,11 @@ public class PostResource extends RepresentationModel<PostResource> {
 	public Date getCreationDate() {
 		return createdAt;
 	}
+
+	public ProfileToken getOwner() {
+		return owner;
+	}
+
+
 
 }

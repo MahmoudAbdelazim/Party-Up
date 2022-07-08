@@ -6,6 +6,7 @@ import com.partyup.model.posting.ContentData;
 import com.partyup.model.posting.Post;
 import com.partyup.payload.PostResource;
 import com.partyup.payload.PostUploadDto;
+import com.partyup.payload.ProfileToken;
 import com.partyup.payload.UploadResponse;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.service.PostContentService;
@@ -14,6 +15,9 @@ import com.partyup.service.exception.PostNotFoundException;
 import com.partyup.service.exception.UploadFailedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -68,33 +72,34 @@ public class PostingController {
 	@GetMapping("/{id}")
 	public PostResource getPostOf(@PathVariable("id") String id) throws PostNotFoundException {
 		Post post = postingService.getPostOfId(id);
-		PostResource postResource = new PostResource(post);
+		ProfileToken owner = new ProfileToken(post.getPlayer().getUsername(), post.getPlayer().getProfilePicture());
+		PostResource postResource = new PostResource(post, owner);
 		postResource.add(linkTo(methodOn(PostingController.class).getPostOf(id)).withSelfRel());
 		return postResource;
 	}
 
 	@GetMapping("/profile")
-	public CollectionModel<PostResource> getOwnPosts() throws UsernameNotFoundException {
+	public CollectionModel<PostResource> getOwnPosts(@PageableDefault(page = 0, size = 20) Pageable page) throws UsernameNotFoundException {
 		String username = getUserName();
 		Optional<Player> player = playerRepo.findByUsernameOrEmail(username, username);
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
-		List<Post> posts = postingService.getPostsOfUser(player.get());
+		Slice<Post> posts = postingService.getPostsOfUser(player.get(), page);
 		CollectionModel<PostResource> recentPosts = new PostResourceAssembler().toCollectionModel(posts);
-		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts()).withSelfRel());
+		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
 
 		return recentPosts;
 	}
 
 	@GetMapping("/feed")
-	public CollectionModel<PostResource> getFeed() throws UsernameNotFoundException {
+	public CollectionModel<PostResource> getFeed(@PageableDefault(page = 0, size = 20) Pageable page) throws UsernameNotFoundException {
 		String username = getUserName();
 		Optional<Player> player = playerRepo.findByUsernameOrEmail(username, username);
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
-		List<Post> posts = postingService.getPostsOfUser(player.get());
+		Slice<Post> posts = postingService.getPostsOfUser(player.get(), page);
 		CollectionModel<PostResource> recentPosts = new PostResourceAssembler().toCollectionModel(posts);
-		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts()).withSelfRel());
+		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
 		return recentPosts;
 	}
 

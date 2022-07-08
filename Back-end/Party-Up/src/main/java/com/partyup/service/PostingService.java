@@ -10,6 +10,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,8 +43,8 @@ public class PostingService {
 		}
 	}
 
-	public List<Post> getPostsOfUser(Player player) {
-		return postRepository.findAllByPlayer(player);
+	public Slice<Post> getPostsOfUser(Player player, Pageable page) {
+		return postRepository.findAllByPlayerAndOrderByCreateAt(player, page);
 	}
 
 	public List<Post> getPostsRelatedToUser(Player player) {

@@ -2,7 +2,7 @@ package com.partyup.service;
 
 import com.partyup.model.posting.Content;
 import com.partyup.model.posting.ContentData;
-import com.partyup.repository.PostContentRepository;
+import com.partyup.repository.ContentRepository;
 import com.partyup.service.exception.FileNotExistException;
 import com.partyup.service.exception.UploadFailedException;
 import com.partyup.util.FileCompressionUtility;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @Service
 public class PostContentService {
 	@Autowired
-	private PostContentRepository postContentRepo;
+	private ContentRepository postContentRepo;
 
 	public List<ContentData> saveContents(List<MultipartFile> files, UriComponentsBuilder uriBuilder) throws UploadFailedException {
 		List<Content> contents = new ArrayList<>();

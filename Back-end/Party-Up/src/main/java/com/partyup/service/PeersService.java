@@ -24,11 +24,8 @@ import java.util.*;
 
 @Service
 public class PeersService {
-
     private final PlayerRepository playerRepository;
-
     private final PeerRequestRepository peerRequestRepository;
-
     private final GameService gameService;
 
     @Autowired
@@ -42,7 +39,7 @@ public class PeersService {
         Player player = authenticate();
         List<ProfileToken> profileTokens = new ArrayList<>();
         for (PeerRequest peerRequest : player.getPeerRequests()) {
-            profileTokens.add(new ProfileToken(peerRequest));
+            profileTokens.add(new ProfileToken(peerRequest.getUsername(), player.getProfilePicture()));
         }
         return profileTokens;
     }
@@ -126,14 +123,13 @@ public class PeersService {
         Player player = authenticate();
         List<ProfileToken> profileTokens = new ArrayList<>();
         for (Player peer: player.getPeers()) {
-            profileTokens.add(new ProfileToken(peer.getUsername()));
+            profileTokens.add(new ProfileToken(peer.getUsername(), peer.getProfilePicture()));
         }
         return profileTokens;
     }
 
     private Optional<Player> getOtherPlayer(String playerUsername) throws PlayerNotFoundException {
         Optional<Player> otherPlayer = playerRepository.findByUsernameOrEmail(playerUsername, playerUsername);
-
         if (otherPlayer.isEmpty()) {
             throw new PlayerNotFoundException(playerUsername);
         }
