@@ -7,17 +7,12 @@ import com.partyup.model.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OtherProfileDto {
-
-    String username;
+public class OtherProfileDto extends ProfileDto {
     List<HandleDto> handles;
     Country country;
     String discordTag;
-
     boolean isPeer = false;
-
     boolean requested = false;
-
     boolean otherRequested = false;
 
     public OtherProfileDto(Player player) {
@@ -39,20 +34,12 @@ public class OtherProfileDto {
         }
     }
 
-    public String getUsername() {
-        return username;
-    }
-
     public Country getCountry() {
         return country;
     }
 
     public boolean isPeer() {
         return isPeer;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setCountry(Country country) {

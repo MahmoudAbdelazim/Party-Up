@@ -1,5 +1,6 @@
 package com.partyup.model;
 
+import com.partyup.model.posting.ContentData;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -50,6 +51,17 @@ public class Player implements UserDetails, Serializable {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
+
+    @OneToOne
+    private ContentData profilePicture;
+
+    public ContentData getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(ContentData profilePicture) {
+        this.profilePicture = profilePicture;
+    }
 
     public List<PeerRequest> getPeerRequests() {
         return peerRequests;
