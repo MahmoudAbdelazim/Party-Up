@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
         email: "",
         password: "",
         username: "",
-        dataOfBirth: "",
+        discordTag: "",
         country: {
           name : ""
         }
@@ -32,8 +32,8 @@ export class RegisterComponent implements OnInit {
     lastName: new FormControl(null, [Validators.required, Validators.minLength(3),Validators.pattern('^[a-zA-Z]{3,20}$'), Validators.maxLength(20)]),
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required ]), //Minimum eight characters, at least one letter and one number
-    discordTag: new FormControl(null, [Validators.required]), //pattern for discord tag. Mustafa Taha#1234
-    dateOfBirth: new FormControl(null,[Validators.required]),
+    username: new FormControl(null, [Validators.required]), //pattern for discord tag. Mustafa Taha#1234
+    discordTag: new FormControl(null,[Validators.required]),
     country: new FormControl(null, [Validators.required])
   })
 
@@ -47,8 +47,8 @@ export class RegisterComponent implements OnInit {
       this.registerPayload.lastName = this.registerForm.get('lastName')?.value;
       this.registerPayload.email = this.registerForm.get('email')?.value;
       this.registerPayload.password = this.registerForm.get('password')?.value;
-      this.registerPayload.username = this.registerForm.get('discordTag')?.value;
-      this.registerPayload.dataOfBirth = this.registerForm.get('dateOfBirth')?.value;
+      this.registerPayload.username = this.registerForm.get('username')?.value;
+      this.registerPayload.discordTag = this.registerForm.get('discordTag')?.value;
       this.registerPayload.country.name = this.registerForm.get('country')?.value;
 
       this.authService.register(this.registerPayload).subscribe(data =>{

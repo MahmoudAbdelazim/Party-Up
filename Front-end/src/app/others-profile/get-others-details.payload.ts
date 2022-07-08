@@ -4,5 +4,7 @@ export interface GetOthersDetailsPayload{
   country: {
     name : string
   }
+  requested : boolean
+  otherRequested : boolean
   peer: boolean
 }

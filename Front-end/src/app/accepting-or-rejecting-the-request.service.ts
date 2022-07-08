@@ -9,12 +9,12 @@ export class AcceptingOrRejectingTheRequestService {
 
   constructor(private _httpClient:HttpClient) { }
 
-  accept(response : AcceptDeclinePayload , username : string){
+  accept(response : string , username : string){
     let url = 'http://localhost:8080/api/respondPeerRequest/' + username;
     return this._httpClient.post(url , response , {responseType : 'text'});
   }
 
-  reject(response : AcceptDeclinePayload ,username :string){
+  reject(response : string ,username :string){
     let url = 'http://localhost:8080/api/respondPeerRequest/' + username;
     return this._httpClient.post(url , response , {responseType : 'text'});
   }

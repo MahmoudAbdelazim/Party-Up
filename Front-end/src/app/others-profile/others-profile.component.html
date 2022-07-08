@@ -14,12 +14,11 @@
 <!--        <h3 *ngFor="let handle of otherPlayerDetails.handles" class="m-b-0 text-warning ">{{handle.game}}: <span class="text-white">{{handle.handle }}</span></h3>-->
         <!-- <h3 class="m-b-0">{{playerDetails.phoneNumber }}</h3> -->
 
-        <a *ngIf="!isOtherUserAlreadySentMe && showAddPeerButton && !this.otherPlayerDetails.peer" (click)="sendPeerRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-success btn-rounded mx-2" data-abc="true">Add Peer</a>
-        <button *ngIf="!isOtherUserAlreadySentMe && !showAddPeerButton && !this.otherPlayerDetails.peer" class="m-t-10 waves-effect waves-dark btn btn-success btn-rounded mx-2" data-abc="true" disabled>Pending</button>
-        <button *ngIf="isOtherUserAlreadySentMe && !this.otherPlayerDetails.peer && !isAcc && !isDeclined" (click)="acceptingTheRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-success btn-rounded " data-abc="true" >Accept</button>
-        <button *ngIf="isOtherUserAlreadySentMe && !this.otherPlayerDetails.peer && !isAcc && !isDeclined" (click)="rejectingTheRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-danger btn-rounded mx-2" data-abc="true" >Reject</button>
-        <button *ngIf="isAcc" class="m-t-10 waves-effect waves-dark btn btn-success btn-rounded mx-2" data-abc="true" disabled >Peered</button>
-        <button *ngIf="isDeclined" class="m-t-10 waves-effect waves-dark btn btn-outline-success btn-rounded mx-2" data-abc="true" >Add Peer</button>
+        <a *ngIf="!otherPlayerDetails.requested && !otherPlayerDetails.otherRequested && !otherPlayerDetails.peer" (click)="sendPeerRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-success btn-rounded mx-2" data-abc="true">Add Peer</a>
+        <button *ngIf="otherPlayerDetails.requested" class="m-t-10 waves-effect waves-dark btn btn-success btn-rounded mx-2" data-abc="true" disabled>Pending</button>
+        <button *ngIf="otherPlayerDetails.otherRequested" (click)="acceptingTheRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-success btn-rounded " data-abc="true" >Accept</button>
+        <button *ngIf="otherPlayerDetails.otherRequested" (click)="rejectingTheRequest()" class="m-t-10 waves-effect waves-dark btn btn-outline-danger btn-rounded mx-2" data-abc="true" >Reject</button>
+        <button *ngIf="otherPlayerDetails.peer" (click)="unPeer()" class="m-t-10 waves-effect waves-dark btn btn-success btn-rounded mx-2" data-abc="true" >UnPeer</button>
         <!-- a5r button me7tag ndef feh 7abet ngIf mn fo2 -->
 
         <a [routerLink]="['/profile']" class="m-t-10 waves-effect waves-dark btn btn-primary btn-rounded" data-abc="true">Go Back</a>
