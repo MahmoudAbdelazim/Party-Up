@@ -1,10 +1,10 @@
 package com.partyup.controller;
 
-import com.partyup.assembler.PostResourceAssembler;
+import com.partyup.assembler.PostModelAssembler;
 import com.partyup.model.Player;
 import com.partyup.model.posting.ContentData;
 import com.partyup.model.posting.Post;
-import com.partyup.payload.PostResource;
+import com.partyup.payload.PostModel;
 import com.partyup.payload.PostUploadDto;
 import com.partyup.payload.ProfileToken;
 import com.partyup.payload.UploadResponse;
@@ -16,9 +16,10 @@ import com.partyup.service.exception.UploadFailedException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Page;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.hateoas.CollectionModel;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -47,6 +48,12 @@ public class PostingController {
 	@Autowired
 	private PlayerRepository playerRepo;
 
+	@Autowired
+	private PagedResourcesAssembler<Post> pagedModelAssembler;
+
+	@Autowired
+	private PostModelAssembler postModelAssembler;
+
 	@PostMapping("/upload")
 	public ResponseEntity<UploadResponse> postPost(@ModelAttribute PostUploadDto post, UriComponentsBuilder uriComponentsBuilder)
 			throws UploadFailedException, UsernameNotFoundException {
@@ -70,35 +77,35 @@ public class PostingController {
 	}
 
 	@GetMapping("/{id}")
-	public PostResource getPostOf(@PathVariable("id") String id) throws PostNotFoundException {
+	public PostModel getPostOf(@PathVariable("id") String id) throws PostNotFoundException {
 		Post post = postingService.getPostOfId(id);
 		ProfileToken owner = new ProfileToken(post.getPlayer().getUsername(), post.getPlayer().getProfilePicture());
-		PostResource postResource = new PostResource(post, owner);
-		postResource.add(linkTo(methodOn(PostingController.class).getPostOf(id)).withSelfRel());
-		return postResource;
+		PostModel postModel = new PostModel(post, owner);
+		postModel.add(linkTo(methodOn(PostingController.class).getPostOf(id)).withSelfRel());
+		return postModel;
 	}
 
 	@GetMapping("/profile")
-	public CollectionModel<PostResource> getOwnPosts(@PageableDefault(page = 0, size = 20) Pageable page) throws UsernameNotFoundException {
+	public PagedModel<PostModel> getOwnPosts(@PageableDefault(page = 0, size = 10) Pageable page) throws UsernameNotFoundException {
 		String username = getUserName();
 		Optional<Player> player = playerRepo.findByUsernameOrEmail(username, username);
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
-		Slice<Post> posts = postingService.getPostsOfUser(player.get(), page);
-		CollectionModel<PostResource> recentPosts = new PostResourceAssembler().toCollectionModel(posts);
+		Page<Post> posts = postingService.getPostsOfUser(player.get(), page);
+		PagedModel<PostModel> recentPosts = pagedModelAssembler.toModel(posts, postModelAssembler);
 		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
 
 		return recentPosts;
 	}
 
 	@GetMapping("/feed")
-	public CollectionModel<PostResource> getFeed(@PageableDefault(page = 0, size = 20) Pageable page) throws UsernameNotFoundException {
+	public PagedModel<PostModel> getFeed(@PageableDefault(page = 0, size = 10) Pageable page) throws UsernameNotFoundException {
 		String username = getUserName();
 		Optional<Player> player = playerRepo.findByUsernameOrEmail(username, username);
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
-		Slice<Post> posts = postingService.getPostsOfUser(player.get(), page);
-		CollectionModel<PostResource> recentPosts = new PostResourceAssembler().toCollectionModel(posts);
+		Page<Post> posts = postingService.getPostsRelatedToUser(player.get(), page);
+		PagedModel<PostModel> recentPosts = pagedModelAssembler.toModel(posts, postModelAssembler);
 		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
 		return recentPosts;
 	}
