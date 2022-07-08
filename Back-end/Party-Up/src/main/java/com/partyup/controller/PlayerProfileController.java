@@ -51,7 +51,8 @@ public class PlayerProfileController {
 	}
 
 	@PutMapping(value = "profilePic")
-	public ResponseEntity<String> editProfilePic(MultipartFile picture, UriComponentsBuilder uriComponentsBuilder) throws UploadFailedException {
+	public ResponseEntity<String> editProfilePic(MultipartFile picture, UriComponentsBuilder uriComponentsBuilder)
+			throws UploadFailedException {
 		if (!Objects.requireNonNull(picture.getContentType()).contains("image")) {
 			return ResponseEntity.badRequest().body("File type not allowed");
 		}

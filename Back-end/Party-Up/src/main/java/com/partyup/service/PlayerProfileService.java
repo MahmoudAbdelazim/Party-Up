@@ -39,9 +39,10 @@ public class PlayerProfileService {
 	private ContentRepository contentRepo;
 
 	@Autowired
-	public PlayerProfileService(PlayerRepository playerRepository, PasswordEncoder passwordEncoder) {
+	public PlayerProfileService(PlayerRepository playerRepository, PasswordEncoder passwordEncoder, ContentRepository contentRepo) {
 		this.playerRepository = playerRepository;
 		this.passwordEncoder = passwordEncoder;
+		this.contentRepo = contentRepo;
 	}
 
 	public void updateProfilePic(MultipartFile picture, UriComponentsBuilder uriBuilder) throws UploadFailedException {
@@ -79,6 +80,7 @@ public class PlayerProfileService {
 				ownProfileDto.setFirstName(player.getFirstName());
 				ownProfileDto.setLastName(player.getLastName());
 				ownProfileDto.setDiscordTag(player.getDiscordTag());
+				ownProfileDto.setProfilePicture(player.getProfilePicture());
 				for (Handle handle : player.getHandles()) {
 					ownProfileDto.getHandles().add(new HandleDto(handle));
 				}

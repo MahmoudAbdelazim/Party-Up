@@ -52,7 +52,7 @@ public class Player implements UserDetails, Serializable {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ContentData profilePicture;
 
     @ManyToMany

@@ -20,6 +20,7 @@ public class OtherProfileDto extends ProfileDto {
     public OtherProfileDto(Player player) {
         username = player.getUsername();
         country = player.getCountry();
+        profilePicture = player.getProfilePicture();
         handles = new ArrayList<>();
     }
 
