@@ -55,6 +55,9 @@ public class Player implements UserDetails, Serializable {
     @OneToOne
     private ContentData profilePicture;
 
+    @ManyToMany
+    private List<Player> reviewers;
+
     public ContentData getProfilePicture() {
         return profilePicture;
     }
@@ -165,7 +168,7 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addRole(Role role) {
-        if (roles == null || roles.isEmpty()) roles = new HashSet<>();
+        if (roles == null) roles = new HashSet<>();
         roles.add(role);
     }
 
@@ -178,7 +181,7 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addHandle(Handle handle) {
-        if (handles == null || handles.isEmpty()) handles = new ArrayList<>();
+        if (handles == null) handles = new ArrayList<>();
         handles.add(handle);
     }
 
@@ -203,12 +206,12 @@ public class Player implements UserDetails, Serializable {
     }
 
     public void addPeerRequest(PeerRequest peerRequest) {
-        if (peerRequests.isEmpty()) peerRequests = new ArrayList<>();
+        if (peerRequests == null) peerRequests = new ArrayList<>();
         peerRequests.add(peerRequest);
     }
 
     public void addPeer(Player player) {
-        if (peers == null || peers.isEmpty()) peers = new HashSet<>();
+        if (peers == null) peers = new HashSet<>();
         peers.add(player);
     }
 
@@ -218,5 +221,18 @@ public class Player implements UserDetails, Serializable {
 
     public void setDiscordTag(String discordTag) {
         this.discordTag = discordTag;
+    }
+
+    public List<Player> getReviewers() {
+        return reviewers;
+    }
+
+    public void setReviewers(List<Player> reviewers) {
+        this.reviewers = reviewers;
+    }
+
+    public void addReviewer(Player player) {
+        if (reviewers == null) reviewers = new ArrayList<>();
+        reviewers.add(player);
     }
 }

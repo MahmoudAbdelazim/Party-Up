@@ -127,6 +127,7 @@ public class PlayerProfileService {
 			profileDto.setPeer(true);
 			profileDto.setHandles(otherPlayer.getHandles());
 			profileDto.setDiscordTag(otherPlayer.getDiscordTag());
+			if (otherPlayer.getReviewers().contains(player)) profileDto.setReviewed(true);
 		} else {
 			for (PeerRequest peerRequest : player.getPeerRequests()) {
 				if (peerRequest.getUsername().equals(otherPlayer.getUsername())) {

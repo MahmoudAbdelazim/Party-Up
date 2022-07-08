@@ -15,6 +15,8 @@ public class OtherProfileDto extends ProfileDto {
     boolean requested = false;
     boolean otherRequested = false;
 
+    boolean reviewed = false;
+
     public OtherProfileDto(Player player) {
         username = player.getUsername();
         country = player.getCountry();
@@ -72,5 +74,13 @@ public class OtherProfileDto extends ProfileDto {
 
     public void setDiscordTag(String discordTag) {
         this.discordTag = discordTag;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 }

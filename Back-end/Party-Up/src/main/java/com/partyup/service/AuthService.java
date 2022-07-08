@@ -9,12 +9,16 @@ import com.partyup.payload.SignUpDto;
 import com.partyup.repository.CountryRepository;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.RoleRepository;
+import com.partyup.service.exception.UserNotAuthenticatedException;
 import com.partyup.session.InMemorySessionRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -82,5 +86,26 @@ public class AuthService {
 
         playerRepository.saveAndFlush(player);
         return new ResponseEntity<>("User Registered Successfully", HttpStatus.OK);
+    }
+
+    public Player authenticate() throws UserNotAuthenticatedException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.isAuthenticated()) {
+            throw new UserNotAuthenticatedException();
+        }
+        String username = getUsername(auth);
+        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        return player;
+    }
+
+    private String getUsername(Authentication authentication) {
+        Object userSessionData = authentication.getPrincipal();
+        String username;
+        if (userSessionData instanceof UserDetails) {
+            username = ((UserDetails) userSessionData).getUsername();
+        } else {
+            username = userSessionData.toString();
+        }
+        return username;
     }
 }

@@ -1,11 +1,11 @@
 package com.partyup.controller;
 
+import com.partyup.model.Question;
+import com.partyup.payload.AnswerDto;
 import com.partyup.payload.ProfileToken;
+import com.partyup.payload.QuestionDto;
 import com.partyup.service.PeersService;
-import com.partyup.service.exception.GameNotFoundException;
-import com.partyup.service.exception.PeerRequestNotFoundException;
-import com.partyup.service.exception.PlayerNotFoundException;
-import com.partyup.service.exception.UserNotAuthenticatedException;
+import com.partyup.service.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,6 +59,17 @@ public class PeersController {
         return ResponseEntity.ok(peersService.myPeers());
     }
 
+    @GetMapping("/api/peerReview")
+    public ResponseEntity<List<QuestionDto>> getPeerReviewQuestions() {
+        return ResponseEntity.ok(peersService.getPeerReviewQuestions());
+    }
+
+    @PostMapping("/api/peerReview/{username}")
+    public ResponseEntity<String> reviewPeer(@PathVariable String username, @RequestBody List<AnswerDto> answers)
+            throws UserNotAuthenticatedException, PlayerNotFoundException, PlayerAlreadyReviewedException, PlayerIsNotPeerException {
+        return ResponseEntity.ok(peersService.reviewPeer(username, answers));
+    }
+
     @ExceptionHandler(UserNotAuthenticatedException.class)
     public ResponseEntity<String> sendUserNotAuthenticated(UserNotAuthenticatedException exception) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
@@ -72,5 +83,10 @@ public class PeersController {
     @ExceptionHandler(PeerRequestNotFoundException.class)
     public ResponseEntity<String> sendPeerRequestNotFound(PeerRequestNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
+
+    @ExceptionHandler(PlayerAlreadyReviewedException.class)
+    public ResponseEntity<String> sendPlayerAlreadyReviewed(PlayerAlreadyReviewedException exception) {
+        return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body("Player already reviewed");
     }
 }

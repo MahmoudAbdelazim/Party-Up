@@ -12,6 +12,8 @@ public class Question implements Serializable {
 
     private String questionString;
 
+    private String reviewQuestionString;
+
     public Long getId() {
         return id;
     }
@@ -26,5 +28,13 @@ public class Question implements Serializable {
 
     public void setQuestionString(String questionString) {
         this.questionString = questionString;
+    }
+
+    public String getReviewQuestionString() {
+        return reviewQuestionString;
+    }
+
+    public void setReviewQuestionString(String reviewQuestionString) {
+        this.reviewQuestionString = reviewQuestionString;
     }
 }

@@ -14,7 +14,7 @@ public class Rate implements Serializable {
 
     private Long playerID;
 
-    private int rate;
+    private double rate;
 
     public Long getId() {
         return id;
@@ -40,11 +40,11 @@ public class Rate implements Serializable {
         this.playerID = playerID;
     }
 
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(double rate) {
         this.rate = rate;
     }
 }
