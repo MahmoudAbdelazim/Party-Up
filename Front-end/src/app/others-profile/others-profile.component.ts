@@ -43,7 +43,9 @@ export class OthersProfileComponent implements OnInit {
       },
       requested : false,
       otherRequested : false,
-      peer : false
+      peer : false,
+      discordTag : '',
+      profilePicture : null
     };
     this.userName = '';
     this.url = '';
