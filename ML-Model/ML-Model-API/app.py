@@ -90,7 +90,7 @@ def get(player_id, game_id):
 @app.route('/<player_id>/<int:game_id>')
 def hello_world(player_id, game_id):
     player_id = int(player_id)
-    game_id = int(game_id)`
+    game_id = int(game_id)
     player_ids = get(player_id, game_id)
     response = app.response_class(
         response=json.dumps(player_ids),

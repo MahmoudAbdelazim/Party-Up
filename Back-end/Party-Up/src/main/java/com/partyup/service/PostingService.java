@@ -44,7 +44,7 @@ public class PostingService {
 	}
 
 	public Slice<Post> getPostsOfUser(Player player, Pageable page) {
-		return postRepository.findAllByPlayerAndOrderByCreateAt(player, page);
+		return postRepository.findAllByPlayerOrderByCreateAt(player, page);
 	}
 
 	public List<Post> getPostsRelatedToUser(Player player) {

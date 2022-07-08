@@ -18,6 +18,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/api/profile")
 public class PlayerProfileController {
@@ -50,7 +52,7 @@ public class PlayerProfileController {
 
 	@PutMapping(value = "profilePic")
 	public ResponseEntity<String> editProfilePic(MultipartFile picture, UriComponentsBuilder uriComponentsBuilder) throws UploadFailedException {
-		if (!picture.getContentType().contains("image")) {
+		if (!Objects.requireNonNull(picture.getContentType()).contains("image")) {
 			return ResponseEntity.badRequest().body("File type not allowed");
 		}
 		UriComponents currentURI = ServletUriComponentsBuilder.fromCurrentRequest().build();
