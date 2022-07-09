@@ -47,16 +47,19 @@ export class ProfileComponent implements OnInit {
     this.pdService.getPlayerDetails().subscribe(data =>{
       this.playerDetails = data;
       console.log(this.playerDetails);
-      this.getPhotoService.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
-        this.imgBlob = data;
-        console.log(this.imgBlob);
-        let reader = new FileReader();
-        reader.readAsDataURL(this.imgBlob);
-        reader.onload = (event: any) =>{
-          this.imgSrc = event.target.result;
+      if (this.playerDetails.profilePicture){
+        this.getPhotoService.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
+          this.imgBlob = data;
+          console.log(this.imgBlob);
+          let reader = new FileReader();
+          reader.readAsDataURL(this.imgBlob);
+          reader.onload = (event: any) =>{
+            this.imgSrc = event.target.result;
 
-        }
-      })
+          }
+        })
+      }
+
 
 
     })
