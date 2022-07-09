@@ -17,13 +17,14 @@ import {AddGameComponent} from "./add-game/add-game.component";
 import {OthersProfileComponent} from "./others-profile/others-profile.component";
 import {MyPeersComponent} from "./my-peers/my-peers.component";
 import {ReviewPeerComponent} from "./review-peer/review-peer.component";
+import { IfLoggedInGuard } from './if-logged-in.guard';
 
 const routes: Routes = [
   {path: "", redirectTo: "home", pathMatch: "full"},
-  {path: "home", component: HomeComponent},
-  {path: "login", component:LoginComponent},
+  {path: "home", component: HomeComponent, canActivate:[IfLoggedInGuard]}, 
+  {path: "login", component:LoginComponent, canActivate:[IfLoggedInGuard]}, 
   {path: "logout", component:LogoutComponent , canActivate:[GuardAuthenticationService]},
-  {path: "register", component: RegisterComponent},
+  {path: "register", component: RegisterComponent, canActivate:[IfLoggedInGuard]}, 
   {path: "addGame", component: AddGameComponent , canActivate:[GuardAuthenticationService]},
   {path: "findpeers", component: FindpeersComponent , canActivate:[GuardAuthenticationService]},
   {path: "profile/settings", component: ProfileSettingsComponent , canActivate:[GuardAuthenticationService]},

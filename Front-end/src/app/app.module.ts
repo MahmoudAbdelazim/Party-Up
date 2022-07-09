@@ -23,6 +23,7 @@ import { AddGameComponent } from './add-game/add-game.component';
 import { OthersProfileComponent } from './others-profile/others-profile.component';
 import { MyPeersComponent } from './my-peers/my-peers.component';
 import { ReviewPeerComponent } from './review-peer/review-peer.component';
+import { IfLoggedInGuard } from './if-logged-in.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +52,7 @@ import { ReviewPeerComponent } from './review-peer/review-peer.component';
     HttpClientModule,
     InfiniteScrollModule
   ],
-  providers: [{provide : HTTP_INTERCEPTORS , useClass : RequestInterceptor , multi : true}],
+  providers: [IfLoggedInGuard, {provide : HTTP_INTERCEPTORS , useClass : RequestInterceptor , multi : true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
