@@ -5,6 +5,9 @@ import { ProfileDetailsGetPayload } from '../profile/profile-details-get.payload
 import {UpdateUserProfilePayload} from "./update-user-profile.payload";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UpdateUserProfileDetailsService} from "../update-user-profile-details.service";
+import {ToastrService} from "../toastr.service";
+import {UploadPictureService} from "../upload-picture.service";
+import {GetUploadedImageService} from "../get-uploaded-image.service";
 
 @Component({
   selector: 'app-profile-settings',
@@ -15,16 +18,27 @@ export class ProfileSettingsComponent implements OnInit {
 
   playerDetails : ProfileDetailsGetPayload;
   updateUserProfile: UpdateUserProfilePayload;
+  formData : FormData
+  imgBlob: Blob
+  imgSrc: string;
 
-  constructor(private pdService : PlayerDetailsService , private updateProfileService : UpdateUserProfileDetailsService, private router:Router) {
+  constructor(private pdService : PlayerDetailsService , private uploadPhotoService : UploadPictureService,
+              private updateProfileService : UpdateUserProfileDetailsService, private getUploadedPhoto : GetUploadedImageService,
+              private router:Router, private toast : ToastrService) {
 
     this.playerDetails = {
       username : '',
       email : '',
       firstName : '',
       lastName : '',
-      phoneNumber : '',
-      handles : []
+      discordTag : '',
+      handles : [],
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      }
     };
 
     this.updateUserProfile = {
@@ -38,12 +52,24 @@ export class ProfileSettingsComponent implements OnInit {
         name : ""
       }
     };
-
+    this.formData = new FormData();
+    this.imgBlob = new Blob();
+    this.imgSrc = '';
    }
 
   ngOnInit(): void {
     this.pdService.getPlayerDetails().subscribe(data =>{
       this.playerDetails = data;
+      this.getUploadedPhoto.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
+        this.imgBlob = data;
+        console.log(this.imgBlob);
+        let reader = new FileReader();
+        reader.readAsDataURL(this.imgBlob);
+        reader.onload = (event: any) =>{
+          this.imgSrc = event.target.result;
+
+        }
+      })
       // this.addHandles();
         console.log(data);
     })
@@ -73,6 +99,18 @@ export class ProfileSettingsComponent implements OnInit {
 
     this.updateProfileService.updateProfileDetails(this.updateUserProfile).subscribe(data =>{
       console.log(this.updateUserProfile);
+      console.log(data);
+      this.uploadProfilePhoto(this.formData);
+      this.toast.success("update profile done");
+    })
+  }
+
+  onFileSelected(event : any){
+    this.formData.append('picture' , event.target.files[0]);
+  }
+
+  uploadProfilePhoto(photo : any){
+    this.uploadPhotoService.UploadPhoto(photo).subscribe(data =>{
       console.log(data);
     })
   }

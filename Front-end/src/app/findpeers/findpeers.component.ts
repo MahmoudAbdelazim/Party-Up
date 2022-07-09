@@ -24,8 +24,14 @@ export class FindpeersComponent implements OnInit {
       email : '',
       firstName : '',
       lastName : '',
-      phoneNumber : '',
-      handles : []
+      discordTag : '',
+      handles : [],
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      }
     };
     this.selectedGame = '';
   }

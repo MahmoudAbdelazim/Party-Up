@@ -38,7 +38,12 @@ export class ReviewPeerComponent implements OnInit {
       otherRequested : false,
       peer : false,
       discordTag : '',
-      profilePicture : null,
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      },
       reviewed : false
     };
     this.username = '';

@@ -3,7 +3,10 @@
     <!-- Column -->
     <div class="m-auto">
       <div class="card-body little-profile text-center my-5">
-        <div class="pro-img"><img src="../../assets/images/human.png" alt="user"></div>
+        <div class="pro-img">
+          <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user">
+          <img *ngIf="!imgSrc" src="../../assets/images/human.png" alt="user">
+        </div>
         <h2 class="m-b-0 text-white">asd asd</h2>
 
         <h3 class="m-b-0 text-white"><span class="text-muted"> UserName:</span> {{otherPlayerDetails.username }}</h3>

@@ -9,5 +9,10 @@ export interface GetOthersDetailsPayload{
   peer: boolean
   reviewed : boolean
   discordTag: string
-  profilePicture : any
+  profilePicture : {
+    id : string
+    type : string
+    size : number
+    url : string
+  }
 }
