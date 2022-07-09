@@ -4,7 +4,7 @@
     <div class="m-auto">
       <div class="card-body little-profile text-center my-5">
         <div class="pro-img">
-          <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user">
+          <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user" class="img-fluid text-center img-circle">
           <img *ngIf="!imgSrc" src="../../assets/images/human.png" alt="user">
         </div>
         <h2 class="m-b-0 text-white">{{playerDetails.firstName }} {{playerDetails.lastName}}</h2>

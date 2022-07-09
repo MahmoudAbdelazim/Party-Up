@@ -7,7 +7,7 @@ import {GetOthersProfileService} from "../get-others-profile.service";
 import {SendReviewPeerAnswersService} from "../send-review-peer-answers.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {GetOthersDetailsPayload} from "../others-profile/get-others-details.payload";
-
+import { from } from 'rxjs';
 @Component({
   selector: 'app-review-peer',
   templateUrl: './review-peer.component.html',
@@ -53,6 +53,7 @@ export class ReviewPeerComponent implements OnInit {
   ngOnInit(): void {
     this.reviewQuestions.getReviewPeersQuestions().subscribe(data =>{
       this.listOfReviewQuestions = data;
+      
       for (let i = 0; i < this.listOfReviewQuestions.length ; i++) {
         this.listOfReviewQuestions[i].index = ++this.index;
       }
