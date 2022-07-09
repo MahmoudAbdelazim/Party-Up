@@ -11,6 +11,7 @@ import {forEach} from "lodash";
 import {AcceptingOrRejectingTheRequestService} from "../accepting-or-rejecting-the-request.service";
 import {AcceptDeclinePayload} from "./accept-decline.payload";
 import {UnpeerService} from "../unpeer.service";
+import {GetUploadedImageService} from "../get-uploaded-image.service";
 
 @Component({
   selector: 'app-others-profile',
@@ -26,12 +27,14 @@ export class OthersProfileComponent implements OnInit {
 
   notifications : NotificationsPayload[];
   response : string
+  imgBlob: Blob;
+  imgSrc: string;
 
 
 
   constructor(private pdService : PlayerDetailsService, private getOtherProfile : GetOthersProfileService,
               private sendPeerRequestService : SendPeerRequestService, private popupNotification: ToastrService,
-              private getPeerRequests : GetPeerRequestsAsNotificationService,
+              private getPeerRequests : GetPeerRequestsAsNotificationService,private getUploadedPhoto : GetUploadedImageService,
               private acceptOrDeclineService : AcceptingOrRejectingTheRequestService, private unPeerService : UnpeerService,
               private router:Router , private actvRoute : ActivatedRoute) {
 
@@ -43,13 +46,22 @@ export class OthersProfileComponent implements OnInit {
       },
       requested : false,
       otherRequested : false,
-      peer : false
+      peer : false,
+      discordTag : '',
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      },
+      reviewed : false
     };
     this.userName = '';
     this.url = '';
     this.notifications = [];
-    this.response = ''
-
+    this.response = '';
+    this.imgBlob = new Blob();
+    this.imgSrc = '';
   }
 
   ngOnInit(): void {
@@ -70,13 +82,23 @@ export class OthersProfileComponent implements OnInit {
     this.getOtherProfile.getOthersDetails(this.userName).subscribe(data =>{
       this.otherPlayerDetails = data;
       console.log(this.otherPlayerDetails);
+      this.getUploadedPhoto.getUploadedImage(this.otherPlayerDetails.profilePicture.url).subscribe(data=>{
+        this.imgBlob = data;
+        console.log(this.imgBlob);
+        let reader = new FileReader();
+        reader.readAsDataURL(this.imgBlob);
+        reader.onload = (event: any) =>{
+          this.imgSrc = event.target.result;
+
+        }
+      })
     })
   }
 
   sendPeerRequest(){
       this.sendPeerRequestService.sendPeerRequest(this.userName).subscribe(data =>{
         this.getothersDetails();
-        this.popupNotification.success();
+        this.popupNotification.success("Request has been sent successfully");
         console.log(data);
       })
   }

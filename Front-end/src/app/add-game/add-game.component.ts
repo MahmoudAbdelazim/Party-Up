@@ -21,8 +21,14 @@ export class AddGameComponent implements OnInit {
       email : '',
       firstName : '',
       lastName : '',
-      phoneNumber : '',
-      handles : []
+      discordTag : '',
+      handles : [],
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      }
     }
 
     this.addGamePayload = {

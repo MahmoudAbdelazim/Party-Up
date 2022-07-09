@@ -1,0 +1,24 @@
+<div class="my-2 text-center container">
+  <h1>Review Peer</h1>
+  <h2>Please answer all questions below sincerely</h2>
+  <h3>Give him a rating from 1 ~ 5 for each question</h3>
+  <div class="container tb-10">
+    <form (ngSubmit)="submitReviewAnswers()" [formGroup]="reviewAnswersForm">
+      <div class="my-2" *ngFor="let question of listOfReviewQuestions">
+        <label>Q{{question.index}}: {{question.question}}</label>
+        <br>
+        <label>1:</label>
+        <input type="radio" name="q{{question.index}}" value="1" class="mx-2"  formControlName='q{{question.index}}'>
+        <label>2:</label>
+        <input type="radio" name="q{{question.index}}" value="2" class="mx-2"  formControlName='q{{question.index}}'>
+        <label>3:</label>
+        <input type="radio" name="q{{question.index}}" value="3" class="mx-2"  formControlName='q{{question.index}}'>
+        <label>4:</label>
+        <input type="radio" name="q{{question.index}}" value="4" class="mx-2"  formControlName='q{{question.index}}'>
+        <label>5:</label>
+        <input type="radio" name="q{{question.index}}" value="5" class="mx-2"  formControlName='q{{question.index}}'>
+      </div>
+      <button [disabled]="reviewAnswersForm.invalid" type="submit" class="btn btn-success x-2 my-2">Submit</button>
+    </form>
+  </div>
+</div>

@@ -1,8 +1,23 @@
-<div class="container">
+<div class="w-100 text-center my-5">
+  <h2>Please Specify your Game to Find the Most Suitable Peers</h2>
+  <form [formGroup]="favouriteGame" (ngSubmit)="selectingFavouriteGame()">
 
-  <div class="card">
+    <div>
+      <select formControlName='game' class="form-select-lg" >
+        <option *ngFor="let gm of playerDetails.handles"  value="{{gm.game}}">{{gm.game}}</option>
+      </select>
+    </div>
+
+    <div class=""><button type="submit" class="my-2 btn-success">Confirm</button></div>
+  </form>
+</div>
+
+
+
+<div class="container">
+  <div *ngFor="let peer of findPeersList" class="card">
     <img src="../../assets/images/human.png" alt="Person" class="card__image">
-    <p class="card__name">Murray Reeve</p>
+    <p class="card__name">{{peer.username}}</p>
     <div class="grid-container">
 
       <div class="grid-child-posts">
@@ -18,7 +33,7 @@
       <li><a href="#"><i class="fa-brands fa-discord iconPositioning"></i></a></li>
 
     </ul>
-    <button class="btn draw-border">Add Peer</button>
+    <button routerLink="/profile/{{peer.username}}" class="btn draw-border">View Profile</button>
     <button class="btn draw-border">...</button>
   </div>
 

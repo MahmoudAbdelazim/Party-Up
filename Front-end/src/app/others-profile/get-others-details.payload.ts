@@ -7,4 +7,12 @@ export interface GetOthersDetailsPayload{
   requested : boolean
   otherRequested : boolean
   peer: boolean
+  reviewed : boolean
+  discordTag: string
+  profilePicture : {
+    id : string
+    type : string
+    size : number
+    url : string
+  }
 }

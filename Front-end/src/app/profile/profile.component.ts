@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {PlayerDetailsService} from "../player-details.service";
 import {Router} from "@angular/router";
 import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
+import {GetUploadedImageService} from "../get-uploaded-image.service";
+import {DomSanitizer, SafeResourceUrl, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -12,17 +14,31 @@ import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
 export class ProfileComponent implements OnInit {
 
   playerDetails : ProfileDetailsGetPayload
+  imgBlob : Blob
+  imgSrc : string
+  imgTrustedSrc : SafeResourceUrl
 
-  constructor(private pdService : PlayerDetailsService , private router:Router) {
+  constructor(private pdService : PlayerDetailsService ,
+              private getPhotoService : GetUploadedImageService, private sanitizer : DomSanitizer,
+              private router:Router) {
 
     this.playerDetails = {
       username : '',
       email : '',
       firstName : '',
       lastName : '',
-      phoneNumber : '',
-      handles : []
-    }
+      discordTag : '',
+      handles : [],
+      profilePicture : {
+        id : '',
+        type : '',
+        size : 0,
+        url : ''
+      }
+    };
+    this.imgSrc = '';
+    this.imgBlob = new Blob();
+    this.imgTrustedSrc = '';
   }
 
 
@@ -30,11 +46,22 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.pdService.getPlayerDetails().subscribe(data =>{
       this.playerDetails = data;
-      
-      console.log(data);
+      console.log(this.playerDetails);
+      this.getPhotoService.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
+        this.imgBlob = data;
+        console.log(this.imgBlob);
+        let reader = new FileReader();
+        reader.readAsDataURL(this.imgBlob);
+        reader.onload = (event: any) =>{
+          this.imgSrc = event.target.result;
+
+        }
+      })
+
+
     })
   }
-  
+
 
 
 }

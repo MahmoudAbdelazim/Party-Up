@@ -8,8 +8,8 @@ export class ToastrService {
 
   constructor() { }
 
-  success(){
-    toastr.success("Request has been sent successfully");
+  success(message : string){
+    toastr.success(message);
   }
   info(){
     toastr.info();
