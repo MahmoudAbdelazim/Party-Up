@@ -20,6 +20,10 @@ export class IfLoggedInGuard implements CanActivate {
       return true;
       
     }
+    else(!this.authService.isUserLoggedIn());
+    {
+      return true;
+    }
     return false;
     
   }
