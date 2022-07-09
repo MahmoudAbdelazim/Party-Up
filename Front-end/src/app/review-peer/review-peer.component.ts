@@ -53,7 +53,7 @@ export class ReviewPeerComponent implements OnInit {
   ngOnInit(): void {
     this.reviewQuestions.getReviewPeersQuestions().subscribe(data =>{
       this.listOfReviewQuestions = data;
-      
+
       for (let i = 0; i < this.listOfReviewQuestions.length ; i++) {
         this.listOfReviewQuestions[i].index = ++this.index;
       }
@@ -96,5 +96,6 @@ export class ReviewPeerComponent implements OnInit {
     })
 
   }
+
 
 }

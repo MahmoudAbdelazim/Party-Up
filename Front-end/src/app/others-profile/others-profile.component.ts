@@ -81,17 +81,21 @@ export class OthersProfileComponent implements OnInit {
   getothersDetails(){
     this.getOtherProfile.getOthersDetails(this.userName).subscribe(data =>{
       this.otherPlayerDetails = data;
+      sessionStorage.setItem('enteredOtherProfile' , this.otherPlayerDetails.username)
       console.log(this.otherPlayerDetails);
-      this.getUploadedPhoto.getUploadedImage(this.otherPlayerDetails.profilePicture.url).subscribe(data=>{
-        this.imgBlob = data;
-        console.log(this.imgBlob);
-        let reader = new FileReader();
-        reader.readAsDataURL(this.imgBlob);
-        reader.onload = (event: any) =>{
-          this.imgSrc = event.target.result;
+      if (this.otherPlayerDetails.profilePicture){
+        this.getUploadedPhoto.getUploadedImage(this.otherPlayerDetails.profilePicture.url).subscribe(data=>{
+          this.imgBlob = data;
+          console.log(this.imgBlob);
+          let reader = new FileReader();
+          reader.readAsDataURL(this.imgBlob);
+          reader.onload = (event: any) =>{
+            this.imgSrc = event.target.result;
 
-        }
-      })
+          }
+        })
+      }
+
     })
   }
 
