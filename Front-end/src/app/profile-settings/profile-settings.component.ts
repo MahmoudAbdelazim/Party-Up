@@ -57,25 +57,6 @@ export class ProfileSettingsComponent implements OnInit {
     this.imgSrc = '';
    }
 
-  ngOnInit(): void {
-    this.pdService.getPlayerDetails().subscribe(data =>{
-      this.playerDetails = data;
-      this.getUploadedPhoto.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
-        this.imgBlob = data;
-        console.log(this.imgBlob);
-        let reader = new FileReader();
-        reader.readAsDataURL(this.imgBlob);
-        reader.onload = (event: any) =>{
-          this.imgSrc = event.target.result;
-
-        }
-      })
-      // this.addHandles();
-        console.log(data);
-    })
-
-
-  }
 
   updateUserForm = new FormGroup({
     firstName: new FormControl(null, [Validators.required, Validators.minLength(3), Validators.pattern('^[a-zA-Z]{3,20}$'), Validators.maxLength(20)]), //inside the constructor is like a place holder
@@ -86,6 +67,51 @@ export class ProfileSettingsComponent implements OnInit {
     discordTag: new FormControl(null,[Validators.required]),
     country: new FormControl(null, [Validators.required])
   })
+
+  ngOnInit(): void {
+    this.pdService.getPlayerDetails().subscribe(data =>{
+      this.playerDetails = data;
+      console.log(this.playerDetails)
+      this.updateUserForm.patchValue({
+        firstName: this.playerDetails.firstName ,
+        lastName: this.playerDetails.lastName ,
+        email: this.playerDetails.email ,
+        password: '' ,
+        username: this.playerDetails.username ,
+        discordTag: this.playerDetails.discordTag,
+        country: ''
+      })
+      console.log(this.updateUserForm.value);
+      // this.updateUserForm.({
+      //   firstname: this.playerDetails.firstName ,
+      //   lastName: this.playerDetails.lastName ,
+      //   email: this.playerDetails.email ,
+      //   password: '' ,
+      //   username: this.playerDetails.username ,
+      //   discordTag: this.playerDetails.discordTag,
+      //   country: ''
+      // })
+      if (this.playerDetails.profilePicture){
+        this.getUploadedPhoto.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
+          this.imgBlob = data;
+          console.log(this.imgBlob);
+          let reader = new FileReader();
+          reader.readAsDataURL(this.imgBlob);
+          reader.onload = (event: any) =>{
+            this.imgSrc = event.target.result;
+
+          }
+        })
+      }
+
+      // this.addHandles();
+        console.log(data);
+    })
+
+
+  }
+
+
 
   updateUser(updateForm : FormGroup){
     this.updateUserProfile.firstName = this.updateUserForm.get('firstName')?.value;
@@ -100,8 +126,11 @@ export class ProfileSettingsComponent implements OnInit {
     this.updateProfileService.updateProfileDetails(this.updateUserProfile).subscribe(data =>{
       console.log(this.updateUserProfile);
       console.log(data);
-      this.uploadProfilePhoto(this.formData);
+      if(this.formData.has('picture'))
+        this.uploadProfilePhoto(this.formData);
       this.toast.success("update profile done");
+      setInterval(()=> window.location.reload() , 2000)
+
     })
   }
 
