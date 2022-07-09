@@ -27,7 +27,7 @@ public class PostContentService {
 		List<Content> contents = new ArrayList<>();
 		List<ContentData> contentsData = new ArrayList<>();
 		try {
-			if (!files.isEmpty()) {
+			if (files != null && !files.isEmpty()) {
 				for (var file : files) {
 					var content = new Content(
 							file.getName(),

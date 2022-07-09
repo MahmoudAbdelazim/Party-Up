@@ -19,6 +19,6 @@ public interface PostRepository extends JpaRepository<Post,String> {
 
 	Page<Post> findAllByPlayerOrderByCreateAt(Player player, Pageable pageable);
 
-	Page<Post> findAllByPlayerInOrderByCreateAt(List<Long> ids, Pageable pageable);
+	Page<Post> findAllByPlayerInOrderByCreateAt(List<Player> ids, Pageable pageable);
 
 }

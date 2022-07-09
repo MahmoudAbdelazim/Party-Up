@@ -92,10 +92,7 @@ public class PostingController {
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
 		Page<Post> posts = postingService.getPostsOfUser(player.get(), page);
-		PagedModel<PostModel> recentPosts = pagedModelAssembler.toModel(posts, postModelAssembler);
-		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
-
-		return recentPosts;
+		return pagedModelAssembler.toModel(posts, postModelAssembler);
 	}
 
 	@GetMapping("/feed")
@@ -105,9 +102,7 @@ public class PostingController {
 		if (player.isEmpty()) throw new UsernameNotFoundException("Username doesn't exist");
 
 		Page<Post> posts = postingService.getPostsRelatedToUser(player.get(), page);
-		PagedModel<PostModel> recentPosts = pagedModelAssembler.toModel(posts, postModelAssembler);
-		recentPosts.add(linkTo(methodOn(PostingController.class).getOwnPosts(page)).withSelfRel());
-		return recentPosts;
+		return pagedModelAssembler.toModel(posts, postModelAssembler);
 	}
 
 	@ExceptionHandler(PostNotFoundException.class)

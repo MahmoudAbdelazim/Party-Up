@@ -29,6 +29,6 @@ public class PostUploadDto {
 	}
 
 	public void clearFiles() {
-		files.clear();
+		if (files != null) files.clear();
 	}
 }

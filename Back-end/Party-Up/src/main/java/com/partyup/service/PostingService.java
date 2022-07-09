@@ -4,6 +4,7 @@ import com.partyup.model.FollowRequest;
 import com.partyup.model.Player;
 import com.partyup.model.posting.Post;
 import com.partyup.payload.PostUploadDto;
+import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.PostRepository;
 import com.partyup.service.exception.PostNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -23,13 +24,16 @@ import java.util.Optional;
 public class PostingService {
 
 	@Autowired
-	PostRepository postRepository;
+	private PostRepository postRepository;
 
 	@Autowired
-	FollowService followService;
+	private FollowService followService;
 
 	@Autowired
-	ModelMapper postingMapper;
+	private ModelMapper postingMapper;
+
+	@Autowired
+	private PlayerRepository playerRepository;
 
 	public String savePostOfUser(PostUploadDto postUploadDto, Player player) {
 		Post post = postingMapper.map(postUploadDto, Post.class);
@@ -55,7 +59,8 @@ public class PostingService {
 		List<FollowRequest> followee = followService.findAllByFollowerId(player.getId());
 		List<Long> followeeIds = new ArrayList<>(followee.size());
 		for (var request: followee) followeeIds.add(request.getFollowee());
-		return postRepository.findAllByPlayerInOrderByCreateAt(followeeIds, page);
+		List<Player> players = playerRepository.findAllByIdIn(followeeIds);
+		return postRepository.findAllByPlayerInOrderByCreateAt(players, page);
 	}
 
 }

@@ -15,6 +15,7 @@ public interface PlayerRepository extends JpaRepository<Player, Long> {
     List<Player> findAllByEmail(String email);
     List<Player> findAllByUsername(String username);
     List<Player> findAllByDiscordTag(String discordTag);
+    List<Player> findAllByIdIn(List<Long> ids);
     Boolean existsByUsername(String username);
     Boolean existsByEmail(String email);
     Boolean existsByDiscordTag(String discordTag);

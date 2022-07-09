@@ -5,7 +5,9 @@ import com.partyup.model.posting.Post;
 import com.partyup.payload.PostModel;
 import com.partyup.payload.ProfileToken;
 import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PostModelAssembler extends RepresentationModelAssemblerSupport<Post, PostModel> {
 
 	public PostModelAssembler() {

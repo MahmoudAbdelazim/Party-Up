@@ -24,8 +24,8 @@ public class FollowingController {
 	@Autowired
 	FollowService followService;
 
-	@PostMapping()
-	public ResponseEntity<String> follow(@ModelAttribute String followeeUsername) {
+	@PostMapping("/{followeeUsername}")
+	public ResponseEntity<String> follow(@PathVariable String followeeUsername) {
 		String followerUsername = getUserName();
 		Optional<Player> follower = playerRepo.findByUsernameOrEmail(followerUsername, followerUsername);
 		if (follower.isEmpty()) {
