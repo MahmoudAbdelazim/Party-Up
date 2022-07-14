@@ -7,13 +7,13 @@
           <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user" class="img-fluid text-center img-circle">
           <img *ngIf="!imgSrc" src="../../assets/images/human.png" alt="user">
         </div>
-        <h3 class="m-b-0 text-white"><span class="text-muted"> User Name:</span> {{playerDetails.username }}</h3>
+        <h3 class="m-b-0 text-white"><span class="text-muted"> Username:</span> {{playerDetails.username }}</h3>
 
         <h3 class="m-b-0 text-white"><i class="fa-solid fa-envelope mx-2 text-info"></i>{{playerDetails.email }}</h3>
-        <h3 *ngIf="playerDetails.handles.length != 0" class="m-b-0 text-muted">Player's Handles in games:</h3>
+        <h3 *ngIf="playerDetails.handles.length != 0" class="m-b-0 text-muted">Your Games and Handles:</h3>
 
         <h3 *ngFor="let handle of playerDetails.handles" class="m-b-0 text-warning ">{{handle.game}}: <span class="text-white">{{handle.handle }}</span></h3>
-         <h3 class="m-b-0">{{playerDetails.discordTag }}</h3>
+        <h3 class="m-b-0 text-white"><span class="text-muted">Discord Tag: </span> {{playerDetails.discordTag }}</h3>
 
 
          <a [routerLink]="['/profile/settings']" class="secondButton m-t-10 waves-effect waves-dark btn btn-primary btn-rounded" data-abc="true">Profile Settings</a>

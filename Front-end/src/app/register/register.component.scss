@@ -2,18 +2,84 @@
   position: relative;
   top: 15vh;
   margin-bottom: 17vh;
-
-}
-.register-fonts-specifications{
-  font-family: 'Cinzel', serif;
-  font-family: 'Cinzel Decorative', cursive;
-  font-family: 'Roboto', sans-serif;
-  color: white;
-  font-weight: bold;
 }
 .discordTagColour{
   color: #573391;
 }
 .regionColour{
   color: red;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  border: 0;
+  outline: 0;
+  color: #fff;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: top;
+  resize: none;
+}
+
+[placeholder]::-webkit-input-placeholder { color: rgba(255,255,255,.8); }
+[placeholder]:hover::-webkit-input-placeholder { color: rgba(255,255,255,.4); }
+[placeholder]:focus::-webkit-input-placeholder { color: transparent; }
+
+[placeholder]::-moz-placeholder { color: rgba(255,255,255,.8); }
+[placeholder]:hover::-moz-placeholder { color: rgba(255,255,255,.4); }
+[placeholder]:focus::-moz-placeholder { color: transparent; }
+
+[placeholder]:-ms-input-placeholder { color: rgba(255,255,255,.8); }
+[placeholder]:hover:-ms-input-placeholder { color: rgba(255,255,255,.4); }
+[placeholder]:focus:-ms-input-placeholder { color: transparent; }
+
+form {
+  width: 400px;
+  margin: 50px auto;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  display: block;
+  width: 50vw;
+  margin: 0 0 20px;
+  padding: 8px 12px 10px 12px;
+  border: 1px solid rgba(0,0,0,.5);
+  background: rgba(0,0,0,.25);
+}
+
+textarea {
+  display: block;
+  width: 400px;
+  height: 150px;
+  margin: 0 0 20px;
+  padding: 8px 12px 10px 12px;
+  border: 1px solid rgba(0,0,0,.5);
+  background: rgba(0,0,0,.25);
+}
+
+input[type="submit"] {
+  display: block;
+  width: 150px;
+  margin: 0 0 20px;
+  padding: 8px 0 10px 0;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,.5);
+  background: rgba(0,0,0,.25);
+}
+
+textarea:focus, input:focus {
+  color: white;
 }

@@ -9,6 +9,10 @@ import java.util.List;
 
 public class OtherProfileDto extends ProfileDto {
     List<HandleDto> handles;
+
+    String firstName;
+
+    String lastName;
     Country country;
     String discordTag;
     boolean isPeer = false;
@@ -83,5 +87,21 @@ public class OtherProfileDto extends ProfileDto {
 
     public void setReviewed(boolean reviewed) {
         this.reviewed = reviewed;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

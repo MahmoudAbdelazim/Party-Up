@@ -1,5 +1,6 @@
 package com.partyup.payload;
 
+import com.partyup.model.Country;
 import com.partyup.model.posting.ContentData;
 
 import java.util.ArrayList;
@@ -10,6 +11,8 @@ public class OwnProfileDto extends ProfileDto{
 	String firstName;
 	String lastName;
 	String discordTag;
+
+	Country country;
 	List<HandleDto> handles = new ArrayList<>();
 
 	public String getEmail() {
@@ -58,5 +61,13 @@ public class OwnProfileDto extends ProfileDto{
 
 	public void setProfilePicture(ContentData profilePicture) {
 		this.profilePicture = profilePicture;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 }

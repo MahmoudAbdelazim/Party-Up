@@ -81,6 +81,7 @@ public class PlayerProfileService {
 				ownProfileDto.setLastName(player.getLastName());
 				ownProfileDto.setDiscordTag(player.getDiscordTag());
 				ownProfileDto.setProfilePicture(player.getProfilePicture());
+				ownProfileDto.setCountry(player.getCountry());
 				for (Handle handle : player.getHandles()) {
 					ownProfileDto.getHandles().add(new HandleDto(handle));
 				}
@@ -144,6 +145,8 @@ public class PlayerProfileService {
 				}
 			}
 		}
+		profileDto.setFirstName(otherPlayer.getFirstName());
+		profileDto.setLastName(otherPlayer.getLastName());
 		return profileDto;
 	}
 

@@ -4,6 +4,7 @@ import com.partyup.model.Game;
 import com.partyup.model.Handle;
 import com.partyup.model.Player;
 import com.partyup.payload.AddGameDto;
+import com.partyup.payload.GameDto;
 import com.partyup.repository.GameRepository;
 import com.partyup.repository.HandleRepository;
 import com.partyup.repository.PlayerRepository;
@@ -16,6 +17,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -65,6 +68,15 @@ public class GameService {
             throw new GameNotFoundException("Game with Name: " + name + " is Not Found");
         }
         return game.get();
+    }
+
+    public List<GameDto> getAllGames() {
+        List<Game> games = gameRepository.findAll();
+        List<GameDto> gameDtos = new ArrayList<>();
+        for (Game game: games) {
+            gameDtos.add(new GameDto(game.getName()));
+        }
+        return gameDtos;
     }
 
     private String getUsername(Authentication authentication) {

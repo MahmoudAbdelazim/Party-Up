@@ -6,7 +6,7 @@
         <label class="login-fonts-specifications" for="EmailAddress">Username or Email*</label>
         <input  formControlName="email" type="text" class="form-control" id="EmailAddress" aria-describedby="emailHelp" placeholder="ex. mustafa@gmail.com">
         <div *ngIf="loginForm.get('email')?.errors != null && loginForm.get('email')?.touched" class="alert my-1 alert-danger">
-          <p *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</p>
+          <p *ngIf="loginForm.get('email')?.errors?.['required']">Username or Email is required</p>
         </div>
       </div>
 
