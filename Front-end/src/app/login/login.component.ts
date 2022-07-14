@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginForm = new FormGroup({
-    email: new FormControl(null, [Validators.email, Validators.required]),
+    email: new FormControl(null, [Validators.required]),
     password: new FormControl(null, [Validators.required ]) //Minimum eight characters, at least one letter and one number
   })
 

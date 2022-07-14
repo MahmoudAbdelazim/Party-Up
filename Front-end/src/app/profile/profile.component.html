@@ -7,8 +7,6 @@
           <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user" class="img-fluid text-center img-circle">
           <img *ngIf="!imgSrc" src="../../assets/images/human.png" alt="user">
         </div>
-        <h2 class="m-b-0 text-white">{{playerDetails.firstName }} {{playerDetails.lastName}}</h2>
-
         <h3 class="m-b-0 text-white"><span class="text-muted"> User Name:</span> {{playerDetails.username }}</h3>
 
         <h3 class="m-b-0 text-white"><i class="fa-solid fa-envelope mx-2 text-info"></i>{{playerDetails.email }}</h3>

@@ -3,11 +3,10 @@
   <div class="">
     <div class="">
       <div class="form-group">
-        <label class="login-fonts-specifications" for="EmailAddress">Email address*</label>
-        <input  formControlName="email" type="email" class="form-control" id="EmailAddress" aria-describedby="emailHelp" placeholder="ex. mustafa@gmail.com">
+        <label class="login-fonts-specifications" for="EmailAddress">Username or Email*</label>
+        <input  formControlName="email" type="text" class="form-control" id="EmailAddress" aria-describedby="emailHelp" placeholder="ex. mustafa@gmail.com">
         <div *ngIf="loginForm.get('email')?.errors != null && loginForm.get('email')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="loginForm.get('email')?.errors?.['required']">Email is required</p>
-          <p *ngIf="loginForm.get('email')?.errors?.['email']">Email is invalid!</p>
         </div>
       </div>
 

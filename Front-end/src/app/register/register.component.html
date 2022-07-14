@@ -46,9 +46,8 @@
     </div>
 
     <div class="form-group">
-      <label class="register-fonts-specifications" for="DiscordTag">username*</label>
-      <i class=" px-1 fa-brands fa-discord discordTagColour"></i>
-      <input formControlName="username" type="text" class="form-control" id="username" placeholder="ex. Mustafa#4320">
+      <label class="register-fonts-specifications" for="username">username*</label>
+      <input formControlName="username" type="text" class="form-control" id="username" placeholder="ex. MustafaTaha">
       <div *ngIf="registerForm.get('username')?.errors != null && registerForm.get('username')?.touched" class="alert my-1 alert-danger">
         <p *ngIf="registerForm.get('username')?.errors?.['required']">user name is required</p>
       </div>
@@ -56,7 +55,8 @@
 
       <div class="form-group">
         <label class="register-fonts-specifications" for="discordTag">discordTag* </label>
-        <input formControlName="discordTag" type="text" class="form-control" id="discordTag" placeholder="ex. Egypt">
+        <i class=" px-1 fa-brands fa-discord discordTagColour"></i>
+        <input formControlName="discordTag" type="text" class="form-control" id="discordTag" placeholder="ex. Mustafa#1234">
         <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="registerForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
         </div>

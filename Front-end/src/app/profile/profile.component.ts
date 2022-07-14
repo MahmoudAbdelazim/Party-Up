@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import {PlayerDetailsService} from "../player-details.service";
 import {Router} from "@angular/router";
 import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
@@ -24,9 +23,9 @@ export class ProfileComponent implements OnInit {
 
     this.playerDetails = {
       username : '',
+      firstName: '',
+      lastName: '',
       email : '',
-      firstName : '',
-      lastName : '',
       discordTag : '',
       handles : [],
       profilePicture : {
