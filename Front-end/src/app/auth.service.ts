@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   isUserSignedUp() {
-    let user = sessionStorage.getItem('userSignedUp')
+    let user = localStorage.getItem('userSignedUp')
     return user
   }
 
@@ -27,12 +27,12 @@ export class AuthService {
 
 
   isUserLoggedIn() {
-    let user = sessionStorage.getItem('token')
+    let user = localStorage.getItem('token')
     return user
   }
 
   logOut() {
-    sessionStorage.removeItem('token')
+    localStorage.removeItem('token')
   }
 
 }

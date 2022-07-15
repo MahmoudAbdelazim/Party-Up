@@ -12,6 +12,7 @@ import {AuthService} from "../auth.service";
 export class RegisterComponent implements OnInit {
 
   registerPayload : RegisterRequestPayload;
+  errorMessage :string;
 
   constructor(private router:Router, private authService : AuthService) {
       this.registerPayload = {
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
           name : ""
         }
       };
+      this.errorMessage = '';
   }
 
   registerForm = new FormGroup({
@@ -33,7 +35,7 @@ export class RegisterComponent implements OnInit {
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required ]), //Minimum eight characters, at least one letter and one number
     username: new FormControl(null, [Validators.required]), //pattern for discord tag. Mustafa Taha#1234
-    discordTag: new FormControl(null,[Validators.required]),
+    discordTag: new FormControl(null,[Validators.required , Validators.pattern('^.{3,32}#[0-9]{4}$')]),
     country: new FormControl(null, [Validators.required])
   })
 
@@ -54,8 +56,10 @@ export class RegisterComponent implements OnInit {
       this.authService.register(this.registerPayload).subscribe(data =>{
         console.log("sign up successfully")
         console.log(data.value)
-        sessionStorage.setItem('userSignedUp' , this.registerPayload.username);
+        localStorage.setItem('userSignedUp' , this.registerPayload.username);
         this.router.navigate(['/personalityTest', this.registerPayload.username]);
+      } , error => {
+        this.errorMessage = error.error;
       });
 
   }

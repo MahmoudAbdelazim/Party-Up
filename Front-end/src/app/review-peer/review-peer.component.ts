@@ -29,6 +29,8 @@ export class ReviewPeerComponent implements OnInit {
     this.listOfReviewQuestions = [];
     this.listOfReviewAnswers = [];
     this.otherPlayerDetails = {
+      firstName : '',
+      lastName : '',
       username : '',
       handles : [],
       country: {

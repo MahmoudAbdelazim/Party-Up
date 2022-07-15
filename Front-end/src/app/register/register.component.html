@@ -19,7 +19,7 @@
         <input formControlName='lastName' type="text" class="form-control" id="LastName" placeholder="ex. Taha">
 
           <div class="alert my-1 alert-danger" *ngIf="registerForm.get('lastName')?.errors != null && registerForm.get('lastName')?.touched">
-            <p *ngIf="registerForm.get('firstName')?.errors?.['pattern']">Last Name has to be only letters</p>
+            <p *ngIf="registerForm.get('lastName')?.errors?.['pattern']">Last Name has to be only letters</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['required']">Last Name is required</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['minlength']">Last Name's min length has to be more than 3</p>
             <p *ngIf="registerForm.get('lastName')?.errors?.['maxlength']">Last Name max length has to be less than 20</p>
@@ -59,6 +59,7 @@
         <input formControlName="discordTag" type="text" class="form-control" id="discordTag" placeholder="ex. Mustafa#1234">
         <div *ngIf="registerForm.get('discordTag')?.errors != null && registerForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
           <p *ngIf="registerForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
+          <p *ngIf="registerForm.get('discordTag')?.errors?.['pattern']">Discord Tag might be in this form Mustafa#1234</p>
         </div>
       </div>
 
@@ -317,7 +318,10 @@
             <option value="Zambia">Zambia</option>
             <option value="Zimbabwe">Zimbabwe</option>
          </select> -->
-    </div>
+      </div>
 
     <button [disabled]="registerForm.invalid" type="submit" class="btn btn-primary my-2 register-fonts-specifications">Go to Personality test</button>
-  </form>
+    <div *ngIf="errorMessage" class="alert my-1 alert-danger">
+      <p>{{errorMessage}}</p>
+    </div>
+</form>

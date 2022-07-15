@@ -174,7 +174,7 @@ export class PersonalityTestComponent implements OnInit {
     });
 
     this.ptQuestionsService.getPersonalityTestQuestions().subscribe(data =>{
-      sessionStorage.removeItem('userSignedUp')
+      localStorage.removeItem('userSignedUp')
       console.log(data);
     })
 

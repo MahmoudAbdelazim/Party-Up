@@ -1,4 +1,7 @@
 export interface GetOthersDetailsPayload{
+
+  firstName : string
+  lastName : string
   username: string
   handles: any
   country: {

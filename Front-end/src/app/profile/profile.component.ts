@@ -15,7 +15,6 @@ export class ProfileComponent implements OnInit {
   playerDetails : ProfileDetailsGetPayload
   imgBlob : Blob
   imgSrc : string
-  imgTrustedSrc : SafeResourceUrl
 
   constructor(private pdService : PlayerDetailsService ,
               private getPhotoService : GetUploadedImageService, private sanitizer : DomSanitizer,
@@ -33,11 +32,13 @@ export class ProfileComponent implements OnInit {
         type : '',
         size : 0,
         url : ''
+      },
+      country: {
+        name : ""
       }
     };
     this.imgSrc = '';
     this.imgBlob = new Blob();
-    this.imgTrustedSrc = '';
   }
 
 

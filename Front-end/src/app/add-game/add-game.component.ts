@@ -5,6 +5,8 @@ import {ProfileDetailsGetPayload} from "../profile/profile-details-get.payload";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AddGamePayload} from "./add-game.payload";
 import {AddGameService} from "../add-game.service";
+import {GetListOfGamesService} from "../get-list-of-games.service";
+import {GetGamesListPayload} from "./get-games-list.payload";
 
 @Component({
   selector: 'app-add-game',
@@ -15,7 +17,9 @@ export class AddGameComponent implements OnInit {
 
   playerDetails : ProfileDetailsGetPayload
   addGamePayload : AddGamePayload
-  constructor(private pdService : PlayerDetailsService , private router:Router , private addGameService : AddGameService) {
+  gamesListDto : GetGamesListPayload[]
+  errorMessage : string
+  constructor(private pdService : PlayerDetailsService , private router:Router , private addGameService : AddGameService , private listOfGames : GetListOfGamesService) {
     this.playerDetails = {
       username : '',
       email : '',
@@ -28,6 +32,9 @@ export class AddGameComponent implements OnInit {
         type : '',
         size : 0,
         url : ''
+      },
+      country: {
+        name : ""
       }
     }
 
@@ -35,6 +42,9 @@ export class AddGameComponent implements OnInit {
       gameName: "",
       handle: ""
     }
+
+    this.gamesListDto = []
+    this.errorMessage = '';
   }
 
   ngOnInit(): void {
@@ -42,12 +52,16 @@ export class AddGameComponent implements OnInit {
       this.playerDetails = data;
       // this.addHandles();
       console.log(data);
+      this.listOfGames.getListOfAvailableGames().subscribe(data =>{
+        this.gamesListDto = data
+        console.log(this.gamesListDto)
+      })
     })
   }
 
   addGameWithHandle = new FormGroup({
-    gameName: new FormControl(), //inside the constructor is like a place holder
-    handle: new FormControl()
+    gameName: new FormControl(null , [Validators.required ]), //inside the constructor is like a place holder
+    handle: new FormControl(null , [Validators.required ])
   })
 
   sendPlayersGameWithHandle(){
@@ -56,6 +70,11 @@ export class AddGameComponent implements OnInit {
     console.log(this.addGamePayload);
     this.addGameService.addGameWithHandle(this.addGamePayload).subscribe(data => {
       console.log(data)
+      if (data == 'Handle is already present for this game'){
+        this.errorMessage = data;
+      }else {
+        this.errorMessage = '';
+      }
       this.pdService.getPlayerDetails().subscribe(data =>{
         this.playerDetails = data;
         // this.addHandles();

@@ -7,6 +7,9 @@
           <img *ngIf="imgSrc" src="{{imgSrc}}" alt="user">
           <img *ngIf="!imgSrc" src="../../assets/images/human.png" alt="user">
         </div>
+
+        <h2 class="m-b-0 text-white">{{otherPlayerDetails.firstName }} {{otherPlayerDetails.lastName}}</h2>
+
         <h3 class="m-b-0 text-white"><span class="text-muted"> Username:</span> {{otherPlayerDetails.username }}</h3>
 
         <h3 class="m-b-0 text-white"><span class="text-muted">Country:</span> {{otherPlayerDetails.country.name }}</h3>

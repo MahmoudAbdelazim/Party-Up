@@ -13,6 +13,8 @@ export class ReviewGuardGuard implements CanActivate {
 
   constructor(private getOtherProfileDetailsService: GetOthersProfileService, private actvRoute : ActivatedRoute, private router:Router){
     this.otherPlayerData = {
+      firstName : '',
+      lastName : '',
       username : '',
       handles : [],
       country: {
@@ -33,7 +35,7 @@ export class ReviewGuardGuard implements CanActivate {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
-    let entered = sessionStorage.getItem('enteredOtherProfile');
+    let entered = localStorage.getItem('enteredOtherProfile');
     if (entered){
       this.getOtherProfileDetailsService.getOthersDetails(entered).subscribe(data=>{
         this.otherPlayerData = data

@@ -21,6 +21,7 @@ export class ProfileSettingsComponent implements OnInit {
   formData : FormData
   imgBlob: Blob
   imgSrc: string;
+  errorMessage : string
 
   constructor(private pdService : PlayerDetailsService , private uploadPhotoService : UploadPictureService,
               private updateProfileService : UpdateUserProfileDetailsService, private getUploadedPhoto : GetUploadedImageService,
@@ -38,6 +39,9 @@ export class ProfileSettingsComponent implements OnInit {
         type : '',
         size : 0,
         url : ''
+      },
+      country : {
+        name : ''
       }
     };
 
@@ -55,6 +59,7 @@ export class ProfileSettingsComponent implements OnInit {
     this.formData = new FormData();
     this.imgBlob = new Blob();
     this.imgSrc = '';
+    this.errorMessage = '';
    }
 
 
@@ -64,7 +69,7 @@ export class ProfileSettingsComponent implements OnInit {
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required ]), //Minimum eight characters, at least one letter and one number
     username: new FormControl(null, [Validators.required]), //pattern for discord tag. Mustafa Taha#1234
-    discordTag: new FormControl(null,[Validators.required]),
+    discordTag: new FormControl(null,[Validators.required , Validators.pattern('^.{3,32}#[0-9]{4}$')]),
     country: new FormControl(null, [Validators.required])
   })
 
@@ -79,7 +84,7 @@ export class ProfileSettingsComponent implements OnInit {
         password: '' ,
         username: this.playerDetails.username ,
         discordTag: this.playerDetails.discordTag,
-        country: ''
+        country: this.playerDetails.country.name
       })
       console.log(this.updateUserForm.value);
       // this.updateUserForm.({
@@ -131,6 +136,8 @@ export class ProfileSettingsComponent implements OnInit {
       this.toast.success("update profile done");
       setInterval(()=> window.location.reload() , 2000)
 
+    } , error => {
+      this.errorMessage = error.error
     })
   }
 
