@@ -44,7 +44,8 @@ public class PeersService {
         for (PeerRequest peerRequest : player.getPeerRequests()) {
             ProfileToken profileToken = new ProfileToken();
             profileToken.setUsername(peerRequest.getUsername());
-            profileToken.setProfilePicture(peerRequest.getProfilePicture());
+            Player otherPlayer = playerRepository.findByUsernameOrEmail(peerRequest.getUsername(), peerRequest.getUsername()).get();
+            profileToken.setProfilePicture(otherPlayer.getProfilePicture());
             profileTokens.add(profileToken);
         }
         return profileTokens;
