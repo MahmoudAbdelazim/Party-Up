@@ -73,8 +73,33 @@ public class GameService {
     public List<GameDto> getAllGames() {
         List<Game> games = gameRepository.findAll();
         List<GameDto> gameDtos = new ArrayList<>();
-        for (Game game: games) {
+        for (Game game : games) {
             gameDtos.add(new GameDto(game.getName()));
+        }
+        return gameDtos;
+    }
+
+    public List<GameDto> myGames() throws UserNotAuthenticatedException {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!auth.isAuthenticated()) {
+            throw new UserNotAuthenticatedException();
+        }
+        String username = getUsername(auth);
+        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        List<GameDto> gameDtos = new ArrayList<>();
+        for (Handle handle : player.getHandles()) {
+            boolean found = false;
+            for (GameDto gameDto : gameDtos) {
+                if (gameDto.getName().equalsIgnoreCase(handle.getGame().getName())) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                GameDto gameDto = new GameDto();
+                gameDto.setName(handle.getGame().getName());
+                gameDtos.add(gameDto);
+            }
         }
         return gameDtos;
     }

@@ -1,5 +1,7 @@
 package com.partyup.model;
 
+import com.partyup.model.posting.ContentData;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,6 +13,9 @@ public class PeerRequest {
     private Long id;
 
     private String username;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private ContentData profilePicture;
 
     public Long getId() {
         return id;
@@ -26,5 +31,13 @@ public class PeerRequest {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public ContentData getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(ContentData profilePicture) {
+        this.profilePicture = profilePicture;
     }
 }

@@ -35,4 +35,9 @@ public class GameController {
     public ResponseEntity<List<GameDto>> getGames() {
         return ResponseEntity.ok(gameService.getAllGames());
     }
+
+    @GetMapping("/api/myGames")
+    public ResponseEntity<List<GameDto>> myGames() throws UserNotAuthenticatedException {
+        return ResponseEntity.ok(gameService.myGames());
+    }
 }

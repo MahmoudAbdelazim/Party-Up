@@ -42,7 +42,10 @@ public class PeersService {
         Player player = authService.authenticate();
         List<ProfileToken> profileTokens = new ArrayList<>();
         for (PeerRequest peerRequest : player.getPeerRequests()) {
-            profileTokens.add(new ProfileToken(peerRequest.getUsername(), player.getProfilePicture()));
+            ProfileToken profileToken = new ProfileToken();
+            profileToken.setUsername(peerRequest.getUsername());
+            profileToken.setProfilePicture(peerRequest.getProfilePicture());
+            profileTokens.add(profileToken);
         }
         return profileTokens;
     }
@@ -52,6 +55,7 @@ public class PeersService {
         Player otherPlayer = getOtherPlayer(playerUsername);
         PeerRequest peerRequest = new PeerRequest();
         peerRequest.setUsername(player.getUsername());
+        peerRequest.setProfilePicture(player.getProfilePicture());
         otherPlayer.addPeerRequest(peerRequest);
         playerRepository.save(otherPlayer);
         return "Peer Request is sent successfully";
@@ -116,6 +120,7 @@ public class PeersService {
             ProfileToken profileToken = new ProfileToken();
             Player player = playerRepository.findById(peerId.getId()).get();
             profileToken.setUsername(player.getUsername());
+            profileToken.setProfilePicture(player.getProfilePicture());
             profileTokens.add(profileToken);
         }
         return profileTokens;
@@ -126,7 +131,10 @@ public class PeersService {
         Player player = authService.authenticate();
         List<ProfileToken> profileTokens = new ArrayList<>();
         for (Player peer : player.getPeers()) {
-            profileTokens.add(new ProfileToken(peer.getUsername(), peer.getProfilePicture()));
+            ProfileToken profileToken = new ProfileToken();
+            profileToken.setUsername(peer.getUsername());
+            profileToken.setProfilePicture(peer.getProfilePicture());
+            profileTokens.add(profileToken);
         }
         return profileTokens;
     }
