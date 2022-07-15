@@ -4,6 +4,7 @@ import {FindPeersPayload} from "./find-peers-payload";
 import {PlayerDetailsService} from "../player-details.service";
 import {ProfileDetailsGetPayload} from "../profile/profile-details-get.payload";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {SafeResourceUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-findpeers',
@@ -15,6 +16,10 @@ export class FindpeersComponent implements OnInit {
   findPeersList : FindPeersPayload[]
   playerDetails : ProfileDetailsGetPayload
   selectedGame : string
+
+  imgBlob : Blob
+  imgSrc : string
+  imgTrustedSrc : SafeResourceUrl
 
   constructor(private findPeersService : FindPeersService , private playerDetailsService : PlayerDetailsService) {
 
@@ -31,9 +36,15 @@ export class FindpeersComponent implements OnInit {
         type : '',
         size : 0,
         url : ''
+      },
+      country: {
+        name : ""
       }
     };
     this.selectedGame = '';
+    this.imgSrc = '';
+    this.imgBlob = new Blob();
+    this.imgTrustedSrc = '';
   }
 
   favouriteGame = new FormGroup({

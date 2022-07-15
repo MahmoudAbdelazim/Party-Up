@@ -13,11 +13,13 @@ import {AuthService} from "../auth.service";
 export class LoginComponent implements OnInit {
 
   loginPayload : LoginRequestPayload;
+  errorMessage : string
   constructor(private router:Router, private authService : AuthService) {
     this.loginPayload = {
       usernameOrEmail: "",
       password: ""
     };
+    this.errorMessage = '';
   }
 
   loginForm = new FormGroup({
@@ -35,9 +37,11 @@ export class LoginComponent implements OnInit {
 
     this.authService.signIn(this.loginPayload).subscribe(data =>{
         console.log("LOGin successfully")
-        sessionStorage.setItem('token', data.sessionId);
+      localStorage.setItem('token', data.sessionId);
         console.log(data)
         this.router.navigate(['/profile']);
+    }, error => {
+      this.errorMessage = 'email or password might be wrong'
     });
 
   }

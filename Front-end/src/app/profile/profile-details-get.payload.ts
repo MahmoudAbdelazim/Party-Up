@@ -11,4 +11,7 @@ export interface ProfileDetailsGetPayload{
     size : number
     url : string
   }
+  country : {
+    name: string
+  }
 }

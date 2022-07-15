@@ -5,8 +5,7 @@
         <div class="d-flex flex-column align-items-center text-center p-3 py-5">
           <img *ngIf="imgSrc" class="w-100 mt-5" src="{{imgSrc}}">
           <img *ngIf="!imgSrc" class="rounded-circle mt-5" width="150px" src="../../assets/images/human.png">
-          <label class="fileLabel" for="file">Select Profile Picture <input type="file" id="file"
-                                                                            (change)="onFileSelected($event)"></label>
+          <label class="fileLabel" for="file">Select Profile Picture <input type="file" id="file" (change)="onFileSelected($event)"></label>
         </div>
       </div>
       <div class="col-md-7 border-right">
@@ -15,35 +14,67 @@
             <h4 class="text-right">Profile Settings</h4>
           </div>
           <div class="row mt-2">
-            <div class="col-md-6 text-primary"><label class="labels">First Name:</label><input
-              formControlName='firstName' type="text" class="form-control" placeholder="First Name"></div>
-            <div class="col-md-6 text-primary"><label class="labels">Last Name:</label><input formControlName='lastName'
-                                                                                              type="text"
-                                                                                              class="form-control"
-                                                                                              placeholder="Last Name">
+            <div class="col-md-6 text-primary">
+              <label class="labels">First Name:</label>
+              <input formControlName='firstName' type="text" class="form-control" placeholder="First Name">
+              <div class="alert my-1 alert-danger" *ngIf="updateUserForm.get('firstName')?.errors != null && updateUserForm.get('firstName')?.touched">
+                <p *ngIf="updateUserForm.get('firstName')?.errors?.['pattern']">First Name has to be only letters</p>
+                <p *ngIf="updateUserForm.get('firstName')?.errors?.['required']">First Name is required</p>
+                <p *ngIf="updateUserForm.get('firstName')?.errors?.['minlength']">First Name's min length has to be more than 3</p>
+                <p *ngIf="updateUserForm.get('firstName')?.errors?.['maxlength']">First Name max length has to be less than 20</p>
+              </div>
+            </div>
+            <div class="col-md-6 text-primary">
+              <label class="labels">Last Name:</label>
+              <input formControlName='lastName' type="text" class="form-control" placeholder="Last Name">
+              <div class="alert my-1 alert-danger" *ngIf="updateUserForm.get('lastName')?.errors != null && updateUserForm.get('lastName')?.touched">
+                <p *ngIf="updateUserForm.get('lastName')?.errors?.['pattern']">Last Name has to be only letters</p>
+                <p *ngIf="updateUserForm.get('lastName')?.errors?.['required']">Last Name is required</p>
+                <p *ngIf="updateUserForm.get('lastName')?.errors?.['minlength']">Last Name's min length has to be more than 3</p>
+                <p *ngIf="updateUserForm.get('lastName')?.errors?.['maxlength']">Last Name max length has to be less than 20</p>
+              </div>
             </div>
           </div>
           <div class="row mt-3">
             <!-- <div class="col-md-12 text-primary"><label class="labels">Mobile Number:</label><input type="text" class="form-control" placeholder="Enter phone number" value=""></div> -->
-            <div class="col-md-12 text-primary"><label class="labels">Discord Tag:</label><input
-              formControlName='discordTag' type="text" class="form-control" placeholder="Enter Discrod Tag"></div>
-            <div class="col-md-12 text-primary"><label class="labels">User Name:</label><input
-              formControlName='username' type="text" class="form-control" placeholder="Enter your username"></div>
-
-            <div class="col-md-12 text-primary"><label class="labels">Email:</label><input formControlName='email'
-                                                                                           type="text"
-                                                                                           class="form-control"
-                                                                                           placeholder="Enter Email">
+            <div class="col-md-12 text-primary">
+              <label class="labels">Discord Tag:</label>
+              <input formControlName='discordTag' type="text" class="form-control" placeholder="Enter Discrod Tag">
+              <div *ngIf="updateUserForm.get('discordTag')?.errors != null && updateUserForm.get('discordTag')?.touched" class="alert my-1 alert-danger">
+                <p *ngIf="updateUserForm.get('discordTag')?.errors?.['required']">Discord Tag is required</p>
+                <p *ngIf="updateUserForm.get('discordTag')?.errors?.['pattern']">Discord Tag might be in this form Mustafa#1234</p>
+              </div>
             </div>
-            <div class="col-md-12 text-primary"><label class="labels">New Password:</label><input
-              formControlName='password' type="password" class="form-control" placeholder="Enter New Password"></div>
-            <div class="col-md-12 text-primary"><label class="labels">Country:</label><input formControlName='country'
-                                                                                             type="text"
-                                                                                             class="form-control"
-                                                                                             placeholder="Country"
-                                                                                             value="Egypt"></div>
+            <div class="col-md-12 text-primary">
+              <label class="labels">User Name:</label>
+              <input formControlName='username' type="text" class="form-control" placeholder="Enter your username">
+              <div *ngIf="updateUserForm.get('username')?.errors != null && updateUserForm.get('username')?.touched" class="alert my-1 alert-danger">
+                <p *ngIf="updateUserForm.get('username')?.errors?.['required']">user name is required</p>
+              </div>
+            </div>
 
-          </div>
+            <div class="col-md-12 text-primary">
+              <label class="labels">Email:</label>
+              <input formControlName='email' type="text" class="form-control" placeholder="Enter Email">
+              <div *ngIf="updateUserForm.get('email')?.errors != null && updateUserForm.get('email')?.touched" class="alert my-1 alert-danger">
+                <p *ngIf="updateUserForm.get('email')?.errors?.['required']">Email is required</p>
+                <p *ngIf="updateUserForm.get('email')?.errors?.['email']">Email is invalid!</p>
+              </div>
+            </div>
+            <div class="col-md-12 text-primary"><label class="labels">New Password:</label>
+              <input formControlName='password' type="password" class="form-control" placeholder="Enter New Password">
+              <div *ngIf="updateUserForm.get('password')?.errors != null && updateUserForm.get('password')?.touched" class="alert my-1 alert-danger">
+                <p *ngIf="updateUserForm.get('password')?.errors?.['required']">Password is required</p>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-primary">
+              <label class="labels">Country:</label>
+              <input formControlName='country' type="text" class="form-control" placeholder="Country"></div>
+            <div *ngIf="updateUserForm.get('country')?.errors != null && updateUserForm.get('country')?.touched" class="alert my-1 alert-danger">
+              <p *ngIf="updateUserForm.get('country')?.errors?.['required']">Country is required</p>
+            </div>
+            </div>
 
           <div class="row mt-3">
             <button [disabled]="updateUserForm.invalid" class="btn btn-success btn-block" type="submit">Save
@@ -53,10 +84,11 @@
               Add games
             </button>
 
-            <div id="addHandlesId">
 
-            </div>
 
+          </div>
+          <div *ngIf="errorMessage" class="alert my-1 alert-danger">
+            <p>{{'userName | email | discord tag might be already existed'}}</p>
           </div>
 
         </div>

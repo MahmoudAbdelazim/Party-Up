@@ -23,4 +23,7 @@
 
 
     <button [disabled]="loginForm.invalid" type="submit" class="btn btn-primary my-2 login-fonts-specifications">Login</button>
+    <div *ngIf="errorMessage" class="alert my-1 alert-danger">
+      <p>{{errorMessage}}</p>
+    </div>
 </form>

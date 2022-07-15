@@ -39,6 +39,8 @@ export class OthersProfileComponent implements OnInit {
               private router:Router , private actvRoute : ActivatedRoute) {
 
     this.otherPlayerDetails = {
+      firstName : '',
+      lastName : '',
       username : '',
       handles : [],
       country: {
@@ -81,7 +83,7 @@ export class OthersProfileComponent implements OnInit {
   getothersDetails(){
     this.getOtherProfile.getOthersDetails(this.userName).subscribe(data =>{
       this.otherPlayerDetails = data;
-      sessionStorage.setItem('enteredOtherProfile' , this.otherPlayerDetails.username)
+      localStorage.setItem('enteredOtherProfile' , this.otherPlayerDetails.username)
       console.log(this.otherPlayerDetails);
       if (this.otherPlayerDetails.profilePicture){
         this.getUploadedPhoto.getUploadedImage(this.otherPlayerDetails.profilePicture.url).subscribe(data=>{
@@ -96,6 +98,8 @@ export class OthersProfileComponent implements OnInit {
         })
       }
 
+    } , error => {
+      this.router.navigate(['/profile'])
     })
   }
 

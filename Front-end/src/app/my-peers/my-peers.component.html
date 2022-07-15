@@ -1,11 +1,11 @@
 <div class="container">
 
   <div *ngFor="let peer of myPeers" class="card">
-    <img src="../../assets/images/human.png" alt="Person" class="card__image">
+    <img src="../../assets/images/myPeer.png" alt="Person" class="card__image">
     <p class="card__name">{{peer.username}}</p>
     <div class="grid-container">
     </div>
-    <button routerLink="/profile/{{peer.username}}" class="btn draw-border">View Profile</button>
+    <a class="btn draw-border" style="text-decoration: none;" routerLink="/profile/{{peer.username}}" target="_blank">View Profile</a>
   </div>
 
 </div>

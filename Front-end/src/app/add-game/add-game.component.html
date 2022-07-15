@@ -26,14 +26,19 @@
 <div class="w-100 text-center my-5">
   <h2>A form to add new games and handles to your account!</h2>
   <form [formGroup]="addGameWithHandle" class="w-100 container" (ngSubmit)="sendPlayersGameWithHandle()">
-    <div class="form-group">
-      <input formControlName="gameName" type="text" class="" name="gameName" placeholder="specify game"/>
+    <div>
+      <select formControlName='gameName' class="form-select-lg" >
+        <option class=".option" *ngFor="let gm of gamesListDto"  value="{{gm.name}}">{{gm.name}}</option>
+      </select>
     </div>
     <div class="form-group my-2">
       <input formControlName="handle" type="text" class="" name="handle" placeholder="specify handle"/>
     </div>
-    <button class="btn btn-success mx-2" type="submit">Confirm</button>
+    <button [disabled]="addGameWithHandle.invalid" class="btn btn-success mx-2" type="submit">Confirm</button>
     <button type="button" class="btn btn-primary" [routerLink]="['/profile']">View Profile</button>
+    <div *ngIf="errorMessage && errorMessage == 'Handle is already present for this game'" class="alert my-1 alert-danger">
+      <p>{{errorMessage}}</p>
+    </div>
   </form>
 
 
