@@ -15,12 +15,14 @@
 
 
 <div class="container">
-  <div *ngFor="let peer of findPeersList" class="card">
-    <img src="../../assets/images/NewPlayer.png" alt="Person" class="card__image">
-    <p class="card__name">{{peer.username}}</p>
-    <div class="grid-container">
-
+  <div *ngFor="let peer of dataObjects" class="card">
+    <div>
+      <img *ngIf="peer.profilePicture" src="{{peer.profilePicture}}" alt="user" class="img-fluid text-center img-circle">
+      <img *ngIf="!peer.profilePicture" src="../../assets/images/NewPlayer.png" alt="Person" class="card__image">
     </div>
-    <a class="btn draw-border" style="text-decoration: none;" routerLink="/profile/{{peer.username}}" target="_blank">View Profile</a>  </div>
+
+    <p class="card__name">{{peer.userName}}</p>
+    <a class="btn draw-border" style="text-decoration: none;" routerLink="/profile/{{peer.userName}}" target="_blank">View Profile</a>
+  </div>
 
 </div>
