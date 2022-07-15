@@ -5,6 +5,7 @@ import {PlayerDetailsService} from "../player-details.service";
 import {ProfileDetailsGetPayload} from "../profile/profile-details-get.payload";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {SafeResourceUrl} from "@angular/platform-browser";
+import {GetUploadedImageService} from "../get-uploaded-image.service";
 
 @Component({
   selector: 'app-findpeers',
@@ -18,10 +19,11 @@ export class FindpeersComponent implements OnInit {
   selectedGame : string
 
   imgBlob : Blob
-  imgSrc : string
+  imgSrc : string[]
   imgTrustedSrc : SafeResourceUrl
+  dataObjects: any[]
 
-  constructor(private findPeersService : FindPeersService , private playerDetailsService : PlayerDetailsService) {
+  constructor(private findPeersService : FindPeersService , private playerDetailsService : PlayerDetailsService, private getPhotoService : GetUploadedImageService) {
 
     this.findPeersList = [];
     this.playerDetails = {
@@ -42,9 +44,10 @@ export class FindpeersComponent implements OnInit {
       }
     };
     this.selectedGame = '';
-    this.imgSrc = '';
+    this.imgSrc = [];
     this.imgBlob = new Blob();
     this.imgTrustedSrc = '';
+    this.dataObjects = [];
   }
 
   favouriteGame = new FormGroup({
@@ -64,6 +67,29 @@ export class FindpeersComponent implements OnInit {
     this.findPeersService.findPeersList(this.selectedGame).subscribe(data =>{
       this.findPeersList = data;
       console.log(this.findPeersList);
+      this.dataObjects = []
+      for (let i = 0; i < this.findPeersList.length ; i++) {
+        if (this.findPeersList[i].profilePicture){
+          this.getPhotoService.getUploadedImage(this.findPeersList[i].profilePicture.url).subscribe(data=>{
+            this.imgBlob = data;
+            console.log(this.imgBlob);
+            let reader = new FileReader();
+            reader.readAsDataURL(this.imgBlob);
+            reader.onload = (event: any) =>{
+              let dataObject = { userName : this.findPeersList[i].username , profilePicture : event.target.result}
+              this.dataObjects.push(dataObject)
+
+
+            }
+          })
+        }else{
+          let dataObject = { userName : this.findPeersList[i].username , profilePicture : ''}
+          this.dataObjects.push(dataObject)
+        }
+      }
+      console.log(this.dataObjects);
+
+
     })
   }
 
