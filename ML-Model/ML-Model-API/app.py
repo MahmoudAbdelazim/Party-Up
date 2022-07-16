@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 def k_means():
     global personality_data, user_games_data, db
-    db = pymysql.connect(host="localhost", user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'),
+    db = pymysql.connect(host="database", user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'),
                          database="partyup")
     user_games_data = pd.read_sql('SELECT * FROM player_games', db)
     personality_data = pd.read_sql('SELECT * FROM players_rates_questions', db)
