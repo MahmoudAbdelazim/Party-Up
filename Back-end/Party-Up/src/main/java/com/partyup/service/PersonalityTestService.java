@@ -7,11 +7,7 @@ import com.partyup.payload.AnswerDto;
 import com.partyup.payload.QuestionDto;
 import com.partyup.repository.PlayerRepository;
 import com.partyup.repository.QuestionsRepository;
-import com.partyup.repository.RateRepository;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,14 +18,11 @@ public class PersonalityTestService {
 
     private QuestionsRepository questionsRepository;
 
-    private RateRepository rateRepository;
-
     private PlayerRepository playerRepository;
 
     @Autowired
-    public PersonalityTestService(QuestionsRepository questionsRepository, RateRepository rateRepository, PlayerRepository playerRepository) {
+    public PersonalityTestService(QuestionsRepository questionsRepository, PlayerRepository playerRepository) {
         this.questionsRepository = questionsRepository;
-        this.rateRepository = rateRepository;
         this.playerRepository = playerRepository;
     }
 
@@ -47,10 +40,10 @@ public class PersonalityTestService {
 
     public void saveAnswersOfUser(List<AnswerDto> answerDtos, Player player) {
         List<Rate> rates = new ArrayList<>();
-        for (int i = 0; i < answerDtos.size(); i++) {
+        for (AnswerDto dto : answerDtos) {
             Rate rate = new Rate();
             AnswerDto answerDto;
-            answerDto = answerDtos.get(i);
+            answerDto = dto;
             rate.setQuestionID(answerDto.getId());
             rate.setPlayerID(player.getId());
             rate.setRate(answerDto.getAnswer());

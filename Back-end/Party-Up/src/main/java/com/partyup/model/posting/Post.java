@@ -55,7 +55,13 @@ public class Post {
 		return id;
 	}
 
-	public Date getCreationDate() { return createAt; }
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Date getCreationDate() {
+		return createAt;
+	}
 
 	@Override
 	public boolean equals(Object o) {

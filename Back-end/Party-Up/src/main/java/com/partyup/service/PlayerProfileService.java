@@ -56,7 +56,7 @@ public class PlayerProfileService {
             var picContent = new Content(
                     picture.getName(),
                     picture.getContentType(),
-                    FileCompressionUtility.compressImage(picture.getBytes())
+                    FileCompressionUtility.compressFile(picture.getBytes())
             );
             contentRepo.save(picContent);
             URL fileURL = getURLOf(picContent, uriBuilder);
