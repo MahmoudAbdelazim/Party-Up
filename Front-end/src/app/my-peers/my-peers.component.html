@@ -1,8 +1,9 @@
+<h1 class="w-100 text-center my-5">This Page shows your peers if already exist some</h1>
 <div class="container">
 
   <div *ngFor="let peer of dataObjects" class="card">
     <div>
-      <img *ngIf="peer.profilePicture" src="{{peer.profilePicture}}" alt="user" class="img-fluid text-center img-circle">
+      <img *ngIf="peer.profilePicture" src="{{peer.profilePicture}}" alt="user" class="card__image img-fluid text-center img-circle">
       <img *ngIf="!peer.profilePicture" src="../../assets/images/myPeer.png" alt="Person" class="card__image">
     </div>
     <p class="card__name">{{peer.userName}}</p>

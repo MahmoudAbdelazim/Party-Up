@@ -93,6 +93,7 @@ export class ReviewPeerComponent implements OnInit {
     this.username = this.actvRoute.snapshot.params['username'];
     console.log(this.listOfReviewAnswers);
     this.sendReviewAnswers.sendReviewAnswers(this.username,this.listOfReviewAnswers).subscribe(data =>{
+      localStorage.setItem('enteredOtherProfile' , '');
       console.log(data);
       this.router.navigate(['/profile']);
     })

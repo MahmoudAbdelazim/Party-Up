@@ -40,7 +40,7 @@ export class ReviewGuardGuard implements CanActivate {
       this.getOtherProfileDetailsService.getOthersDetails(entered).subscribe(data=>{
         this.otherPlayerData = data
         if (this.otherPlayerData.reviewed){
-          let url = 'profile/' + entered;
+          let url = 'profile/';
           this.router.navigate([url]);
           return false
         }else {

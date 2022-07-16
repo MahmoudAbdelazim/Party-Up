@@ -4,7 +4,7 @@
 
     <div>
       <select formControlName='game' class="form-select-lg" >
-        <option class=".option" *ngFor="let gm of playerDetails.handles"  value="{{gm.game}}">{{gm.game}}</option>
+        <option class=".option" *ngFor="let gm of uniqueGameList"  value="{{gm.name}}">{{gm.name}}</option>
       </select>
     </div>
 
@@ -15,14 +15,14 @@
 
 
 <div class="container">
-  <div *ngFor="let peer of dataObjects" class="card">
+  <div *ngFor="let peer of findPeersList" class="card">
     <div>
-      <img *ngIf="peer.profilePicture" src="{{peer.profilePicture}}" alt="user" class="img-fluid text-center img-circle">
+      <img *ngIf="peer.profilePicture" src="{{peer.profilePicture.url}}" alt="user" class="card__image img-fluid text-center img-circle">
       <img *ngIf="!peer.profilePicture" src="../../assets/images/NewPlayer.png" alt="Person" class="card__image">
     </div>
 
-    <p class="card__name">{{peer.userName}}</p>
-    <a class="btn draw-border" style="text-decoration: none;" routerLink="/profile/{{peer.userName}}" target="_blank">View Profile</a>
+    <p class="card__name">{{peer.username}}</p>
+    <a class="btn draw-border" style="text-decoration: none;" routerLink="/profile/{{peer.username}}" target="_blank">View Profile</a>
   </div>
 
 </div>
