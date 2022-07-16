@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Random;
 
 @Component
-@Profile("dev")
 public class TempDataInitializer {
 
     @Autowired
