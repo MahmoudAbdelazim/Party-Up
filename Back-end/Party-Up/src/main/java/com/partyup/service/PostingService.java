@@ -35,11 +35,11 @@ public class PostingService {
 	@Autowired
 	private PlayerRepository playerRepository;
 
-	public String savePostOfUser(PostUploadDto postUploadDto, Player player) {
+	public Post savePostOfUser(PostUploadDto postUploadDto, Player player) {
 		Post post = postingMapper.map(postUploadDto, Post.class);
 		post.setPlayer(player);
-		postRepository.save(post);
-		return post.getId();
+		post = postRepository.save(post);
+		return post;
 	}
 
 	public Post getPostOfId(String id) throws PostNotFoundException {

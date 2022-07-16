@@ -24,7 +24,7 @@ public class FilesController {
 		return ResponseEntity
 				.ok()
 				.contentType(MediaType.valueOf(file.getType()))
-				.body(FileCompressionUtility.decompressImage(file.getFile()));
+				.body(FileCompressionUtility.decompressFile(file.getFile()));
 	}
 
 	@ExceptionHandler(FileNotExistException.class)
