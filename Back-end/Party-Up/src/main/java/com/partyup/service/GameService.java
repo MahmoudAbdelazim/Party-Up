@@ -30,36 +30,32 @@ public class GameService {
 
     private HandleRepository handleRepository;
 
+    private AuthService authService;
+
     @Autowired
-    public GameService(GameRepository gameRepository, PlayerRepository playerRepository, HandleRepository handleRepository) {
+    public GameService(GameRepository gameRepository, PlayerRepository playerRepository,
+                       HandleRepository handleRepository, AuthService authService) {
         this.gameRepository = gameRepository;
         this.playerRepository = playerRepository;
         this.handleRepository = handleRepository;
+        this.authService = authService;
     }
 
     public String addGame(AddGameDto addGameDto)
-            throws UserNotAuthenticatedException, PlayerNotFoundException, GameNotFoundException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth.isAuthenticated()) {
-            String username = getUsername(auth);
-            Optional<Player> player = playerRepository.findByUsernameOrEmail(username, username);
-            if (player.isEmpty())
-                throw new PlayerNotFoundException(username);
-            Optional<Game> game = gameRepository.findByName(addGameDto.getGameName());
-            if (game.isEmpty())
-                throw new GameNotFoundException("Game with Name: " + addGameDto.getGameName() + " is Not Found");
-            Optional<Handle> existingHandle = handleRepository.findByHandleNameAndGame(addGameDto.getHandle(), game.get());
-            if (existingHandle.isPresent())
-                return "Handle is already present for this game";
-            Handle handle = new Handle();
-            handle.setHandleName(addGameDto.getHandle());
-            handle.setGame(game.get());
-            player.get().addHandle(handle);
-            playerRepository.save(player.get());
-            return "Game Added Successfully";
-        } else {
-            throw new UserNotAuthenticatedException();
-        }
+            throws UserNotAuthenticatedException, GameNotFoundException {
+        Player player = authService.authenticate();
+        Optional<Game> game = gameRepository.findByName(addGameDto.getGameName());
+        if (game.isEmpty())
+            throw new GameNotFoundException("Game with Name: " + addGameDto.getGameName() + " is Not Found");
+        Optional<Handle> existingHandle = handleRepository.findByHandleNameAndGame(addGameDto.getHandle(), game.get());
+        if (existingHandle.isPresent())
+            return "Handle is already present for this game";
+        Handle handle = new Handle();
+        handle.setHandleName(addGameDto.getHandle());
+        handle.setGame(game.get());
+        player.addHandle(handle);
+        playerRepository.save(player);
+        return "Game Added Successfully";
     }
 
     public Game getGameBy(String name) throws GameNotFoundException {
@@ -80,12 +76,7 @@ public class GameService {
     }
 
     public List<GameDto> myGames() throws UserNotAuthenticatedException {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (!auth.isAuthenticated()) {
-            throw new UserNotAuthenticatedException();
-        }
-        String username = getUsername(auth);
-        Player player = playerRepository.findByUsernameOrEmail(username, username).get();
+        Player player = authService.authenticate();
         List<GameDto> gameDtos = new ArrayList<>();
         for (Handle handle : player.getHandles()) {
             boolean found = false;
@@ -102,16 +93,5 @@ public class GameService {
             }
         }
         return gameDtos;
-    }
-
-    private String getUsername(Authentication authentication) {
-        Object userSessionData = authentication.getPrincipal();
-        String username;
-        if (userSessionData instanceof UserDetails) {
-            username = ((UserDetails) userSessionData).getUsername();
-        } else {
-            username = userSessionData.toString();
-        }
-        return username;
     }
 }

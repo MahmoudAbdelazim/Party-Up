@@ -45,6 +45,20 @@ public class AuthService {
     @Autowired
     private CountryRepository countryRepository;
 
+    public AuthService(AuthenticationManager authenticationManager, PlayerRepository playerRepository,
+                       RoleRepository roleRepository, PasswordEncoder passwordEncoder,
+                       InMemorySessionRegistry sessionRegistry, CountryRepository countryRepository) {
+        this.authenticationManager = authenticationManager;
+        this.playerRepository = playerRepository;
+        this.roleRepository = roleRepository;
+        this.passwordEncoder = passwordEncoder;
+        this.sessionRegistry = sessionRegistry;
+        this.countryRepository = countryRepository;
+    }
+
+    public AuthService() {
+    }
+
     public LoginResponseDto signin(LoginDto loginDto) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(

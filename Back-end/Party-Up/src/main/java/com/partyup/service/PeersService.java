@@ -25,17 +25,21 @@ public class PeersService {
     private final GameService gameService;
     private final AuthService authService;
 
+    private final MLModelService mlModelService;
+
     @Autowired
     public PeersService(PlayerRepository playerRepository,
                         PeerRequestRepository peerRequestRepository,
                         QuestionsRepository questionsRepository,
                         GameService gameService,
-                        AuthService authService) {
+                        AuthService authService,
+                        MLModelService mlModelService) {
         this.playerRepository = playerRepository;
         this.peerRequestRepository = peerRequestRepository;
         this.gameService = gameService;
         this.authService = authService;
         this.questionsRepository = questionsRepository;
+        this.mlModelService = mlModelService;
     }
 
     public List<ProfileToken> getRequests() throws UserNotAuthenticatedException {
@@ -51,7 +55,8 @@ public class PeersService {
         return profileTokens;
     }
 
-    public String addPeer(String playerUsername) throws UserNotAuthenticatedException, PlayerNotFoundException {
+    public String addPeer(String playerUsername)
+            throws UserNotAuthenticatedException, PlayerNotFoundException {
         Player player = authService.authenticate();
         Player otherPlayer = getOtherPlayer(playerUsername);
         PeerRequest peerRequest = new PeerRequest();
@@ -105,26 +110,8 @@ public class PeersService {
     public List<ProfileToken> findPeers(String gameName)
             throws UserNotAuthenticatedException, GameNotFoundException {
         Player player = authService.authenticate();
-        RestTemplate restTemplate = new RestTemplate();
         Game game = gameService.getGameBy(gameName);
-        String findPeersUri = UriComponentsBuilder.fromHttpUrl("http://localhost:5000")
-                .path("/" + player.getId())
-                .path("/" + game.getId())
-                .encode().toUriString();
-        ResponseEntity<SuggestedPeerId[]> suggestedPeerIds = restTemplate.getForEntity(findPeersUri, SuggestedPeerId[].class);
-        return getProfileTokensOf(Arrays.asList(Objects.requireNonNull(suggestedPeerIds.getBody())));
-    }
-
-    private List<ProfileToken> getProfileTokensOf(List<SuggestedPeerId> suggestedPeerIds) {
-        List<ProfileToken> profileTokens = new ArrayList<>();
-        for (SuggestedPeerId peerId : suggestedPeerIds) {
-            ProfileToken profileToken = new ProfileToken();
-            Player player = playerRepository.findById(peerId.getId()).get();
-            profileToken.setUsername(player.getUsername());
-            profileToken.setProfilePicture(player.getProfilePicture());
-            profileTokens.add(profileToken);
-        }
-        return profileTokens;
+        return mlModelService.getSuggestedProfileTokens(player, game);
     }
 
     public List<ProfileToken> myPeers()
