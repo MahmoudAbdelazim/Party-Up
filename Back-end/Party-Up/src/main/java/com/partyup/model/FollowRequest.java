@@ -13,7 +13,6 @@ public class FollowRequest {
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@GeneratedValue(generator = "uuid")
 	String id;
-
 	Long follower;
 	Long followee;
 
@@ -41,5 +40,13 @@ public class FollowRequest {
 
 	public void setFollowee(Long followee) {
 		this.followee = followee;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 }

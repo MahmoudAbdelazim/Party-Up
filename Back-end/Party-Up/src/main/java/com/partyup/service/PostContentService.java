@@ -32,17 +32,19 @@ public class PostContentService {
 					var content = new Content(
 							file.getName(),
 							file.getContentType(),
-							FileCompressionUtility.compressImage(file.getBytes())
+							FileCompressionUtility.compressFile(file.getBytes())
 					);
 					contents.add(content);
 				}
+
 				contents = postContentRepo.saveAll(contents);
+
 				for (var content : contents) {
 					URL fileURL = getURLOf(content, uriBuilder);
 					contentsData.add(new ContentData(content.getType(), content.getSize(), fileURL));
 				}
-				return contentsData;
-			} else return contentsData;
+			}
+			return contentsData;
 
 		} catch (IOException e) {
 			var specificException = new UploadFailedException();
