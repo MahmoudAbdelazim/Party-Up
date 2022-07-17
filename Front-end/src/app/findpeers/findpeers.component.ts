@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FindPeersService} from "../find-peers.service";
 import {FindPeersPayload} from "./find-peers-payload";
 import {PlayerDetailsService} from "../player-details.service";
-import {ProfileDetailsGetPayload} from "../profile/profile-details-get.payload";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {SafeResourceUrl} from "@angular/platform-browser";
 import {GetUploadedImageService} from "../get-uploaded-image.service";
 import {UniqueGameListPayload} from "./unique-game-list.payload";
@@ -17,14 +16,10 @@ import {GetUniqueGameHandlesListService} from "../get-unique-game-handles-list.s
 export class FindpeersComponent implements OnInit {
 
   findPeersList : FindPeersPayload[]
-  // playerDetails : ProfileDetailsGetPayload
   uniqueGameList: UniqueGameListPayload[]
   selectedGame : string
 
   imgBlob : Blob
-  imgSrc : string[]
-  imgTrustedSrc : SafeResourceUrl
-  dataObjects: any[]
 
   constructor(private findPeersService : FindPeersService ,
               private playerDetailsService : PlayerDetailsService,
@@ -32,28 +27,8 @@ export class FindpeersComponent implements OnInit {
 
     this.findPeersList = [];
     this.uniqueGameList = []
-    // this.playerDetails = {
-    //   username : '',
-    //   email : '',
-    //   firstName : '',
-    //   lastName : '',
-    //   discordTag : '',
-    //   handles : [],
-    //   profilePicture : {
-    //     id : '',
-    //     type : '',
-    //     size : 0,
-    //     url : ''
-    //   },
-    //   country: {
-    //     name : ""
-    //   }
-    // };
     this.selectedGame = '';
-    this.imgSrc = [];
     this.imgBlob = new Blob();
-    this.imgTrustedSrc = '';
-    this.dataObjects = [];
   }
 
   favouriteGame = new FormGroup({
@@ -65,19 +40,12 @@ export class FindpeersComponent implements OnInit {
       this.uniqueGameList = data
       console.log(this.uniqueGameList)
     })
-    // this.playerDetailsService.getPlayerDetails().subscribe(playerData  =>{
-    //   this.playerDetails = playerData;
-    //   console.log(this.playerDetails);
-    //   console.log(this.playerDetails);
-    // })
-
   }
   selectingFavouriteGame(){
     this.selectedGame = this.favouriteGame.get('game')?.value;
     this.findPeersService.findPeersList(this.selectedGame).subscribe(data =>{
       this.findPeersList = data;
       console.log(this.findPeersList);
-      this.dataObjects = []
       for (let i = 0; i < this.findPeersList.length ; i++) {
         if (this.findPeersList[i].profilePicture){
           this.getPhotoService.getUploadedImage(this.findPeersList[i].profilePicture.url).subscribe(data=>{
@@ -86,20 +54,13 @@ export class FindpeersComponent implements OnInit {
             let reader = new FileReader();
             reader.readAsDataURL(this.imgBlob);
             reader.onload = (event: any) =>{
-              let dataObject = { userName : this.findPeersList[i].username , profilePicture : event.target.result}
-              this.dataObjects.push(dataObject)
               this.findPeersList[i].profilePicture.url = event.target.result;
 
 
             }
           })
-        }else{
-          let dataObject = { userName : this.findPeersList[i].username , profilePicture : ''}
-          this.dataObjects.push(dataObject)
         }
       }
-      this.dataObjects = this.dataObjects.reverse();
-      console.log(this.dataObjects);
       console.log(this.findPeersList)
 
 

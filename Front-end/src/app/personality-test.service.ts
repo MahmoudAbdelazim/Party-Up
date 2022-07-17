@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {PersonalityTestRequestPayload} from "./personality-test/personality-test-request.payload";
 import {Observable} from "rxjs";
-import { PersonalityTestGetPayload } from './personality-test/personality-test-get.payload';
 
 @Injectable({
   providedIn: 'root'

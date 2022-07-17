@@ -10,7 +10,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { FindpeersComponent } from './findpeers/findpeers.component';
 import { NotFound404Component } from './not-found404/not-found404.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { AllRightsReservedComponent } from './all-rights-reserved/all-rights-reserved.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PersonalityTestComponent } from './personality-test/personality-test.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +33,6 @@ import { IfLoggedInGuard } from './if-logged-in.guard';
     FindpeersComponent,
     NotFound404Component,
     NavbarComponent,
-    AllRightsReservedComponent,
     LogoutComponent,
     PersonalityTestComponent,
     FeedComponent,

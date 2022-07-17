@@ -87,15 +87,7 @@ export class ProfileSettingsComponent implements OnInit {
         country: this.playerDetails.country.name
       })
       console.log(this.updateUserForm.value);
-      // this.updateUserForm.({
-      //   firstname: this.playerDetails.firstName ,
-      //   lastName: this.playerDetails.lastName ,
-      //   email: this.playerDetails.email ,
-      //   password: '' ,
-      //   username: this.playerDetails.username ,
-      //   discordTag: this.playerDetails.discordTag,
-      //   country: ''
-      // })
+
       if (this.playerDetails.profilePicture){
         this.getUploadedPhoto.getUploadedImage(this.playerDetails.profilePicture.url).subscribe(data=>{
           this.imgBlob = data;
@@ -109,7 +101,6 @@ export class ProfileSettingsComponent implements OnInit {
         })
       }
 
-      // this.addHandles();
         console.log(data);
     })
 
