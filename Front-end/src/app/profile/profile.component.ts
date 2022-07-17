@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PlayerDetailsService} from "../player-details.service";
-import {Router} from "@angular/router";
 import {ProfileDetailsGetPayload} from "./profile-details-get.payload";
 import {GetUploadedImageService} from "../get-uploaded-image.service";
-import {DomSanitizer, SafeResourceUrl, SafeUrl} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-profile',
@@ -17,8 +15,7 @@ export class ProfileComponent implements OnInit {
   imgSrc : string
 
   constructor(private pdService : PlayerDetailsService ,
-              private getPhotoService : GetUploadedImageService, private sanitizer : DomSanitizer,
-              private router:Router) {
+              private getPhotoService : GetUploadedImageService) {
 
     this.playerDetails = {
       username : '',

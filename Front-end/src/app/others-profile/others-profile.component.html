@@ -1,6 +1,5 @@
 <div class="padding">
   <div class="col-md-9">
-    <!-- Column -->
     <div class="m-auto">
       <div class="card-body little-profile text-center my-5">
         <div class="pro-img">
@@ -27,20 +26,9 @@
         <button *ngIf="otherPlayerDetails.otherRequested" (click)="rejectingTheRequest()" class="m-t-10 waves-effect waves-dark btn btn-danger btn-rounded mx-2" data-abc="true" >Reject</button>
         <button *ngIf="otherPlayerDetails.peer" (click)="unPeer()" class="m-t-10 waves-effect waves-dark btn btn-danger btn-rounded" data-abc="true" >UnPeer</button>
         <button *ngIf="!otherPlayerDetails.reviewed && otherPlayerDetails.peer" routerLink="/reviewPeer/{{userName}}" class="m-t-10 waves-effect waves-dark btn btn-success btn-rounded mx-2" data-abc="true" >Review</button>
-        <!-- a5r button me7tag ndef feh 7abet ngIf mn fo2 -->
 
         <a [routerLink]="['/profile']" class="m-t-10 waves-effect waves-dark btn btn-primary btn-rounded" data-abc="true">Go Back</a>
-<!--        <div class="row text-center m-t-20">-->
-          <!-- <div class="col-lg-4 col-md-4 m-t-20">
-            <h3 class="m-b-0 font-light">10434</h3><small>Articles</small>
-          </div>
-          <div class="col-lg-4 col-md-4 m-t-20">
-            <h3 class="m-b-0 font-light">434K</h3><small>Followers</small>
-          </div>
-          <div class="col-lg-4 col-md-4 m-t-20">
-            <h3 class="m-b-0 font-light">5454</h3><small>Following</small>
-          </div> -->
-<!--        </div>-->
+
       </div>
     </div>
   </div>

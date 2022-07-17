@@ -7,9 +7,7 @@ import {SendPeerRequestService} from "../send-peer-request.service";
 import {ToastrService} from "../toastr.service";
 import {GetPeerRequestsAsNotificationService} from "../get-peer-requests-as-notification.service";
 import {NotificationsPayload} from "../navbar/notifications.payload";
-import {forEach} from "lodash";
 import {AcceptingOrRejectingTheRequestService} from "../accepting-or-rejecting-the-request.service";
-import {AcceptDeclinePayload} from "./accept-decline.payload";
 import {UnpeerService} from "../unpeer.service";
 import {GetUploadedImageService} from "../get-uploaded-image.service";
 

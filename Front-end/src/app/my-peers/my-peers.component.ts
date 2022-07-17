@@ -13,16 +13,12 @@ export class MyPeersComponent implements OnInit {
 
   myPeers : GetMyPeersPayload[]
   imgBlob : Blob
-  imgSrc : string[]
-  imgTrustedSrc : SafeResourceUrl
 
   dataObjects: any[]
 
   constructor(private peerList : GetListOfPeersService, private getPhotoService : GetUploadedImageService) {
     this.myPeers = [];
-    this.imgSrc = [];
     this.imgBlob = new Blob();
-    this.imgTrustedSrc = '';
     this.dataObjects = [];
   }
 
@@ -30,7 +26,6 @@ export class MyPeersComponent implements OnInit {
     this.peerList.fetchPeersList().subscribe(data =>{
         console.log(data);
         this.myPeers = data;
-        this.imgSrc = [];
       for (let i = 0; i < this.myPeers.length ; i++) {
 
         if (this.myPeers[i].profilePicture){
@@ -50,7 +45,6 @@ export class MyPeersComponent implements OnInit {
           this.dataObjects.push(dataObject)
         }
       }
-      console.log(this.imgSrc)
     })
   }
 

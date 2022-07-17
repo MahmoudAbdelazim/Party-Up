@@ -60,7 +60,7 @@ export class AddGameComponent implements OnInit {
   }
 
   addGameWithHandle = new FormGroup({
-    gameName: new FormControl(null , [Validators.required ]), //inside the constructor is like a place holder
+    gameName: new FormControl(null , [Validators.required ]),
     handle: new FormControl(null , [Validators.required ])
   })
 
@@ -77,7 +77,7 @@ export class AddGameComponent implements OnInit {
       }
       this.pdService.getPlayerDetails().subscribe(data =>{
         this.playerDetails = data;
-        // this.addHandles();
+
       })
       this.router.navigate(['/addGame']);
     });
