@@ -14,6 +14,7 @@ services:
   backend:
     depends_on:
       - database
+      - ml
     restart: on-failure
     build: ./Back-end/Party-Up
     ports:
@@ -23,8 +24,10 @@ services:
       DB_PASSWORD: root
       SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/partyup?max_allowed_packet=100MB&createDatabaseIfNotExist=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
       SPRING_JPA_HIBERNATE_DDL-AUTO: create
+      ML_URL: http://ml:5000
     links:
       - database
+      - ml
     networks:
       - partyup-app
   ml:
@@ -36,6 +39,9 @@ services:
     environment:
       DB_USERNAME: root
       DB_PASSWORD: root
+      DB_HOST: database
+      DB_DATABASE: partyup
+      DB_URL: jdbc:mysql://database:3306/partyup
     links:
       - database
     networks:

@@ -25,7 +25,8 @@ public class MLModelService {
     }
 
     public List<ProfileToken> getSuggestedProfileTokens(Player player, Game game) {
-        String findPeersUri = UriComponentsBuilder.fromHttpUrl("http://localhost:5000")
+        String url = System.getenv("ML_URL");
+        String findPeersUri = UriComponentsBuilder.fromHttpUrl(url)
                 .path("/" + player.getId())
                 .path("/" + game.getId())
                 .encode().toUriString();

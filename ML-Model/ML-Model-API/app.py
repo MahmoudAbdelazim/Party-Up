@@ -12,8 +12,8 @@ app = Flask(__name__)
 
 def k_means():
     global personality_data, user_games_data, db
-    db = pymysql.connect(host="database", user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'),
-                         database="partyup")
+    db = pymysql.connect(host=os.getenv('DB_HOST'), user=os.getenv('DB_USERNAME'), password=os.getenv('DB_PASSWORD'),
+                         database=os.getenv('DB_DATABASE'))
     user_games_data = pd.read_sql('SELECT * FROM player_games', db)
     personality_data = pd.read_sql('SELECT * FROM players_rates_questions', db)
     personality_data = personality_data.pivot_table('rate', 'player_id', 'questionid').reset_index()
@@ -101,4 +101,4 @@ def hello_world(player_id, game_id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0')
