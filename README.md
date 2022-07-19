@@ -50,9 +50,11 @@ features we’ll be working with in the personality dataset:
 
 And we also adjusted the questions to allow players to review each others in
 order to have a more realistic view of the players personalities:
+
 <img width="434" alt="fig 2" src="https://user-images.githubusercontent.com/43009893/179864776-1a9ef478-0972-4bb3-8c39-8ede1ff10b5a.png">
 
 And in the Gaming dataset:
+
 <img width="439" alt="fig 3" src="https://user-images.githubusercontent.com/43009893/179864788-562d3044-4277-4ce7-a381-f89566b8a8a7.png">
 
 ### Handling Missing Values
@@ -89,6 +91,7 @@ ascending order of distance, and then we match the player with the closest
 players in his cluster that also play the same game.
 
 This flowchart shows the approach for finding peers:
+
 <img width="344" alt="fig 6" src="https://user-images.githubusercontent.com/43009893/179864818-151054da-28a3-41fb-846e-ef49e5746b31.png">
 
 # Platform Features
@@ -113,6 +116,7 @@ And when a player submits a review, the peer's personality scores get updated fo
 This allows for more realistic personality scores for all players in order to improve the quality of the service. 
 
 # Project Structure
+
 <img width="487" alt="fig 4" src="https://user-images.githubusercontent.com/43009893/179864855-f05c553d-970a-4ee2-a457-abe042216719.png">
 The project is separated into these artifacts:
 
@@ -131,24 +135,24 @@ Database used is MySQL and the database schema is generated using Spring Data mo
 # Conclusion
 This project was created by:
 ### Mahmoud Abdelazim
-- GitHub
-- LinkedIn
+- [GitHub](https://github.com/MahmoudAbdelazim)
+- [LinkedIn](https://www.linkedin.com/in/mahmoudabdelazim/)
 
 ### Ahmed ShikhTawel
-- GitHub
-- LinkedIn
+- [GitHub](https://github.com/ShikhTawel)
+- [LinkedIn](https://www.linkedin.com/in/shikhtawel/)
 
 ### Mustafa Taha
-- GitHub
-- LinkedIn
+- [GitHub](https://github.com/MustafaTaha09)
+- [LinkedIn](https://www.linkedin.com/in/mustafa-taha-6ab52316a/)
 
 ### Kamel Mohamed
-- GitHub
-- LinkedIn
+- [GitHub](https://github.com/KamelMohamed2000)
+- [LinkedIn](https://www.linkedin.com/in/kamel-mohamed-33510a184/)
 
 ### Amr Bumadian
-- GitHub
-- LinkedIn
+- [GitHub](https://github.com/AmrBumadian)
+- [LinkedIn](https://www.linkedin.com/in/amr-bumadian/)
 
 Under the supervision of Dr. Soha Makady, Cairo University, Faculty of Computers and AI, Computer Science department.
 
