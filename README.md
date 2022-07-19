@@ -24,6 +24,44 @@ us define his behavior and personality.
 Using a Machine Learning Model (Unsupervised Learning techniques), we match the player
 with other players that are close in personality and also play the same games as well.
 
+# Platform Features
+The website allows players to do the following:
+- Sign Up and Login to the system
+- Edit profile information and profile photo
+- Add games and their handles in them in their profile
+- Find peers playing a specific game
+- Send a peer up request
+- Accept or Decline a peer up request
+- Review a peer (Updates the player's personality scores)
+- Unpeer a peer
+
+## Finding Peers Process
+When a player requests to find a peer playing a certain game, the back-end application receives the request, retrieves the user's ID and the game's ID, and makes a request for the ML Model server, which in turn runs the ML Model with the specified parameters and returns a list of suggested player IDs which is responded back to the user in the form of profile tokens.
+
+## Peer Review Process
+When a player reviews a peer, a list of 10 questions is selected randomly from the list of personality questions (same questions in the personality test but re-phrased for reviews).
+
+And when a player submits a review, the peer's personality scores get updated for those questions based on the average score for all persons who reviewed this player.
+
+This allows for more realistic personality scores for all players in order to improve the quality of the service. 
+
+# Project Structure
+
+<img width="487" alt="fig 4" src="https://user-images.githubusercontent.com/43009893/179864855-f05c553d-970a-4ee2-a457-abe042216719.png">
+The project is separated into these artifacts:
+
+## Back-End
+Used Java and Spring Boot for building the back-end server using Spring Data and Spring REST to allow communication with the front-end, also responsible for communication with the Machine Learning model server to expose the peers suggestion service.
+
+## Front-End
+Built in Angular and TypeScript and communicates with the back-end using RESTful APIs.
+
+## ML Model
+The model itself is built using SKLearn (K-Means Clustering and K-Nearest-Neighbors), while the REST API server is built using Flask to expose the service to the back-end application.
+
+## Database
+Database used is MySQL and the database schema is generated using Spring Data model entities, and the ML Model also uses views to the database to access personality-related data and apply the matching service.
+
 # The Machine Learning Model
 ## Datasets
 The datasets we've worked on during this project in order to build the model and test its effectiveness are:
@@ -93,44 +131,6 @@ players in his cluster that also play the same game.
 This flowchart shows the approach for finding peers:
 
 <img width="344" alt="fig 6" src="https://user-images.githubusercontent.com/43009893/179864818-151054da-28a3-41fb-846e-ef49e5746b31.png">
-
-# Platform Features
-The website allows players to do the following:
-- Sign Up and Login to the system
-- Edit profile information and profile photo
-- Add games and their handles in them in their profile
-- Find peers playing a specific game
-- Send a peer up request
-- Accept or Decline a peer up request
-- Review a peer (Updates the player's personality scores)
-- Unpeer a peer
-
-## Finding Peers Process
-When a player requests to find a peer playing a certain game, the back-end application receives the request, retrieves the user's ID and the game's ID, and makes a request for the ML Model server, which in turn runs the ML Model with the specified parameters and returns a list of suggested player IDs which is responded back to the user in the form of profile tokens.
-
-## Peer Review Process
-When a player reviews a peer, a list of 10 questions is selected randomly from the list of personality questions (same questions in the personality test but re-phrased for reviews).
-
-And when a player submits a review, the peer's personality scores get updated for those questions based on the average score for all persons who reviewed this player.
-
-This allows for more realistic personality scores for all players in order to improve the quality of the service. 
-
-# Project Structure
-
-<img width="487" alt="fig 4" src="https://user-images.githubusercontent.com/43009893/179864855-f05c553d-970a-4ee2-a457-abe042216719.png">
-The project is separated into these artifacts:
-
-## Back-End
-Used Java and Spring Boot for building the back-end server using Spring Data and Spring REST to allow communication with the front-end, also responsible for communication with the Machine Learning model server to expose the peers suggestion service.
-
-## Front-End
-Built in Angular and TypeScript and communicates with the back-end using RESTful APIs.
-
-## ML Model
-The model itself is built using SKLearn (K-Means Clustering and K-Nearest-Neighbors), while the REST API server is built using Flask to expose the service to the back-end application.
-
-## Database
-Database used is MySQL and the database schema is generated using Spring Data model entities, and the ML Model also uses views to the database to access personality-related data and apply the matching service.
 
 # Conclusion
 This project was created by:
