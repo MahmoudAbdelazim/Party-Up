@@ -27,12 +27,12 @@ with other players that are close in personality and also play the same games as
 # The Machine Learning Model
 ## Datasets
 The datasets we've worked on during this project in order to build the model and test its effectiveness are:
-### 1- Big 5 Personality Traits Dataset
+### 1- [Big 5 Personality Traits Dataset](https://www.kaggle.com/datasets/tunguz/big-five-personality-test)
 Contains about 1 million records of users’ answers to the Big 5 personality
 test, which gives scores for a person’s personality traits like extraversion and
 agreeableness using 50 questions with answers from 1 to 5.
 
-### 2- Steam Games Users Dataset
+### 2- [Steam Games Users Dataset](https://www.kaggle.com/datasets/tamber/steam-video-games)
 Contains 200K records of Steam (an online gaming platform) users, each
 record contains a player ID and Game name.
 
@@ -45,14 +45,15 @@ purpose in the project in the personality test dataset, and we further adjusted
 them to match our needs in the gaming platform, and this is the list of
 features we’ll be working with in the personality dataset:
 
-[fig 1]
+<img width="436" alt="fig 1" src="https://user-images.githubusercontent.com/43009893/179864764-32b84ec3-d915-44ca-81b5-e1747563a0da.png">
+
 
 And we also adjusted the questions to allow players to review each others in
 order to have a more realistic view of the players personalities:
-[fig 2]
+<img width="434" alt="fig 2" src="https://user-images.githubusercontent.com/43009893/179864776-1a9ef478-0972-4bb3-8c39-8ede1ff10b5a.png">
 
 And in the Gaming dataset:
-[fig 3]
+<img width="439" alt="fig 3" src="https://user-images.githubusercontent.com/43009893/179864788-562d3044-4277-4ce7-a381-f89566b8a8a7.png">
 
 ### Handling Missing Values
 1783 rows in the personality test dataset had missing values, which is a
@@ -88,7 +89,7 @@ ascending order of distance, and then we match the player with the closest
 players in his cluster that also play the same game.
 
 This flowchart shows the approach for finding peers:
-[fig 6]
+<img width="344" alt="fig 6" src="https://user-images.githubusercontent.com/43009893/179864818-151054da-28a3-41fb-846e-ef49e5746b31.png">
 
 # Platform Features
 The website allows players to do the following:
@@ -112,7 +113,7 @@ And when a player submits a review, the peer's personality scores get updated fo
 This allows for more realistic personality scores for all players in order to improve the quality of the service. 
 
 # Project Structure
-[fig 4]
+<img width="487" alt="fig 4" src="https://user-images.githubusercontent.com/43009893/179864855-f05c553d-970a-4ee2-a457-abe042216719.png">
 The project is separated into these artifacts:
 
 ## Back-End
@@ -125,7 +126,7 @@ Built in Angular and TypeScript and communicates with the back-end using RESTful
 The model itself is built using SKLearn (K-Means Clustering and K-Nearest-Neighbors), while the REST API server is built using Flask to expose the service to the back-end application.
 
 ## Database
-Database schema is generated using Spring Data model entities, and the ML Model also uses views to the database to access personality-related data and apply the matching service.
+Database used is MySQL and the database schema is generated using Spring Data model entities, and the ML Model also uses views to the database to access personality-related data and apply the matching service.
 
 # Conclusion
 This project was created by:
