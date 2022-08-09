@@ -38,6 +38,8 @@ The website allows players to do the following:
 ## Finding Peers Process
 When a player requests to find a peer playing a certain game, the back-end application receives the request, retrieves the user's ID and the game's ID, and makes a request for the ML Model server, which in turn runs the ML Model with the specified parameters and returns a list of suggested player IDs which is responded back to the user in the form of profile tokens.
 
+![294384623_1439533993176126_1981297541696896583_n](https://user-images.githubusercontent.com/43009893/183606414-6516de57-0ba3-47c2-922e-a3adb759ca4c.png)
+
 ## Peer Review Process
 When a player reviews a peer, a list of 10 questions is selected randomly from the list of personality questions (same questions in the personality test but re-phrased for reviews).
 
